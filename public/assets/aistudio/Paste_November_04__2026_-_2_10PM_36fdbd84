@@ -1,0 +1,830 @@
+/**
+ * U&M — Transporte de Colaboradores
+ * Cadastro do colaborador + Painel administrativo + Rotas automáticas
+ * Google Apps Script (script.google.com)
+ *
+ * Arquivos do projeto:
+ *   Codigo.gs   (este arquivo)
+ *   Index.html  (tela do colaborador e painel admin)
+ *
+ * Links depois de implantar como "App da Web":
+ *   Colaborador:  .../exec
+ *   Admin:        .../exec?page=admin
+ */
+
+const CONFIG = {
+  NOME_PLANILHA: 'U&M - Cadastro de Transporte',
+  ABA: 'Colaboradores',
+  ABA_ROTAS: 'Rotas',
+  ABA_PONTOS: 'Mapa das rotas',
+  PASTA_FOTOS: 'U&M - Fotos dos Colaboradores',
+  FUSO: 'America/Belem',
+  HORAS_SESSAO: 6,        // tempo de login do admin (máx. 6)
+  MAX_TENTATIVAS: 5,      // erros de senha antes de bloquear por 10 min
+  FOTO_MAX_MB: 3,
+  USAR_MAPA: true         // usa o Google Maps do próprio Apps Script para medir distâncias
+};
+
+// [chave interna, título da coluna na planilha]
+const CAMPOS = [
+  ['id', 'Protocolo'],
+  ['criadoEm', 'Data do cadastro'],
+  ['nome', 'Nome completo'],
+  ['matricula', 'Matrícula'],
+  ['telefone', 'Telefone'],
+  ['endereco', 'Endereço'],
+  ['bairro', 'Bairro'],
+  ['cidade', 'Cidade'],
+  ['turma', 'Turma / setor'],
+  ['local', 'Local de trabalho'],
+  ['ponto', 'Ponto de embarque'],
+  ['onibus', 'Ônibus / rota definida'],
+  ['status', 'Status'],
+  ['obs', 'Observações (admin)'],
+  ['fotoId', 'Foto (ID no Drive)'],
+  ['atualizadoEm', 'Atualizado em'],
+  ['rotaSugerida', 'Rota sugerida (automática)'],
+  ['rotaMotivo', 'Por que essa rota'],
+  ['coord', 'Localização aprox. (lat,lng)']
+];
+
+const CAMPOS_ROTA = [
+  ['id', 'ID'],
+  ['turma', 'Turma'],
+  ['linha', 'Linha'],
+  ['horario', 'Horário de saída'],
+  ['km', 'Distância'],
+  ['itinerario', 'Itinerário (uma via por linha, na ordem)'],
+  ['bairrosExtras', 'Bairros atendidos extras (separe por vírgula)'],
+  ['ativa', 'Ativa (SIM/NÃO)'],
+  ['atualizadoEm', 'Atualizado em']
+];
+
+const CAMPOS_PONTO = [
+  ['consulta', 'Endereço consultado'],
+  ['lat', 'Latitude'],
+  ['lng', 'Longitude'],
+  ['status', 'Resultado'],
+  ['atualizadoEm', 'Atualizado em']
+];
+
+const STATUS = ['Novo', 'Rota sugerida', 'Em análise', 'Rota definida', 'Inativo'];
+
+const LIMITES = {
+  nome: 120, matricula: 40, telefone: 30, endereco: 200, bairro: 80, cidade: 80,
+  turma: 80, local: 80, ponto: 200, onibus: 120, obs: 500
+};
+const CAMPOS_COLAB = ['nome', 'matricula', 'telefone', 'endereco', 'bairro', 'cidade', 'turma', 'local', 'ponto'];
+const CAMPOS_ADMIN = CAMPOS_COLAB.concat(['onibus', 'status', 'obs']);
+const OBRIGATORIOS = ['nome', 'matricula', 'endereco', 'bairro', 'cidade', 'turma', 'ponto'];
+
+
+// <MOTOR> ================================================================
+// Rotas iniciais e motor de sugestão. Funções puras: não usam serviços do Google.
+
+const ROTAS_INICIAIS = [
+  { id: 'TA-L01', turma: 'Turno A', linha: 'Linha 01', horario: '03:50 / 15:50', km: '21 km',
+    itinerario: 'BAIRRO AMAZONAS, AV. SALVADOR FLAUSINO, AV. ANA KARINA, BAIRRO CIDADE JARDIM, AV. DOS YPÊS, AV. A, AV. DOS BURITIS (EM FRENTE À UPA), AV. C, AV. Q, AV. D (ATÉ O FINAL), AV. Q, RUA M17, AV. DOS BURITIS, AV. F, AV. PARICÁ, AV. V, AV. DOS BURITIS, AV. D, AV. G, PA-160, BAIRRO PARK DOS CARAJÁS, AV. POTIGUÁ, AV. E, AV. A, RUA 69, AV. J, ROD. FARUK SALMEN, RUA A, RUA 13, RUA E, PORTARIA PARAUAPEBAS' },
+  { id: 'TA-L02', turma: 'Turno A', linha: 'Linha 02', horario: '03:50 / 15:50', km: '21 km',
+    itinerario: 'VILA NOVA (ATÉ A ROTATÓRIA), AV. 01, POLO MOVELEIRO, RUA 35, AV. CASTANHEIRA, PA-160, ATRÁS DO CEMITÉRIO, ROD. FARUK SALMEN, PA-160, POPULAR II, AV. RIO URUGUAI, RUA RIO CAPANEMA, RUA RIO PITINGA, RUA RIO IGUAÇU, RUA AMSTERDÃ, RUA SANTO ANTÔNIO, AV. NICODEMOS, RUA NOVO PARAÍSO, RUA SANTIAGO, RUA NOVA CONQUISTA, AV. INGLATERRA, RUA CAIENA, ROD. FARUK SALMEN, RUA 10, BAIRRO LIBERDADE, RUA SANTA CATARINA, RUA FERNÃO DIAS, RUA VINÍCIUS DE MORAIS, AV. PARÁ, RUA ESPÍRITO SANTO, AV. PRINCESA ISABEL, RUA VINÍCIUS DE MORAIS, RUA 11, RUA E, PORTARIA PEBA' },
+  { id: 'TA-L03', turma: 'Turno A', linha: 'Linha 03', horario: '03:50 / 15:50', km: '14,5 km',
+    itinerario: 'ESTRADA VS-10 (EM FRENTE À ESCOLA MÁRIO LAGO), AV. SEBASTIÃO GONÇALVES PIMENTEL, RUA D, RUA RAIMUNDO GONÇALVES PIMENTEL, RUA B, ESTRADA VS-10, AV. OLESTINA LERMOS, AV. YPÊ, ESTRADA VS-10, RUA PAULO MARANHÃO, AV. BOM JARDIM, RUA RUI BARBOSA, AV. MANÉ GARRINCHA, AV. BOM JARDIM, RUA MARABÁ, RUA RIO DE JANEIRO, RUA 16, RUA F, RUA E, RUA 11, RUA A, RUA 2, PORTARIA PEBA' },
+  { id: 'TB-L01', turma: 'Turno B', linha: 'Linha 01', horario: '03:40 / 15:40', km: '20,2 km',
+    itinerario: 'BAIRRO PARK DOS CARAJÁS, AV. POTIGUÁ, AV. B, AV. DOS YPÊS (ESQUINA COM AV. B), AV. DOS BURITIS, RUA C5, AV. Q, AV. C, AV. DOS BURITIS, BAIRRO DOS MINÉRIOS, AV. 01, PA-160, RUA DOMINGOS CARDOSO, RUA CRISTÓVÃO COLOMBO, RUA AMSTERDÃ, AV. HAVANA, RUA AMSTERDÃ, RUA SANTO ANTÔNIO, AV. NICODEMOS, AV. INGLATERRA, ROD. FARUK SALMEN, BAIRRO PRIMAVERA, RUA MARCOS FREIRE, RUA SAPUCAIA, RUA BELÉM, RUA 10, RUA F, RUA E, RUA 02, PORTARIA PEBA' },
+  { id: 'TB-L02', turma: 'Turno B', linha: 'Linha 02', horario: '03:50 / 15:50', km: '17 km',
+    itinerario: "RUA PAU D'ARCO, ESTRADA VS-10, RUA DIOLINA LERMOS, RUA TAMANDARÉ, AV. ALZIRA CAMILO, ESTRADA VS-10, RUA TIM LOPES, RUA CASTILHO FRANÇA, RUA RIO CLARO, RUA LEANDRO PINHEIRO, RUA JORGE AMADO, RUA AUGUSTO MEIRE, AV. BOM JARDIM, RUA RUI BARBOSA, AV. PAULO AFONSO, RUA MARABÁ, RUA RIO DE JANEIRO, PERIMETRAL NORTE, BAIRRO LIBERDADE, RUA SANTA CATARINA, RUA OLAVO BILAC, RUA VINÍCIUS DE MORAIS, AV. PARÁ, RUA ESPÍRITO SANTO, AV. PRINCESA ISABEL, RUA VINÍCIUS DE MORAIS, RUA 11, RUA E, PORTARIA PEBA" },
+  { id: 'TB-L03', turma: 'Turno B', linha: 'Linha 03', horario: '03:50 / 15:50', km: '20 km',
+    itinerario: 'ESTRADA VS-10 (PRÓXIMO AO PRESÍDIO), AV. JURITI, RUA DAS OSTRAS, AV. DAS GAIVOTAS, ESTRADA VS-10, BAIRRO PLANALTO, AV. SEBASTIÃO GONÇALVES PIMENTEL, RUA D, RUA RAIMUNDO GONÇALVES, ESTRADA VS-10, AV. OLESTINA LEMOS, RUA CASTANHEIRA, AV. AUGUSTO DIAS, ESTRADA VS-10, RUA PAULO MARANHÃO, RUA JORGE AMADO, RUA AUGUSTO MEIRE, AV. PAULO AFONSO, RUA MARABÁ, RUA SANTA MARIA, PA-275, AV. PRESIDENTE KENNEDY, RUA 69, AV. J, ROD. FARUK SALMEN, RUA A, RUA 02, PORTARIA PEBA' },
+  { id: 'TC-L01', turma: 'Turno C', linha: 'Linha 01', horario: '03:50 / 15:50', km: '22 km',
+    itinerario: 'CASINHAS NOVAS CARAJÁS, RUA 90, AV. NOVA CARAJÁS, AV. PARAUAPEBAS, AV. SERRA NORTE, RUA 57, AV. SOSSEGO, AV. PARAUAPEBAS, AV. SERRA ARQUEADA, W. TORRES, AV. ANA KARINA, AV. SALVADOR FLAUZINO, RUA A10, PA-160, BAIRRO LINHA VERDE, RUA 10, AV. DAS FLORES, AV. JOÃO FIGUEIREDO, BAIRRO PARAÍSO, RUA ARACAJU, RUA MARABÁ, RUA MATO GROSSO, AV. BOM JARDIM, RUA PAULO MARANHÃO, AV. PAULO AFONSO, RUA MARABÁ, RUA RIO DE JANEIRO, RUA 16, RUA F, RUA E, PORTARIA PEBA' },
+  { id: 'TC-L02', turma: 'Turno C', linha: 'Linha 02', horario: '03:50 / 15:50', km: '21,7 km',
+    itinerario: 'BAIRRO CIDADE JARDIM, AV. U, AV. Q, AV. D, AV. DOS IPÊS, PA-275, AV. G, AV. E, AV. A, RUA 69, AV. J, RUA 80, AV. NICODEMOS, AV. INGLATERRA, ROD. FARUK SALMEN, RUA A, RUA 13, RUA E, RUA 10, BAIRRO LIBERDADE, RUA SANTA CATARINA, RUA OLAVO BILAC, RUA VINÍCIUS DE MORAIS, AV. PARÁ, RUA ESPÍRITO SANTO, AV. PRINCESA ISABEL, RUA 11, RUA A, RUA 2, PORTARIA PEBA' },
+  { id: 'TC-L03', turma: 'Turno C', linha: 'Linha 03', horario: '03:50 / 15:50', km: '20 km',
+    itinerario: 'BAIRRO CIDADE JARDIM, AV. Q, AV. JATOBÁ, AV. CASTANHEIRA, AV. PARICÁ, AV. F, RUA F19, RUA F26, BAIRRO DOS MINÉRIOS, AV. 01, AV. 02 (RETORNA PELA MESMA), RUA 01, PA-160, RUA ESPANHA, BAIRRO TROPICAL, RUA A10, AV. A, RUA C5, AV. C, BAIRRO VALE DO SOL, AV. DUBAI, ROD. FARUK SALMEN, PA-160, AV. HAVANA, AV. AMSTERDÃ, ROD. FARUK SALMEN, CHÁCARAS, RUA MARCOS FREIRE (ATÉ A PRAÇA), RUA SAPUCAIA, RUA BELÉM, RUA 10, RUA A, RUA 2, PORTARIA PEBA' },
+  { id: 'TD-L01', turma: 'Turno D', linha: 'Linha 01', horario: '03:50 / 15:50', km: '17 km',
+    itinerario: 'BAIRRO AMAZÔNIA, AV. SALVADOR FLAUZINO, RUA A10, PA-160, BAIRRO LINHA VERDE, RUA 10, AV. DAS FLORES, AV. JOÃO FIGUEIREDO, RUA MARABÁ, RUA MATO GROSSO, AV. BOM JARDIM, RUA RUI BARBOSA, AV. PAULO AFONSO, RUA DANIELA PERES, AILTON SENNA, AV. CRUZEIRO, AV. MURUMBI, AILTON SENNA, AV. JK, RUA MINAS GERAIS, RUA BEIRA RIO, RUA PERIMETRAL NORTE, BAIRRO LIBERDADE, RUA SANTA CATARINA, RUA OLAVO BILAC, AV. PARÁ, RUA ESPÍRITO SANTO, RUA PRINCESA ISABEL, RUA VINÍCIUS DE MORAIS, RUA 11, RUA E, PORTARIA PEBA' },
+  { id: 'TD-L02', turma: 'Turno D', linha: 'Linha 02', horario: '03:45 / 15:45', km: '29 km',
+    itinerario: 'PALMARES II (PRAÇA), PALMARES I, AV. TANCREDO NEVES (ATÉ A PRAÇA E RETORNA PELA MESMA AVENIDA), RUA DA ESCOLA, ROD. FARUK SALMEN, BAIRRO VALE DO SOL, AV. DUBAI, BAIRRO TROPICAL, AV. JATOBÁ, RUA E1, AV. JATOBÁ, AV. C, RUA C5, AV. A, AV. CASTANHEIRA, PA-160, ROD. FARUK SALMEN, RUA A, RUA 02, PORTARIA PEBA' },
+  { id: 'TD-L03', turma: 'Turno D', linha: 'Linha 03', horario: '03:50 / 15:50', km: '18,3 km',
+    itinerario: 'BAIRRO PARK DOS CARAJÁS, AV. POTIGUÁ, AV. B, AV. G, RUA C5, AV. DOS YPÊS, AV. B, AV. DOS BURITIS, AV. D, AV. DOS YPÊS, AV. F, AV. DOS BURITIS, BAIRRO DOS MINÉRIOS, AV. 01, PA-160, ALTO BONITO, RUA MONARQUIA, RUA 35, RUA TOMÉ DE SOUSA, AV. NICODEMOS, AV. INGLATERRA, RUA CAIENA, RUA AMSTERDÃ, ROD. FARUK SALMEN, RUA A, RUA 13, RUA F, RUA E, RUA 2, PORTARIA PEBA' }
+];
+
+const RAIO_ROTA_M = 2500;                       // acima disso a distância não conta pontos
+const CENTRO_MAPA = { lat: -6.0675, lng: -49.9025 }; // Parauapebas
+
+function semAcento_(s) {
+  return String(s || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+// Deixa nomes comparáveis: "Av. dos Ypês" e "AVENIDA IPES" viram "IPES"
+function canon_(s) {
+  let t = semAcento_(s).replace(/\([^)]*\)/g, ' ').replace(/[^A-Z0-9 ]+/g, ' ').replace(/Y/g, 'I');
+  let tk = t.split(/\s+/).filter(Boolean);
+  const PREF = ['RUA', 'R', 'AVENIDA', 'AV', 'AVE', 'RODOVIA', 'ROD', 'ESTRADA', 'EST', 'TRAVESSA', 'TV', 'TRAV',
+    'ALAMEDA', 'AL', 'PRACA', 'BAIRRO', 'LOTEAMENTO', 'LOT', 'CONJUNTO', 'CONJ', 'RESIDENCIAL', 'RES', 'SETOR', 'W'];
+  while (tk.length > 1 && PREF.indexOf(tk[0]) >= 0) tk.shift();
+  if (tk.length > 1) tk = tk.filter(function (w) { return ['DE', 'DA', 'DO', 'DAS', 'DOS'].indexOf(w) < 0; });
+  tk = tk.map(function (w) { return w === 'PARK' ? 'PARQUE' : (/^\d+$/.test(w) ? String(Number(w)) : w); });
+  return tk.join(' ');
+}
+
+function tipoItem_(orig) {
+  const u = semAcento_(orig).trim();
+  if (/^PORTARIA/.test(u)) return 'portaria';
+  if (/^(PA ?-?\d+|ROD\b|RODOVIA|ESTRADA|PERIMETRAL|RUA PERIMETRAL|VS ?-?10)/.test(u)) return 'rodovia';
+  if (/^BAIRRO\b/.test(u)) return 'bairro';
+  if (/^(RUA|R\.|AV\b|AV\.|AVENIDA|TRAVESSA|ALAMEDA|PRACA|W\.)/.test(u)) return 'via';
+  return 'local';
+}
+
+function listaItinerario_(txt) {
+  const s = String(txt || '').replace(/\r/g, '');
+  let partes = s.split('\n');
+  if (partes.filter(function (p) { return p.trim(); }).length <= 1) partes = s.split(/[,;]/);
+  return partes.map(function (p) {
+    return p.replace(/^\s*IN[IÍ]CIO\s*:?\s*/i, '').replace(/\.{2,}/g, '').replace(/\s+/g, ' ').trim();
+  }).filter(Boolean);
+}
+
+function itensDaRota_(rota) {
+  return listaItinerario_(rota.itinerario).map(function (o) {
+    return { orig: o, tipo: tipoItem_(o), canon: canon_(o) };
+  });
+}
+
+function lev_(a, b) {
+  const m = a.length, n = b.length;
+  if (!m) return n; if (!n) return m;
+  let ant = []; for (let j = 0; j <= n; j++) ant[j] = j;
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      cur[j] = Math.min(ant[j] + 1, cur[j - 1] + 1, ant[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    ant = cur;
+  }
+  return ant[n];
+}
+
+// Aceita pequenas diferenças de grafia (FLAUSINO x FLAUZINO, LEMOS x LERMOS)
+function parecido_(a, b) {
+  if (!a || !b) return false;
+  if (a === b) return true;
+  const m = Math.min(a.length, b.length);
+  if (m < 5) return false;
+  if (a.indexOf(b + ' ') === 0 || b.indexOf(a + ' ') === 0) return true;
+  const d = lev_(a, b);
+  return (m >= 6 && d <= 1) || (m >= 10 && d <= 2);
+}
+
+// "Rua Marabá, 120, Qd 10" -> ["MARABA"]
+function enderecoSegmentos_(end) {
+  return semAcento_(end).split(/[,;\/]| - /).map(function (p) {
+    p = p.replace(/\b(N|NO|NUMERO|QD|QUADRA|LT|LOTE|CASA|APTO|AP|BLOCO|BL|KM|SN)\b[\s\S]*$/, ' ').replace(/Nº.*$/, ' ');
+    let tk = canon_(p).split(' ').filter(Boolean);
+    if (tk.length >= 2 && /^\d+$/.test(tk[tk.length - 1]) && /[A-Z]{3,}/.test(tk[tk.length - 2])) tk.pop();
+    return tk.join(' ');
+  }).filter(function (s, k) { return s && (k === 0 || !/^\d+$/.test(s)); }); // número solto = nº da casa
+}
+
+function distM_(lat1, lng1, lat2, lng2) {
+  const R = 6371000, rad = Math.PI / 180;
+  const dLat = (lat2 - lat1) * rad, dLng = (lng2 - lng1) * rad;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+function textoDistancia_(m) {
+  return m < 1000 ? (Math.max(50, Math.round(m / 50) * 50)) + ' m' : (m / 1000).toFixed(1).replace('.', ',') + ' km';
+}
+
+// Texto que o Google Maps vai localizar para cada ponto da rota
+function consultaDoItem_(i) {
+  if (i.tipo === 'portaria' || i.tipo === 'rodovia' || !i.canon || i.canon.length <= 3) return '';
+  return String(i.orig).replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim() + ', Parauapebas - PA';
+}
+
+function labelRota_(r) { return (r.linha || '') + ' — ' + (r.turma || ''); }
+function rotaAtiva_(r) { return !/^N/i.test(String(r.ativa || 'SIM').trim()); }
+
+/**
+ * Escolhe a linha do turno do colaborador que passa mais perto dele.
+ * Pontua: bairro no itinerário, rua do endereço no itinerário, ponto de embarque citado
+ * e, se houver mapa, a distância até o ponto da rota mais próximo.
+ */
+function sugerirRota_(cad, rotas, geo) {
+  const todas = (rotas || []).filter(rotaAtiva_);
+  const turma = String(cad.turma || '').trim();
+  const daTurma = todas.filter(function (r) { return String(r.turma).trim() === turma; });
+  if (!daTurma.length) {
+    return { encontrada: false, motivo: 'Ainda não há linhas cadastradas para ' + (turma || 'esta turma') + '. A administração vai informar sua rota.' };
+  }
+  // vias que aparecem em quase todas as linhas (perto da portaria) valem pouco
+  const df = {};
+  todas.forEach(function (r) {
+    const visto = {};
+    itensDaRota_(r).forEach(function (i) { if (i.canon && !visto[i.canon]) { visto[i.canon] = 1; df[i.canon] = (df[i.canon] || 0) + 1; } });
+  });
+  const N = todas.length;
+  const peso = function (c) { return ((df[c] || 1) / N >= 0.5) ? 0.15 : 1; };
+  const bairro = canon_(cad.bairro);
+  const segs = enderecoSegmentos_(cad.endereco);
+  const ponto = ' ' + canon_(cad.ponto) + ' ';
+
+  const res = daTurma.map(function (r) {
+    const itens = itensDaRota_(r).filter(function (i) { return i.canon && i.tipo !== 'portaria'; });
+    let score = 0; const motivos = [];
+
+    const bairrosLinha = itens.filter(function (i) { return i.tipo === 'bairro' || i.tipo === 'local'; }).map(function (i) { return i.canon; })
+      .concat(String(r.bairrosExtras || '').split(/[,;\n]/).map(canon_).filter(Boolean));
+    const passaBairro = bairro.length >= 3 && bairrosLinha.some(function (c) { return parecido_(c, bairro); });
+    if (passaBairro) { score += 10; motivos.push('passa pelo bairro ' + String(cad.bairro).trim()); }
+
+    let ptsRua = 0, rua = '';
+    itens.forEach(function (i) {
+      if (i.tipo === 'bairro') return;
+      const generica = i.canon.length <= 3;
+      const ok = segs.some(function (s) { return generica ? s === i.canon : parecido_(s, i.canon); });
+      if (!ok) return;
+      const p = (generica ? (passaBairro ? 4 : 1.5) : 8) * peso(i.canon);
+      if (p > ptsRua) { ptsRua = p; rua = i.orig.replace(/\s*\([^)]*\)/g, ''); }
+    });
+    if (ptsRua) { score += ptsRua; motivos.push('o itinerário inclui ' + rua); }
+
+    if (ponto.trim()) {
+      const achou = itens.find(function (i) { return i.canon.length > 3 && i.tipo !== 'bairro' && ponto.indexOf(' ' + i.canon + ' ') >= 0; });
+      if (achou) { score += 4 * peso(achou.canon); motivos.push('o ponto de embarque cita ' + achou.orig.replace(/\s*\([^)]*\)/g, '')); }
+    }
+
+    let dist = null;
+    if (geo && geo.coord && geo.pontos) {
+      itens.forEach(function (i) {
+        const q = consultaDoItem_(i); const p = q && geo.pontos[q];
+        if (p && p.lat) {
+          const d = distM_(geo.coord.lat, geo.coord.lng, p.lat, p.lng);
+          if (dist === null || d < dist) dist = d;
+        }
+      });
+      if (dist !== null) {
+        const fator = geo.coord.precisao === 'bairro' ? 0.5 : 1;
+        const pd = 12 * Math.max(0, 1 - dist / RAIO_ROTA_M) * fator;
+        if (pd > 0) { score += pd; motivos.push('fica a cerca de ' + textoDistancia_(dist) + ' de um ponto da rota'); }
+      }
+    }
+    return { rota: r, score: score, motivos: motivos, dist: dist };
+  }).sort(function (a, b) {
+    return (b.score - a.score) || ((a.dist == null ? 1e9 : a.dist) - (b.dist == null ? 1e9 : b.dist));
+  });
+
+  const top = res[0];
+  if (!top || top.score <= 0) {
+    return { encontrada: false, motivo: 'Não encontramos sua rua ou seu bairro nos itinerários do ' + turma + '. A administração vai definir sua rota.' };
+  }
+  const r = top.rota;
+  const itin = listaItinerario_(r.itinerario);
+  return {
+    encontrada: true,
+    rotaId: r.id, label: labelRota_(r), turma: r.turma, linha: r.linha, horario: r.horario, km: r.km,
+    inicio: itin[0] || '', itinerario: itin,
+    confianca: top.score >= 14 ? 'alta' : (top.score >= 7 ? 'média' : 'baixa'),
+    motivo: top.motivos.join(', '),
+    distanciaM: top.dist == null ? null : Math.round(top.dist),
+    alternativas: res.slice(1).filter(function (x) { return x.score > 0; }).map(function (x) {
+      return { rotaId: x.rota.id, label: labelRota_(x.rota), pontos: Math.round(x.score) };
+    })
+  };
+}
+// </MOTOR> ===============================================================
+
+
+/* ============ PÁGINAS ============ */
+
+function doGet(e) {
+  const t = HtmlService.createTemplateFromFile('Index');
+  t.page = (e && e.parameter && e.parameter.page === 'admin') ? 'admin' : 'form';
+  return t.evaluate()
+    .setTitle('U&M | Transporte de Colaboradores')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
+}
+
+
+/* ============ CONFIGURAÇÃO (rode uma vez) ============ */
+
+function configurarSistema() {
+  const props = PropertiesService.getScriptProperties();
+  const ss = planilha_();
+  abaDe_(CONFIG.ABA, CAMPOS);
+  abaDe_(CONFIG.ABA_PONTOS, CAMPOS_PONTO);
+  semearRotas_();
+  pasta_();
+  if (!props.getProperty('SENHA_ADMIN')) {
+    props.setProperty('SENHA_ADMIN', 'troque-esta-senha');
+    Logger.log('ATENÇÃO: senha provisória criada. Troque em Configurações do projeto > Propriedades do script > SENHA_ADMIN.');
+  }
+  Logger.log('Planilha: ' + ss.getUrl());
+  const url = ScriptApp.getService().getUrl();
+  if (url) {
+    Logger.log('Link do colaborador: ' + url);
+    Logger.log('Link do admin: ' + url + '?page=admin');
+  } else {
+    Logger.log('Implante como App da Web para gerar os links.');
+  }
+  Logger.log('Próximo passo: rode prepararMapaDasRotas para localizar as ruas das rotas no mapa.');
+}
+
+// Localiza no mapa as ruas de todas as linhas (pode rodar quantas vezes quiser)
+function prepararMapaDasRotas() {
+  const r = prepararMapaDasRotas_(1000, 300000, null);
+  Logger.log('Localizadas agora: ' + r.feitos + ' | Encontradas no total: ' + r.localizados + ' de ' + r.total + ' | Faltam: ' + r.faltam);
+  if (r.faltam) Logger.log('Ainda faltam pontos: rode prepararMapaDasRotas de novo.');
+}
+
+
+/* ============ COLABORADOR ============ */
+
+function enviarCadastro(d) {
+  d = d || {};
+  if (d.site) return { ok: true, protocolo: '—', rota: null }; // campo-armadilha contra robôs
+  OBRIGATORIOS.forEach(function (k) {
+    if (!String(d[k] || '').trim()) throw new Error('Preencha o campo: ' + rotulo_(k));
+  });
+  if (!d.consentimento) throw new Error('Marque a autorização de uso dos dados para enviar.');
+
+  const r = montar_(d, CAMPOS_COLAB);
+  const sug = calcularRotaSegura_(r);
+
+  return comLock_(function () {
+    r.id = novoId_();
+    r.criadoEm = agora_();
+    r.atualizadoEm = r.criadoEm;
+    r.status = sug.encontrada ? 'Rota sugerida' : 'Novo';
+    r.onibus = sug.encontrada ? sug.label : '';
+    r.obs = '';
+    aplicarSugestao_(r, sug);
+    r.fotoId = salvarFoto_(d.foto, r.id + ' - ' + r.nome);
+    anexar_(abaDe_(CONFIG.ABA, CAMPOS), CAMPOS, r);
+    return { ok: true, protocolo: r.id, rota: rotaPublica_(sug) };
+  });
+}
+
+
+/* ============ ADMIN: LOGIN ============ */
+
+function login(senha) {
+  const cache = CacheService.getScriptCache();
+  const falhas = Number(cache.get('falhas_login') || 0);
+  if (falhas >= CONFIG.MAX_TENTATIVAS) throw new Error('Muitas tentativas erradas. Aguarde 10 minutos.');
+  const certa = PropertiesService.getScriptProperties().getProperty('SENHA_ADMIN');
+  if (!certa) throw new Error('Sistema não configurado. Rode a função configurarSistema no editor.');
+  Utilities.sleep(300);
+  if (String(senha || '') !== certa) {
+    cache.put('falhas_login', String(falhas + 1), 600);
+    throw new Error('Senha incorreta.');
+  }
+  cache.remove('falhas_login');
+  const token = Utilities.getUuid();
+  cache.put('sess_' + token, '1', Math.min(CONFIG.HORAS_SESSAO, 6) * 3600);
+  return token;
+}
+
+function sair(token) {
+  if (token) CacheService.getScriptCache().remove('sess_' + token);
+  return true;
+}
+
+
+/* ============ ADMIN: CADASTROS ============ */
+
+function listarCadastros(token) {
+  exigirAdmin_(token);
+  return {
+    registros: lerTudo_().map(semLinha_).reverse(), // mais recentes primeiro
+    rotas: lerRotas_().map(semLinha_),
+    mapa: resumoMapa_(),
+    planilhaUrl: planilha_().getUrl()
+  };
+}
+
+function salvarCadastro(token, d) {
+  exigirAdmin_(token);
+  d = d || {};
+  if (!String(d.nome || '').trim()) throw new Error('Informe o nome.');
+  if (d.id) {
+    return comLock_(function () {
+      const atual = acharOuErro_(d.id);
+      const novo = Object.assign({}, atual, montar_(d, CAMPOS_ADMIN));
+      if (novo.endereco !== atual.endereco || novo.bairro !== atual.bairro || novo.cidade !== atual.cidade) novo.coord = '';
+      novo.atualizadoEm = agora_();
+      gravar_(novo);
+      return semLinha_(novo);
+    });
+  }
+  const r = montar_(d, CAMPOS_ADMIN);
+  const sug = calcularRotaSegura_(r);
+  return comLock_(function () {
+    r.id = novoId_();
+    r.criadoEm = agora_();
+    r.atualizadoEm = r.criadoEm;
+    aplicarSugestao_(r, sug);
+    if (!r.onibus && sug.encontrada) { r.onibus = sug.label; if (r.status === 'Novo') r.status = 'Rota sugerida'; }
+    r.fotoId = salvarFoto_(d.foto, r.id + ' - ' + r.nome);
+    anexar_(abaDe_(CONFIG.ABA, CAMPOS), CAMPOS, r);
+    return semLinha_(r);
+  });
+}
+
+function recalcularRota(token, id) {
+  exigirAdmin_(token);
+  const base = acharOuErro_(id);
+  const sug = calcularRotaSegura_(base);
+  return comLock_(function () {
+    const r = acharOuErro_(id);
+    aplicarSugestao_(r, sug);
+    if (sug.encontrada) {
+      r.onibus = sug.label;
+      if (r.status === 'Novo' || r.status === 'Rota sugerida') r.status = 'Rota sugerida';
+    }
+    r.atualizadoEm = agora_();
+    gravar_(r);
+    return { registro: semLinha_(r), sugestao: rotaPublica_(sug) };
+  });
+}
+
+function alterarStatus(token, id, status) {
+  exigirAdmin_(token);
+  if (STATUS.indexOf(status) < 0) throw new Error('Status inválido.');
+  return comLock_(function () {
+    const r = acharOuErro_(id);
+    r.status = status;
+    r.atualizadoEm = agora_();
+    gravar_(r);
+    return semLinha_(r);
+  });
+}
+
+function alterarFoto(token, id, foto) {
+  exigirAdmin_(token);
+  return comLock_(function () {
+    const r = acharOuErro_(id);
+    const antiga = r.fotoId;
+    r.fotoId = foto ? salvarFoto_(foto, r.id + ' - ' + r.nome) : '';
+    r.atualizadoEm = agora_();
+    gravar_(r);
+    apagarFoto_(antiga);
+    return { fotoId: r.fotoId };
+  });
+}
+
+function excluirCadastro(token, id) {
+  exigirAdmin_(token);
+  return comLock_(function () {
+    const r = acharOuErro_(id);
+    abaDe_(CONFIG.ABA, CAMPOS).deleteRow(r._linha);
+    apagarFoto_(r.fotoId);
+    return true;
+  });
+}
+
+function getFotos(token, ids) {
+  exigirAdmin_(token);
+  const regs = lerTudo_();
+  const mapa = {};
+  (ids || []).slice(0, 20).forEach(function (id) {
+    const r = regs.find(function (x) { return x.id === id; });
+    if (!r || !r.fotoId) return;
+    try {
+      const b = DriveApp.getFileById(r.fotoId).getBlob();
+      mapa[id] = 'data:' + b.getContentType() + ';base64,' + Utilities.base64Encode(b.getBytes());
+    } catch (e) { /* foto apagada no Drive */ }
+  });
+  return mapa;
+}
+
+
+/* ============ ADMIN: ROTAS ============ */
+
+function listarRotas(token) {
+  exigirAdmin_(token);
+  return { rotas: lerRotas_().map(semLinha_), mapa: resumoMapa_() };
+}
+
+function salvarRota(token, d) {
+  exigirAdmin_(token);
+  d = d || {};
+  const turma = limpar_(d.turma, 80), linha = limpar_(d.linha, 60);
+  const itens = listaItinerario_(d.itinerario);
+  if (!turma) throw new Error('Escolha a turma da linha.');
+  if (!linha) throw new Error('Informe o nome da linha. Ex.: Linha 04');
+  if (itens.length < 2) throw new Error('Informe o itinerário com pelo menos duas ruas, uma por linha.');
+  return comLock_(function () {
+    const sh = abaDe_(CONFIG.ABA_ROTAS, CAMPOS_ROTA);
+    const r = {
+      turma: turma, linha: linha,
+      horario: limpar_(d.horario, 40), km: limpar_(d.km, 20),
+      itinerario: itens.map(function (i) { return limpar_(i, 160); }).join('\n').slice(0, 8000),
+      bairrosExtras: limpar_(d.bairrosExtras, 500),
+      ativa: d.ativa === false || d.ativa === 'NÃO' ? 'NÃO' : 'SIM',
+      atualizadoEm: agora_()
+    };
+    if (d.id) {
+      const atual = lerTabela_(sh, CAMPOS_ROTA).find(function (x) { return x.id === d.id; });
+      if (!atual) throw new Error('Linha não encontrada. Toque em Atualizar.');
+      const novo = Object.assign({}, atual, r);
+      gravarLinha_(sh, CAMPOS_ROTA, novo);
+      return semLinha_(novo);
+    }
+    r.id = 'R' + Utilities.getUuid().replace(/-/g, '').slice(0, 6).toUpperCase();
+    anexar_(sh, CAMPOS_ROTA, r);
+    return r;
+  });
+}
+
+function excluirRota(token, id) {
+  exigirAdmin_(token);
+  return comLock_(function () {
+    const sh = abaDe_(CONFIG.ABA_ROTAS, CAMPOS_ROTA);
+    const r = lerTabela_(sh, CAMPOS_ROTA).find(function (x) { return x.id === id; });
+    if (!r) throw new Error('Linha não encontrada.');
+    sh.deleteRow(r._linha);
+    return true;
+  });
+}
+
+function prepararMapa(token) {
+  exigirAdmin_(token);
+  return prepararMapaDasRotas_(40, 240000, null);
+}
+
+
+/* ============ ROTAS: MAPA E SUGESTÃO ============ */
+
+function calcularRotaSegura_(cad) {
+  try { return calcularRota_(cad); }
+  catch (e) { return { encontrada: false, motivo: 'Não foi possível calcular a rota agora. A administração vai definir sua rota.' }; }
+}
+
+function calcularRota_(cad) {
+  const rotas = lerRotas_();
+  let geo = null;
+  if (CONFIG.USAR_MAPA) {
+    try {
+      let coord = lerCoord_(cad.coord);
+      if (!coord) coord = localizarColaborador_(cad);
+      if (coord) {
+        prepararMapaDasRotas_(15, 20000, cad.turma); // garante os pontos das linhas deste turno
+        geo = { coord: coord, pontos: lerPontos_() };
+      }
+    } catch (e) { geo = null; }
+  }
+  const s = sugerirRota_(cad, rotas, geo);
+  s._coord = geo ? geo.coord.lat.toFixed(6) + ',' + geo.coord.lng.toFixed(6) + (geo.coord.precisao === 'bairro' ? ',bairro' : '') : '';
+  return s;
+}
+
+function aplicarSugestao_(r, sug) {
+  r.rotaSugerida = sug.encontrada ? sug.label : '';
+  r.rotaMotivo = sug.encontrada
+    ? 'Confiança ' + sug.confianca + ': ' + sug.motivo + (sug.alternativas && sug.alternativas.length ? '. Outras opções: ' + sug.alternativas.map(function (a) { return a.label; }).join(', ') : '')
+    : sug.motivo;
+  if (sug._coord) r.coord = sug._coord;
+}
+
+function rotaPublica_(s) {
+  if (!s || !s.encontrada) return { encontrada: false, motivo: s ? s.motivo : '' };
+  return {
+    encontrada: true, label: s.label, linha: s.linha, turma: s.turma, horario: s.horario, km: s.km,
+    inicio: s.inicio, itinerario: s.itinerario, confianca: s.confianca, motivo: s.motivo, distanciaM: s.distanciaM
+  };
+}
+
+function lerCoord_(txt) {
+  const p = String(txt || '').split(',');
+  const lat = parseFloat(p[0]), lng = parseFloat(p[1]);
+  if (isNaN(lat) || isNaN(lng)) return null;
+  return { lat: lat, lng: lng, precisao: p[2] === 'bairro' ? 'bairro' : 'endereco' };
+}
+
+function localizarColaborador_(cad) {
+  const cidade = String(cad.cidade || 'Parauapebas').trim();
+  let g = geocode_([cad.endereco, cad.bairro, cidade].filter(Boolean).join(', ') + ' - PA');
+  if (g) { g.precisao = 'endereco'; return g; }
+  if (cad.bairro) {
+    g = geocode_('Bairro ' + cad.bairro + ', ' + cidade + ' - PA');
+    if (g) { g.precisao = 'bairro'; return g; }
+  }
+  return null;
+}
+
+function geocode_(texto) {
+  const resp = Maps.newGeocoder().setRegion('br').setLanguage('pt-BR')
+    .setBounds(-6.45, -50.25, -5.70, -49.55).geocode(texto);
+  if (!resp || resp.status !== 'OK' || !resp.results || !resp.results.length) return null;
+  const res = resp.results[0];
+  const tipos = res.types || [];
+  const amplo = ['locality', 'administrative_area_level_1', 'administrative_area_level_2', 'country', 'postal_code'];
+  if (tipos.some(function (t) { return amplo.indexOf(t) >= 0; })) return null; // só achou a cidade
+  const loc = res.geometry.location;
+  if (distM_(loc.lat, loc.lng, CENTRO_MAPA.lat, CENTRO_MAPA.lng) > 45000) return null;
+  return { lat: loc.lat, lng: loc.lng };
+}
+
+function prepararMapaDasRotas_(limite, tempoMax, soTurma) {
+  const inicio = Date.now();
+  const sh = abaDe_(CONFIG.ABA_PONTOS, CAMPOS_PONTO);
+  const pontos = lerPontos_();
+  const todas = [];
+  lerRotas_().filter(rotaAtiva_).forEach(function (r) {
+    if (soTurma && String(r.turma).trim() !== String(soTurma).trim()) return;
+    itensDaRota_(r).forEach(function (i) { const q = consultaDoItem_(i); if (q && todas.indexOf(q) < 0) todas.push(q); });
+  });
+  const faltam = todas.filter(function (q) { return !pontos[q]; });
+  const novas = [];
+  for (let k = 0; k < faltam.length; k++) {
+    if (novas.length >= limite || Date.now() - inicio > tempoMax) break;
+    let g = null;
+    try { g = geocode_(faltam[k]); }
+    catch (e) { break; } // cota do dia atingida: tenta de novo depois
+    novas.push([faltam[k], g ? String(g.lat) : '', g ? String(g.lng) : '', g ? 'ok' : 'não encontrado', agora_()]);
+    pontos[faltam[k]] = g ? { lat: g.lat, lng: g.lng } : { lat: null };
+    Utilities.sleep(100);
+  }
+  if (novas.length) sh.getRange(sh.getLastRow() + 1, 1, novas.length, CAMPOS_PONTO.length).setValues(novas);
+  return {
+    feitos: novas.length,
+    faltam: faltam.length - novas.length,
+    total: todas.length,
+    localizados: todas.filter(function (q) { return pontos[q] && pontos[q].lat; }).length
+  };
+}
+
+function resumoMapa_() {
+  const pontos = lerPontos_();
+  const todas = [];
+  lerRotas_().filter(rotaAtiva_).forEach(function (r) {
+    itensDaRota_(r).forEach(function (i) { const q = consultaDoItem_(i); if (q && todas.indexOf(q) < 0) todas.push(q); });
+  });
+  return {
+    total: todas.length,
+    faltam: todas.filter(function (q) { return !pontos[q]; }).length,
+    localizados: todas.filter(function (q) { return pontos[q] && pontos[q].lat; }).length
+  };
+}
+
+function lerPontos_() {
+  const mapa = {};
+  lerTabela_(abaDe_(CONFIG.ABA_PONTOS, CAMPOS_PONTO), CAMPOS_PONTO).forEach(function (p) {
+    const lat = parseFloat(p.lat), lng = parseFloat(p.lng);
+    mapa[p.consulta] = isNaN(lat) ? { lat: null } : { lat: lat, lng: lng };
+  });
+  return mapa;
+}
+
+function lerRotas_() {
+  return lerTabela_(abaDe_(CONFIG.ABA_ROTAS, CAMPOS_ROTA), CAMPOS_ROTA);
+}
+
+function semearRotas_() {
+  const sh = abaDe_(CONFIG.ABA_ROTAS, CAMPOS_ROTA);
+  if (sh.getLastRow() > 1) return;
+  const agora = agora_();
+  const linhas = ROTAS_INICIAIS.map(function (r) {
+    return paraLinhaDe_(CAMPOS_ROTA, Object.assign({}, r, {
+      itinerario: listaItinerario_(r.itinerario).join('\n'), bairrosExtras: '', ativa: 'SIM', atualizadoEm: agora
+    }));
+  });
+  sh.getRange(2, 1, linhas.length, CAMPOS_ROTA.length).setValues(linhas);
+  sh.setColumnWidth(6, 420);
+  sh.getRange(2, 6, linhas.length, 1).setWrap(true);
+}
+
+
+/* ============ AUXILIARES ============ */
+
+function exigirAdmin_(token) {
+  if (!token || !CacheService.getScriptCache().get('sess_' + token)) throw new Error('SESSAO_EXPIRADA');
+}
+
+function planilha_() {
+  const props = PropertiesService.getScriptProperties();
+  const id = props.getProperty('PLANILHA_ID');
+  let ss = null;
+  if (id) { try { ss = SpreadsheetApp.openById(id); } catch (e) { ss = null; } }
+  if (!ss) {
+    ss = SpreadsheetApp.create(CONFIG.NOME_PLANILHA);
+    ss.getSheets()[0].setName(CONFIG.ABA);
+    props.setProperty('PLANILHA_ID', ss.getId());
+  }
+  return ss;
+}
+
+// Abre (ou cria) uma aba e garante o cabeçalho com todas as colunas
+function abaDe_(nome, campos) {
+  const ss = planilha_();
+  let sh = ss.getSheetByName(nome);
+  if (!sh) sh = ss.insertSheet(nome);
+  const cols = sh.getLastColumn();
+  const cab = cols ? sh.getRange(1, 1, 1, cols).getDisplayValues()[0].filter(String) : [];
+  if (cab.length < campos.length) {
+    sh.getRange(1, 1, sh.getMaxRows(), campos.length).setNumberFormat('@');
+    sh.getRange(1, 1, 1, campos.length).setValues([campos.map(function (c) { return c[1]; })])
+      .setFontWeight('bold').setBackground('#1b6e47').setFontColor('#ffffff');
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+function lerTabela_(sh, campos) {
+  const n = sh.getLastRow();
+  if (n < 2) return [];
+  const vals = sh.getRange(2, 1, n - 1, campos.length).getDisplayValues();
+  return vals.map(function (linha, i) {
+    const o = { _linha: i + 2 };
+    campos.forEach(function (c, j) { o[c[0]] = String(linha[j]).replace(/^'/, ''); });
+    return o;
+  }).filter(function (o) { return o[campos[0][0]]; });
+}
+
+function paraLinhaDe_(campos, r) {
+  return campos.map(function (c) { return r[c[0]] == null ? '' : r[c[0]]; });
+}
+function gravarLinha_(sh, campos, r) {
+  sh.getRange(r._linha, 1, 1, campos.length).setValues([paraLinhaDe_(campos, r)]);
+}
+function anexar_(sh, campos, r) {
+  sh.getRange(sh.getLastRow() + 1, 1, 1, campos.length).setValues([paraLinhaDe_(campos, r)]);
+}
+
+function lerTudo_() { return lerTabela_(abaDe_(CONFIG.ABA, CAMPOS), CAMPOS); }
+function gravar_(r) { gravarLinha_(abaDe_(CONFIG.ABA, CAMPOS), CAMPOS, r); }
+
+function acharOuErro_(id) {
+  const r = lerTudo_().find(function (x) { return x.id === id; });
+  if (!r) throw new Error('Cadastro não encontrado. Ele pode ter sido excluído; toque em Atualizar.');
+  return r;
+}
+
+function semLinha_(r) {
+  const o = Object.assign({}, r);
+  delete o._linha;
+  return o;
+}
+
+function montar_(d, campos) {
+  const o = {};
+  campos.forEach(function (k) { o[k] = limpar_(d[k], LIMITES[k], k === 'obs'); });
+  if ('status' in o && STATUS.indexOf(o.status) < 0) o.status = 'Novo';
+  return o;
+}
+
+// Remove espaços extras, limita tamanho e impede fórmulas na planilha
+function limpar_(v, max, multilinha) {
+  let s = String(v == null ? '' : v);
+  s = multilinha ? s.replace(/[ \t]+/g, ' ').trim() : s.replace(/\s+/g, ' ').trim();
+  s = s.slice(0, max || 200);
+  if (/^[=+\-@]/.test(s)) s = "'" + s;
+  return s;
+}
+
+function pasta_() {
+  const props = PropertiesService.getScriptProperties();
+  const id = props.getProperty('PASTA_ID');
+  if (id) { try { return DriveApp.getFolderById(id); } catch (e) { } }
+  const p = DriveApp.createFolder(CONFIG.PASTA_FOTOS);
+  props.setProperty('PASTA_ID', p.getId());
+  return p;
+}
+
+function salvarFoto_(foto, nome) {
+  if (!foto || !foto.base64) return '';
+  const tipos = ['image/jpeg', 'image/png', 'image/webp'];
+  if (tipos.indexOf(foto.tipo) < 0) throw new Error('Formato de foto não aceito. Use JPG ou PNG.');
+  const bytes = Utilities.base64Decode(foto.base64);
+  if (bytes.length > CONFIG.FOTO_MAX_MB * 1024 * 1024) throw new Error('Foto muito grande (máx. ' + CONFIG.FOTO_MAX_MB + ' MB).');
+  const ext = foto.tipo === 'image/png' ? '.png' : (foto.tipo === 'image/webp' ? '.webp' : '.jpg');
+  return pasta_().createFile(Utilities.newBlob(bytes, foto.tipo, nome + ext)).getId();
+}
+
+function apagarFoto_(id) {
+  if (!id) return;
+  try { DriveApp.getFileById(id).setTrashed(true); } catch (e) { }
+}
+
+function comLock_(fn) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try { return fn(); } finally { lock.releaseLock(); }
+}
+
+function novoId_() {
+  return 'UM' + Utilities.formatDate(new Date(), CONFIG.FUSO, 'yyMMdd') + '-' +
+    Utilities.getUuid().replace(/-/g, '').slice(0, 4).toUpperCase();
+}
+
+function agora_() {
+  return Utilities.formatDate(new Date(), CONFIG.FUSO, 'dd/MM/yyyy HH:mm');
+}
+
+function rotulo_(k) {
+  const c = CAMPOS.find(function (x) { return x[0] === k; });
+  return c ? c[1] : k;
+}

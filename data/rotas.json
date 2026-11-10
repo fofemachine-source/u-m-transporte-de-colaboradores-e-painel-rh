@@ -1,0 +1,977 @@
+[
+  {
+    "id": "ADM01",
+    "codigo": "ADM01",
+    "nome": "Palmares / Tropical / Betânia",
+    "turmas": [
+      "Administrativo"
+    ],
+    "turma": "Administrativo",
+    "linha": "ADM01",
+    "horarioInicio": "04:25",
+    "horarioRetorno": "17:00",
+    "horario": "04:25 / 17:00",
+    "km": "33,5 km",
+    "cor": "#10b981",
+    "capacidade": 44,
+    "bairros": [
+      "Palmares II",
+      "Palmares I",
+      "Vale do Sol",
+      "Tropical",
+      "Ipiranga",
+      "Vila Rica",
+      "Betânia",
+      "Novo Horizonte",
+      "Chácara",
+      "Cidade Nova"
+    ],
+    "ruas": [
+      "Av. Tancredo Neves",
+      "Av. Boa Vista",
+      "Rod. Faruk Salmen",
+      "Av. Dubai",
+      "Av. C",
+      "Av. Jatobá",
+      "Av. Castanheira",
+      "PA-160",
+      "R. Espanha",
+      "Av. Havana",
+      "R. Amsterdã",
+      "R. Santo Antônio",
+      "Av. Nicodemos",
+      "R. Novo Paraíso",
+      "R. Santiago",
+      "R. Nova Conquista",
+      "Av. Inglaterra",
+      "R. Marcos Freire",
+      "R. Sapucaia",
+      "R. Belém",
+      "Rua 10",
+      "Rua A",
+      "Rua 02"
+    ],
+    "itinerario": "Palmares II (Praça), Palmares I, Av. Tancredo Neves, Rod. Faruk Salmen, Vale do Sol (Av. Dubai), Tropical (Av. Jatobá), Ipiranga, Betânia, Novo Horizonte, Cidade Nova, Rua A, Rua 02, Portaria Peba",
+    "bairrosExtras": "Palmares II, Palmares I, Vale do Sol, Tropical, Betânia, Cidade Nova",
+    "coordenadas": [
+      [
+        -6.021,
+        -49.845
+      ],
+      [
+        -6.035,
+        -49.855
+      ],
+      [
+        -6.058,
+        -49.873
+      ],
+      [
+        -6.064,
+        -49.882
+      ],
+      [
+        -6.071,
+        -49.887
+      ],
+      [
+        -6.082,
+        -49.884
+      ],
+      [
+        -6.059,
+        -49.897
+      ],
+      [
+        -6.0682,
+        -49.9045
+      ],
+      [
+        -6.062,
+        -49.891
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "ADM02",
+    "codigo": "ADM02",
+    "nome": "Nova Carajás / Amazonas / Linha Verde",
+    "turmas": [
+      "Administrativo"
+    ],
+    "turma": "Administrativo",
+    "linha": "ADM02",
+    "horarioInicio": "04:35",
+    "horarioRetorno": "17:00",
+    "horario": "04:35 / 17:00",
+    "km": "20,8 km",
+    "cor": "#3b82f6",
+    "capacidade": 44,
+    "bairros": [
+      "Nova Carajás",
+      "Nova Carajás (Casinhas)",
+      "Alvorá",
+      "W. Torres",
+      "Amazonas",
+      "Linha Verde",
+      "Paraíso",
+      "Da Paz",
+      "Rio Verde",
+      "União"
+    ],
+    "ruas": [
+      "Av. Igarapé Bahia",
+      "Rua C34",
+      "Rua C42",
+      "Rua 90",
+      "Av. Nova Carajás",
+      "Av. Parauapebas",
+      "Av. Serra Sul",
+      "Rua 55",
+      "Av. Sossego",
+      "Av. Carajás",
+      "Av. Serra Arqueada",
+      "Av. 07",
+      "Av. 01",
+      "Canal 5",
+      "Av. Ana Karina",
+      "Av. Salvador Flausino",
+      "Rua A10",
+      "PA-160",
+      "R. Novo Progresso",
+      "Av. das Flores",
+      "R. Wenceslau Braz",
+      "Av. Pres. Prudente",
+      "Av. João Figueiredo",
+      "R. Aracaju",
+      "R. Marabá",
+      "R. Rio de Janeiro",
+      "Rua 16",
+      "Rua F",
+      "Rua E",
+      "Rua 02"
+    ],
+    "itinerario": "Casinhas Nova Carajás, Av. Nova Carajás, Alvorá, W. Torres, Bairro Amazonas (Av. Ana Karina), Linha Verde (Av. das Flores), Paraíso, Da Paz, Rio Verde, União, Rua 16, Portaria Peba",
+    "bairrosExtras": "Nova Carajás, Amazonas, Linha Verde, Paraíso, Rio Verde, União",
+    "coordenadas": [
+      [
+        -6.089,
+        -49.952
+      ],
+      [
+        -6.079,
+        -49.939
+      ],
+      [
+        -6.069,
+        -49.928
+      ],
+      [
+        -6.064,
+        -49.919
+      ],
+      [
+        -6.067,
+        -49.914
+      ],
+      [
+        -6.075,
+        -49.913
+      ],
+      [
+        -6.061,
+        -49.897
+      ],
+      [
+        -6.062,
+        -49.889
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "ADM03",
+    "codigo": "ADM03",
+    "nome": "Liberdade e Região Central",
+    "turmas": [
+      "Administrativo"
+    ],
+    "turma": "Administrativo",
+    "linha": "ADM03",
+    "horarioInicio": "04:35",
+    "horarioRetorno": "17:00",
+    "horario": "04:35 / 17:00",
+    "km": "14,2 km",
+    "cor": "#8b5cf6",
+    "capacidade": 44,
+    "bairros": [
+      "Liberdade",
+      "Região Central",
+      "Centro",
+      "Beira Rio",
+      "Morumbi"
+    ],
+    "ruas": [
+      "Av. Bom Jardim",
+      "R. Rui Barbosa",
+      "Av. Paulo Afonso",
+      "R. Daniela Perez",
+      "R. Ayrton Senna",
+      "Av. Morumbi",
+      "Av. JK",
+      "R. Minas Gerais",
+      "R. Perimetral Norte",
+      "R. Santa Catarina",
+      "R. Olavo Bilac",
+      "R. Vinícius de Morais",
+      "Av. Pará",
+      "R. Espírito Santo",
+      "Av. Princesa Isabel",
+      "Rua 11",
+      "Rua E"
+    ],
+    "itinerario": "Av. Bom Jardim, R. Rui Barbosa, Av. Paulo Afonso, Morumbi, Av. JK, R. Perimetral Norte, Liberdade (R. Santa Catarina, R. Olavo Bilac, Av. Pará, Av. Princesa Isabel), Rua 11, Portaria Peba",
+    "bairrosExtras": "Liberdade, Centro, Morumbi, Beira Rio",
+    "coordenadas": [
+      [
+        -6.069,
+        -49.901
+      ],
+      [
+        -6.061,
+        -49.895
+      ],
+      [
+        -6.054,
+        -49.891
+      ],
+      [
+        -6.052,
+        -49.889
+      ],
+      [
+        -6.049,
+        -49.886
+      ],
+      [
+        -6.055,
+        -49.884
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "ADM04",
+    "codigo": "ADM04",
+    "nome": "Alto Bonito / Minérios / Cidade Jardim / Parque dos Carajás",
+    "turmas": [
+      "Administrativo"
+    ],
+    "turma": "Administrativo",
+    "linha": "ADM04",
+    "horarioInicio": "04:40",
+    "horarioRetorno": "17:00",
+    "horario": "04:40 / 17:00",
+    "km": "31,3 km",
+    "cor": "#f59e0b",
+    "capacidade": 44,
+    "bairros": [
+      "Residencial Alto Bonito",
+      "Alto Bonito",
+      "Bairro dos Minérios",
+      "Minérios",
+      "Cidade Jardim",
+      "Parque dos Carajás",
+      "Park dos Carajás"
+    ],
+    "ruas": [
+      "PA-160",
+      "Av. 01",
+      "Rua F26",
+      "Av. J",
+      "Av. F",
+      "Av. Paricá",
+      "Av. das Castanheiras",
+      "Av. Jatobá",
+      "Av. Q",
+      "Av. D",
+      "Av. B",
+      "Av. dos Buritis",
+      "PA-275",
+      "Av. dos Ipês",
+      "Av. A",
+      "Av. G",
+      "Av. C",
+      "Av. Potiguar",
+      "Rua E"
+    ],
+    "itinerario": "Alto Bonito, Minérios (Av. 01, Rua F26), Cidade Jardim (Av. dos Buritis, Av. D, Av. Q), Parque dos Carajás (Av. Potiguar, Av. A, Av. C), PA-275, Portaria Peba",
+    "bairrosExtras": "Alto Bonito, Minérios, Cidade Jardim, Park dos Carajás",
+    "coordenadas": [
+      [
+        -6.038,
+        -49.912
+      ],
+      [
+        -6.048,
+        -49.919
+      ],
+      [
+        -6.056,
+        -49.924
+      ],
+      [
+        -6.062,
+        -49.929
+      ],
+      [
+        -6.071,
+        -49.932
+      ],
+      [
+        -6.068,
+        -49.916
+      ],
+      [
+        -6.061,
+        -49.897
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "ADM07",
+    "codigo": "ADM07",
+    "nome": "VS-10 / Liberdade / Bom Jardim",
+    "turmas": [
+      "Administrativo"
+    ],
+    "turma": "Administrativo",
+    "linha": "ADM07",
+    "horarioInicio": "04:45",
+    "horarioRetorno": "17:00",
+    "horario": "04:45 / 17:00",
+    "km": "20 km",
+    "cor": "#ec4899",
+    "capacidade": 44,
+    "bairros": [
+      "VS-10",
+      "Complexo VS-10",
+      "Liberdade",
+      "Bom Jardim",
+      "Guanabara"
+    ],
+    "ruas": [
+      "Av. VS-10",
+      "Av. Sebastião Gonçalves Pimentel",
+      "R. Raimundo Gonçalves Pimentel",
+      "Rua B",
+      "R. Sapucaia",
+      "R. Muricí",
+      "Av. dos Ipês",
+      "R. Olestina Lemos",
+      "R. Antônio Lemos",
+      "Av. Alzira Camilo",
+      "Av. Paulo Maranhão",
+      "Av. Floriano Peixoto",
+      "R. Jorge Amado",
+      "R. Augusto Meire",
+      "R. Bom Jardim",
+      "R. Marabá",
+      "R. Rio de Janeiro",
+      "Rua 16",
+      "Av. Liberdade",
+      "Rua E"
+    ],
+    "itinerario": "Estrada VS-10 (Sebastião G. Pimentel), Bairro Guanabara, Alzira Camilo, Bom Jardim (Av. Paulo Maranhão), R. Marabá, R. Rio de Janeiro, Av. Liberdade, Rua 16, Portaria Peba",
+    "bairrosExtras": "VS-10, Guanabara, Bom Jardim, Liberdade",
+    "coordenadas": [
+      [
+        -6.088,
+        -49.872
+      ],
+      [
+        -6.079,
+        -49.878
+      ],
+      [
+        -6.069,
+        -49.884
+      ],
+      [
+        -6.06,
+        -49.888
+      ],
+      [
+        -6.052,
+        -49.889
+      ],
+      [
+        -6.057,
+        -49.885
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-06-A",
+    "codigo": "LINHA-06",
+    "nome": "LINHA-06 (Turma A) • Alvorá / W. Torres / Tropical / Vale do Sol",
+    "turmas": [
+      "Retaludamento — Turma A"
+    ],
+    "turma": "Retaludamento — Turma A",
+    "linha": "LINHA-06",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "27,6 km",
+    "cor": "#065f46",
+    "capacidade": 44,
+    "bairros": [
+      "Alvorá",
+      "W. Torres",
+      "Amazonas",
+      "Buritis",
+      "Polo Moveleiro",
+      "Tropical",
+      "Vale do Sol"
+    ],
+    "ruas": [
+      "Praça do Alvorá",
+      "Av. Ana Karina",
+      "Av. Salvador Flausino",
+      "Rua A010",
+      "PA-160",
+      "PA-275",
+      "Av. Buritis",
+      "Av. C",
+      "Av. Q",
+      "Av. D",
+      "Av. Castanheira",
+      "Av. Paricá",
+      "Av. F",
+      "Av. 01",
+      "R. Marupá",
+      "Av. Mogno",
+      "Av. Jatobá",
+      "Av. Havana",
+      "R. Amsterdã",
+      "R. Santo Antônio",
+      "R. Nicodemos",
+      "Av. Inglaterra",
+      "Rod. Faruk Salmen",
+      "Rua A",
+      "Rua 2"
+    ],
+    "itinerario": "Praça do Alvorá, W. Torres, Amazonas (Ana Karina), PA-160, Av. Buritis, Polo Moveleiro, Tropical (Av. Jatobá), Vale do Sol (Av. Havana), Faruk Salmen, Rua A, Portaria Peba",
+    "bairrosExtras": "Alvorá, W. Torres, Amazonas, Tropical, Vale do Sol",
+    "coordenadas": [
+      [
+        -6.082,
+        -49.941
+      ],
+      [
+        -6.074,
+        -49.932
+      ],
+      [
+        -6.068,
+        -49.927
+      ],
+      [
+        -6.059,
+        -49.921
+      ],
+      [
+        -6.064,
+        -49.882
+      ],
+      [
+        -6.058,
+        -49.873
+      ],
+      [
+        -6.062,
+        -49.885
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-06-B",
+    "codigo": "LINHA-06",
+    "nome": "LINHA-06 (Turma B) • W. Torres / Parque dos Carajás",
+    "turmas": [
+      "Retaludamento — Turma B"
+    ],
+    "turma": "Retaludamento — Turma B",
+    "linha": "LINHA-06",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "11,8 km",
+    "cor": "#0284c7",
+    "capacidade": 44,
+    "bairros": [
+      "W. Torres",
+      "Parque dos Carajás",
+      "Park dos Carajás",
+      "Alvorá"
+    ],
+    "ruas": [
+      "Av. Ana Karina",
+      "Av. Salvador Flausino",
+      "Rua 010",
+      "PA-160",
+      "Av. Potiguar",
+      "Av. F",
+      "Av. Rio Grande",
+      "PA-275",
+      "Rua E",
+      "Rua 2"
+    ],
+    "itinerario": "W. Torres (Av. Ana Karina, Salvador Flausino), PA-160, Parque dos Carajás (Av. Potiguar, Av. F, Av. Rio Grande), PA-275, Rua E, Rua 2, Portaria Peba",
+    "bairrosExtras": "W. Torres, Parque dos Carajás",
+    "coordenadas": [
+      [
+        -6.074,
+        -49.932
+      ],
+      [
+        -6.068,
+        -49.925
+      ],
+      [
+        -6.071,
+        -49.932
+      ],
+      [
+        -6.075,
+        -49.928
+      ],
+      [
+        -6.068,
+        -49.916
+      ],
+      [
+        -6.061,
+        -49.897
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-07-B",
+    "codigo": "LINHA-07",
+    "nome": "LINHA-07 (Turma B) • VS-10 / Liberdade / Rio Verde",
+    "turmas": [
+      "Retaludamento — Turma B"
+    ],
+    "turma": "Retaludamento — Turma B",
+    "linha": "LINHA-07",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "22,7 km",
+    "cor": "#7c3aed",
+    "capacidade": 44,
+    "bairros": [
+      "VS-10",
+      "Complexo VS-10",
+      "Liberdade",
+      "Rio Verde",
+      "Bom Jardim"
+    ],
+    "ruas": [
+      "Av. VS-10",
+      "R. Jatobá",
+      "R. Jequitibá",
+      "Av. Ipê",
+      "R. Fernando Peixoto",
+      "R. Castilho França",
+      "R. Rio Claro",
+      "R. Paulo Afonso",
+      "R. Paulo Maranhão",
+      "R. Floriano Peixoto",
+      "R. Jorge Amado",
+      "R. Augusto Meire",
+      "R. Bom Jardim",
+      "R. Marabá",
+      "R. Ângela Diniz",
+      "R. Rui Barbosa",
+      "R. Daniela Perez",
+      "R. Ayrton Senna",
+      "R. Morumbi",
+      "R. Safira",
+      "R. JK",
+      "R. Rio de Janeiro",
+      "Rua 16",
+      "Rua F",
+      "Rua E",
+      "Rua 2"
+    ],
+    "itinerario": "Av. VS-10 (Escola Mário Lago), Castilho França, Bom Jardim, Liberdade (Rui Barbosa, Daniela Perez, Morumbi, JK), Rio Verde (Rio de Janeiro), Rua 16, Portaria Peba",
+    "bairrosExtras": "VS-10, Liberdade, Rio Verde, Bom Jardim",
+    "coordenadas": [
+      [
+        -6.091,
+        -49.868
+      ],
+      [
+        -6.079,
+        -49.878
+      ],
+      [
+        -6.069,
+        -49.884
+      ],
+      [
+        -6.052,
+        -49.889
+      ],
+      [
+        -6.068,
+        -49.902
+      ],
+      [
+        -6.061,
+        -49.889
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-06-C",
+    "codigo": "LINHA-06",
+    "nome": "LINHA-06 (Turma C) • Vila Nova / Tropical / Alto Bonito",
+    "turmas": [
+      "Retaludamento — Turma C"
+    ],
+    "turma": "Retaludamento — Turma C",
+    "linha": "LINHA-06",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "22,1 km",
+    "cor": "#ea580c",
+    "capacidade": 44,
+    "bairros": [
+      "Vila Nova",
+      "Tropical",
+      "Alto Bonito",
+      "Minérios",
+      "Cidade Jardim"
+    ],
+    "ruas": [
+      "Av. D com Av. Q",
+      "PA-160",
+      "Av. dos Ipês",
+      "Av. F",
+      "Av. dos Buritis",
+      "Av. 01",
+      "Av. 02",
+      "Av. A",
+      "Av. B",
+      "Av. Castanheira",
+      "R. Monarquia",
+      "Policlínica",
+      "Av. J",
+      "Rod. Faruk Salmen",
+      "Rua A",
+      "Rua 2"
+    ],
+    "itinerario": "Vila Nova, Cidade Jardim (Av. D, Av. Q), Minérios (Av. 01, Av. 02), Alto Bonito (R. Monarquia), Tropical, Rod. Faruk Salmen, Rua A, Rua 2, Portaria Peba",
+    "bairrosExtras": "Vila Nova, Tropical, Alto Bonito, Cidade Jardim",
+    "coordenadas": [
+      [
+        -6.071,
+        -49.924
+      ],
+      [
+        -6.058,
+        -49.922
+      ],
+      [
+        -6.048,
+        -49.919
+      ],
+      [
+        -6.038,
+        -49.912
+      ],
+      [
+        -6.064,
+        -49.882
+      ],
+      [
+        -6.062,
+        -49.885
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-07-C",
+    "codigo": "LINHA-07",
+    "nome": "LINHA-07 (Turma C) • Nova Carajás / Alvorá / Parque dos Carajás",
+    "turmas": [
+      "Retaludamento — Turma C"
+    ],
+    "turma": "Retaludamento — Turma C",
+    "linha": "LINHA-07",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "19,5 km",
+    "cor": "#0d9488",
+    "capacidade": 44,
+    "bairros": [
+      "Nova Carajás",
+      "Nova Carajás (Casinhas)",
+      "Alvorá",
+      "W. Torres",
+      "Parque dos Carajás",
+      "Park dos Carajás"
+    ],
+    "ruas": [
+      "Rua 141",
+      "Rua C38",
+      "C27",
+      "Rua C42",
+      "Rua 90",
+      "Av. Serra Norte",
+      "R. Araguaia",
+      "Av. Nova Carajás",
+      "Av. Serra Arqueada",
+      "Av. 07",
+      "Av. Ana Karina",
+      "Av. Salvador Flausino",
+      "Av. A010",
+      "PA-160",
+      "Av. Potiguar",
+      "Av. F",
+      "Av. Rio Grande",
+      "PA-275",
+      "Rua E",
+      "Rua 2"
+    ],
+    "itinerario": "Casinhas Nova Carajás (Rua 141, C38), Av. Nova Carajás, Alvorá, W. Torres, PA-160, Parque dos Carajás (Av. Potiguar, Rio Grande), PA-275, Portaria Peba",
+    "bairrosExtras": "Nova Carajás, Alvorá, W. Torres, Parque dos Carajás",
+    "coordenadas": [
+      [
+        -6.092,
+        -49.954
+      ],
+      [
+        -6.084,
+        -49.945
+      ],
+      [
+        -6.079,
+        -49.939
+      ],
+      [
+        -6.074,
+        -49.932
+      ],
+      [
+        -6.071,
+        -49.932
+      ],
+      [
+        -6.068,
+        -49.916
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-06-D",
+    "codigo": "LINHA-06",
+    "nome": "LINHA-06 (Turma D) • Alvorá / W. Torres / Paraíso / Rio Verde",
+    "turmas": [
+      "Retaludamento — Turma D"
+    ],
+    "turma": "Retaludamento — Turma D",
+    "linha": "LINHA-06",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "14,3 km",
+    "cor": "#4f46e5",
+    "capacidade": 44,
+    "bairros": [
+      "Alvorá",
+      "W. Torres",
+      "Paraíso",
+      "Rio Verde",
+      "União"
+    ],
+    "ruas": [
+      "Praça do Alvorá",
+      "Av. Ana Karina",
+      "Av. Salvador Flausino",
+      "Rua A010",
+      "PA-160",
+      "PA-275",
+      "Av. Jânio Quadros",
+      "R. Delfim Moreira",
+      "Av. Presidente Prudente",
+      "R. Marabá",
+      "R. Rio de Janeiro",
+      "Rua 16",
+      "Rua F",
+      "Rua E",
+      "Rua 2"
+    ],
+    "itinerario": "Praça do Alvorá, W. Torres, PA-160, Paraíso (Av. Presidente Prudente), Rio Verde (R. Marabá, R. Rio de Janeiro), Rua 16, Rua F, Portaria Peba",
+    "bairrosExtras": "Alvorá, W. Torres, Paraíso, Rio Verde",
+    "coordenadas": [
+      [
+        -6.082,
+        -49.941
+      ],
+      [
+        -6.074,
+        -49.932
+      ],
+      [
+        -6.067,
+        -49.914
+      ],
+      [
+        -6.075,
+        -49.913
+      ],
+      [
+        -6.061,
+        -49.897
+      ],
+      [
+        -6.062,
+        -49.889
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  },
+  {
+    "id": "LINHA-07-D",
+    "codigo": "LINHA-07",
+    "nome": "LINHA-07 (Turma D) • Palmares II / Vale do Sol",
+    "turmas": [
+      "Retaludamento — Turma D"
+    ],
+    "turma": "Retaludamento — Turma D",
+    "linha": "LINHA-07",
+    "horarioInicio": "04:00",
+    "horarioRetorno": "16:00",
+    "horario": "04:00 / 16:00",
+    "km": "25 km",
+    "cor": "#dc2626",
+    "capacidade": 44,
+    "bairros": [
+      "Palmares II",
+      "Palmares I",
+      "Vale do Sol",
+      "Tropical"
+    ],
+    "ruas": [
+      "Av. Tancredo Neves",
+      "Rod. Faruk Salmen",
+      "Av. Dubai",
+      "R. Oslo",
+      "R. Jamaica",
+      "Av. Havana",
+      "R. Amsterdã",
+      "Rua A",
+      "Rua 2"
+    ],
+    "itinerario": "Palmares II (Praça), Av. Tancredo Neves, Rod. Faruk Salmen, Vale do Sol (Av. Dubai, R. Oslo, R. Jamaica), Tropical (Av. Havana, R. Amsterdã), Rua A, Rua 2, Portaria Peba",
+    "bairrosExtras": "Palmares II, Vale do Sol, Tropical",
+    "coordenadas": [
+      [
+        -6.021,
+        -49.845
+      ],
+      [
+        -6.035,
+        -49.855
+      ],
+      [
+        -6.058,
+        -49.873
+      ],
+      [
+        -6.064,
+        -49.882
+      ],
+      [
+        -6.062,
+        -49.885
+      ],
+      [
+        -6.0592,
+        -49.882
+      ]
+    ],
+    "ativa": true,
+    "atualizadoEm": "06/11/2026 08:00"
+  }
+]

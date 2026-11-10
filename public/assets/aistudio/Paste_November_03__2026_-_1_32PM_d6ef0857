@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>U&amp;M | Transporte de Colaboradores</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --verde:#1b6e47;--verde-forte:#155a3a;--verde-suave:#e6f2eb;
+  --fundo:#f3f6f4;--card:#ffffff;--texto:#16251d;--suave:#5d6d64;--borda:#cdd8d1;--campo:#ffffff;
+  --perigo:#b3261e;--perigo-suave:#fdecea;--alerta:#7a4f00;--alerta-suave:#fff3d6;
+  --info:#1f4f8a;--info-suave:#e6eefa;--neutro-suave:#eceeed;--largura:720px;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --verde:#2b8a5d;--verde-forte:#5cc48f;--verde-suave:#1b3327;
+  --fundo:#0e1411;--card:#17201b;--texto:#e5ede8;--suave:#9fb2a7;--borda:#2e3c34;--campo:#111915;
+  --perigo:#ff8a80;--perigo-suave:#3a1c1a;--alerta:#f2c46d;--alerta-suave:#3a2e14;
+  --info:#9cc0f5;--info-suave:#1a2a40;--neutro-suave:#252c28;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --verde:#2b8a5d;--verde-forte:#5cc48f;--verde-suave:#1b3327;
+  --fundo:#0e1411;--card:#17201b;--texto:#e5ede8;--suave:#9fb2a7;--borda:#2e3c34;--campo:#111915;
+  --perigo:#ff8a80;--perigo-suave:#3a1c1a;--alerta:#f2c46d;--alerta-suave:#3a2e14;
+  --info:#9cc0f5;--info-suave:#1a2a40;--neutro-suave:#252c28;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.45 Roboto,"Segoe UI",system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%}
+body[data-page="admin"]{--largura:1120px}
+body.travado{overflow:hidden}
+[hidden]{display:none!important}
+
+.topo{background:#1b6e47;color:#fff;padding:20px 16px 22px}
+.topo-in{max-width:var(--largura);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.marca{display:flex;align-items:center;gap:12px}
+.logo{width:54px;height:54px;border-radius:12px;background:#fff;color:#1b6e47;font-weight:900;font-size:18px;letter-spacing:-.03em;display:flex;align-items:center;justify-content:center;flex:none}
+.topo h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.topo p{margin:2px 0 0;opacity:.88;font-size:15px}
+.btn-topo{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:10px;padding:8px 14px;font:inherit;font-size:15px;cursor:pointer}
+
+.wrap{max-width:var(--largura);margin:0 auto;padding:16px 14px 48px}
+.card{background:var(--card);border:1px solid var(--borda);border-radius:18px;padding:20px;margin-bottom:16px}
+h2{font-size:22px;margin:0 0 6px;line-height:1.2}
+.desc{color:var(--suave);margin:0 0 6px}
+.campo{display:block;font-weight:600;margin:16px 0 6px;font-size:15px}
+.req{color:var(--perigo);font-weight:700}
+input,select,textarea{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1px solid var(--borda);border-radius:12px;background:var(--campo);color:var(--texto)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--verde);outline-offset:1px;border-color:var(--verde)}
+textarea{min-height:84px;resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--suave);opacity:.8}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:10px 16px;border-radius:12px;border:1px solid var(--borda);background:var(--card);color:var(--texto);font:inherit;font-weight:600;cursor:pointer;text-decoration:none;line-height:1.2}
+.btn:focus-visible,.chip:focus-visible,.stat:focus-visible{outline:2px solid var(--verde);outline-offset:2px}
+.btn.prim{background:var(--verde);border-color:var(--verde);color:#fff}
+.btn.perigo{color:var(--perigo);border-color:var(--perigo)}
+.btn.perigo.cheio{background:var(--perigo);color:#fff}
+.btn.bloco{width:100%;margin-top:22px;font-size:18px;min-height:54px}
+.btn:disabled{opacity:.6;cursor:wait}
+
+.foto-linha{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.avatar{width:76px;height:76px;border-radius:50%;background:var(--verde-suave);color:var(--verde-forte);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;overflow:hidden;flex:none;border:2px solid var(--borda)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar svg{width:30px;height:30px}
+.selo svg{width:38px;height:38px}
+.foto-btns{display:flex;gap:8px;flex-wrap:wrap}
+.foto-btns .btn{min-height:40px;font-size:15px}
+.arquivo{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:20px;font-size:15px;cursor:pointer}
+.check input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--verde)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.nota{color:var(--suave);font-size:14px;margin:14px 0 0}
+
+.ok{text-align:center;padding:32px 20px}
+.ok .selo{width:72px;height:72px;border-radius:50%;background:var(--verde);color:#fff;font-size:38px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.protocolo{font-size:24px;font-weight:800;letter-spacing:.04em;background:var(--verde-suave);color:var(--verde-forte);display:inline-block;padding:8px 16px;border-radius:12px;margin:10px 0}
+
+.login{max-width:420px;margin:24px auto}
+
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
+@media (max-width:640px){.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.stats .stat:first-child{grid-column:1/-1;display:flex;align-items:baseline;gap:10px}.stat{padding:10px}.stat b{font-size:22px}.stat span{font-size:12.5px;line-height:1.2;display:block}}
+.stat{background:var(--card);border:1px solid var(--borda);border-radius:14px;padding:12px 14px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.stat b{display:block;font-size:28px;line-height:1.1}
+.stat span{font-size:14px;color:var(--suave)}
+.stat.ativo{border-color:var(--verde);box-shadow:inset 0 0 0 1px var(--verde)}
+.stat:first-child{background:var(--verde);border-color:var(--verde);color:#fff}
+.stat:first-child span{color:#fff;opacity:.9}
+
+.barra-acoes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 2px 6px;scrollbar-width:thin}
+.chip{flex:none;border:1px solid var(--borda);background:var(--card);border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;color:var(--texto);cursor:pointer;white-space:nowrap}
+.chip.ativo{background:var(--verde);color:#fff;border-color:var(--verde)}
+.chip small{opacity:.75;margin-left:4px;font-size:13px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}
+@media (max-width:560px){.grid3{grid-template-columns:1fr 1fr}.grid3 select:last-child{grid-column:1/-1}}
+.grid3 select{font-size:15px;padding:10px 12px}
+.linha-res{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--suave);font-size:14px;gap:10px}
+.link{background:none;border:0;color:var(--verde-forte);font:inherit;font-size:14px;cursor:pointer;text-decoration:underline;padding:4px}
+
+.lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.cad{background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;border-left:5px solid var(--borda)}
+.cad.s-novo{border-left-color:var(--info)}
+.cad.s-analise{border-left-color:var(--alerta)}
+.cad.s-rota{border-left-color:var(--verde)}
+.cad.s-inativo{opacity:.72}
+.cad-top{display:flex;gap:12px;align-items:center}
+.cad-top .avatar{width:58px;height:58px;font-size:19px}
+.cad h3{margin:0;font-size:17px;line-height:1.25;word-break:break-word}
+.sub{color:var(--suave);font-size:14px;margin:2px 0 6px}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badge{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--neutro-suave);color:var(--suave)}
+.badge.s-novo{background:var(--info-suave);color:var(--info)}
+.badge.s-analise{background:var(--alerta-suave);color:var(--alerta)}
+.badge.s-rota{background:var(--verde-suave);color:var(--verde-forte)}
+.badge.dup{background:var(--perigo-suave);color:var(--perigo)}
+.info{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin:0;font-size:14px}
+.info dt{color:var(--suave)}
+.info dd{margin:0;word-break:break-word;white-space:pre-line}
+.acoes{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px;border-top:1px solid var(--borda)}
+.acoes .btn{min-height:40px;padding:8px 12px;font-size:14px}
+.acoes select{width:100%;font-size:14px;padding:9px 10px}
+.vazio{text-align:center;color:var(--suave);padding:36px 12px;grid-column:1/-1;background:var(--card);border:1px dashed var(--borda);border-radius:16px}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:50}
+.modal-caixa{background:var(--card);width:100%;max-width:660px;max-height:94vh;display:flex;flex-direction:column;border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+.modal-caixa form{display:flex;flex-direction:column;min-height:0;flex:1}
+.modal-caixa.peq{max-width:420px}
+@media (min-width:700px){.modal{align-items:center;padding:20px}.modal-caixa{border-radius:20px}}
+.modal-cab{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--borda)}
+.modal-cab h2{margin:0;font-size:20px}
+.modal-corpo{padding:6px 20px 20px;overflow-y:auto}
+.modal-rod{display:flex;gap:8px;justify-content:flex-end;padding:12px 20px;border-top:1px solid var(--borda)}
+.x{border:0;background:none;font-size:30px;color:var(--suave);cursor:pointer;line-height:1;padding:0 4px}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+@media (max-width:520px){.duas{grid-template-columns:1fr}}
+.bloco-admin{margin-top:20px;padding:4px 14px 14px;border-radius:14px;background:var(--verde-suave)}
+.bloco-admin .campo:first-child{margin-top:12px}
+
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#1f2a24;color:#fff;padding:12px 18px;border-radius:12px;opacity:0;transition:opacity .2s,transform .2s;z-index:70;max-width:calc(100% - 32px);font-size:15px;pointer-events:none;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.erro{background:#8c1d18}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-in">
+    <div class="marca">
+      <div class="logo" aria-hidden="true">U&amp;M</div>
+      <div><h1>Transporte de Colaboradores</h1><p id="subtitulo"></p></div>
+    </div>
+    <button class="btn-topo" id="btnSair" hidden>Sair</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ COLABORADOR ============ -->
+  <section id="viewForm" hidden>
+    <form id="formColab" class="card">
+      <h2>Cadastro do colaborador</h2>
+      <p class="desc">Preencha seus dados para a equipe administrativa organizar seu transporte. Campos com <span class="req">*</span> são obrigatórios.</p>
+
+      <span class="campo">Foto (opcional)</span>
+      <div class="foto-linha">
+        <div class="avatar" id="fFotoPrev"></div>
+        <div class="foto-btns">
+          <label class="btn" for="fFoto">Adicionar foto</label>
+          <button type="button" class="btn" id="fFotoRem" hidden>Remover</button>
+        </div>
+        <input type="file" id="fFoto" class="arquivo" accept="image/*">
+      </div>
+
+      <label class="campo" for="c_nome">Nome completo <span class="req">*</span></label>
+      <input id="c_nome" name="nome" required maxlength="120" autocomplete="name" placeholder="Seu nome completo">
+
+      <label class="campo" for="c_mat">Matrícula ou identificação <span class="req">*</span></label>
+      <input id="c_mat" name="matricula" required maxlength="40" placeholder="Sua matrícula">
+
+      <label class="campo" for="c_tel">Telefone / WhatsApp</label>
+      <input id="c_tel" name="telefone" type="tel" inputmode="tel" maxlength="30" autocomplete="tel" placeholder="(94) 9 0000-0000">
+
+      <label class="campo" for="c_end">Endereço completo <span class="req">*</span></label>
+      <input id="c_end" name="endereco" required maxlength="200" autocomplete="street-address" placeholder="Rua, número, quadra e complemento">
+
+      <label class="campo" for="c_bai">Bairro <span class="req">*</span></label>
+      <input id="c_bai" name="bairro" required maxlength="80" placeholder="Seu bairro">
+
+      <label class="campo" for="c_cid">Cidade <span class="req">*</span></label>
+      <input id="c_cid" name="cidade" required maxlength="80" value="Parauapebas">
+
+      <label class="campo" for="c_tur">Turma / setor <span class="req">*</span></label>
+      <select id="c_tur" name="turma" required></select>
+
+      <label class="campo" for="c_loc">Local de trabalho / contrato</label>
+      <input id="c_loc" name="local" maxlength="80" placeholder="Ex.: U&M">
+
+      <label class="campo" for="c_pon">Ponto de embarque <span class="req">*</span></label>
+      <input id="c_pon" name="ponto" required maxlength="200" placeholder="Onde você vai esperar o ônibus">
+
+      <div class="hp" aria-hidden="true"><label>Não preencha<input name="site" tabindex="-1" autocomplete="off"></label></div>
+
+      <label class="check">
+        <input type="checkbox" name="consentimento" required>
+        <span>Autorizo o uso dos meus dados somente para a organização do transporte, conforme a LGPD.</span>
+      </label>
+
+      <button class="btn prim bloco" id="btnEnviar">Enviar cadastro</button>
+      <p class="nota">Seus dados ficam visíveis apenas para a equipe administrativa.</p>
+    </form>
+  </section>
+
+  <section id="viewOk" hidden>
+    <div class="card ok">
+      <div class="selo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Cadastro enviado</h2>
+      <p class="desc">Seu número de protocolo é</p>
+      <div class="protocolo" id="protocolo"></div>
+      <p class="desc">Guarde este número caso precise falar com a administração.</p>
+      <button class="btn" id="btnOutro" style="margin-top:14px">Fazer outro cadastro</button>
+    </div>
+  </section>
+
+  <!-- ============ LOGIN ADMIN ============ -->
+  <section id="viewLogin" hidden>
+    <form id="formLogin" class="card login">
+      <h2>Área da empresa</h2>
+      <p class="desc">Digite a senha do painel para ver os cadastros.</p>
+      <label class="campo" for="senha">Senha</label>
+      <input id="senha" type="password" required autocomplete="current-password">
+      <button class="btn prim bloco" id="btnEntrar">Entrar</button>
+    </form>
+  </section>
+
+  <!-- ============ PAINEL ADMIN ============ -->
+  <section id="viewAdmin" hidden>
+    <div class="stats" id="stats"></div>
+
+    <div class="card">
+      <div class="barra-acoes">
+        <button class="btn prim" id="btnNovo">+ Novo cadastro</button>
+        <button class="btn" id="btnAtualizar">Atualizar</button>
+        <a class="btn" id="lnkPlanilha" href="#" target="_blank" rel="noopener">Abrir planilha</a>
+      </div>
+      <input type="search" id="fBusca" placeholder="Buscar por nome, matrícula, endereço, ponto ou ônibus" aria-label="Buscar">
+      <div class="chips" id="chipsTurma" role="group" aria-label="Filtrar por turma"></div>
+      <div class="grid3">
+        <select id="fStatus" aria-label="Filtrar por status"></select>
+        <select id="fBairro" aria-label="Filtrar por bairro"></select>
+        <select id="fOrdem" aria-label="Ordenar">
+          <option value="recentes">Mais recentes</option>
+          <option value="antigos">Mais antigos</option>
+          <option value="nome">Nome (A–Z)</option>
+          <option value="bairro">Bairro (A–Z)</option>
+        </select>
+      </div>
+      <div class="linha-res"><span id="resumo"></span><button class="link" id="btnLimpar">Limpar filtros</button></div>
+    </div>
+
+    <div class="lista" id="lista"></div>
+  </section>
+</main>
+
+<!-- Modal de edição / novo -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modalTit">
+    <form id="formModal">
+      <div class="modal-cab"><h2 id="modalTit">Editar cadastro</h2><button type="button" class="x" data-fechar aria-label="Fechar">×</button></div>
+      <div class="modal-corpo">
+        <input type="hidden" name="id">
+        <span class="campo">Foto</span>
+        <div class="foto-linha">
+          <div class="avatar" id="mFotoPrev"></div>
+          <div class="foto-btns">
+            <label class="btn" for="mFoto">Trocar foto</label>
+            <button type="button" class="btn" id="mFotoRem">Remover foto</button>
+          </div>
+          <input type="file" id="mFoto" class="arquivo" accept="image/*">
+        </div>
+        <label class="campo" for="m_nome">Nome completo <span class="req">*</span></label>
+        <input id="m_nome" name="nome" required maxlength="120">
+        <div class="duas">
+          <div><label class="campo" for="m_mat">Matrícula</label><input id="m_mat" name="matricula" maxlength="40"></div>
+          <div><label class="campo" for="m_tel">Telefone</label><input id="m_tel" name="telefone" type="tel" maxlength="30"></div>
+        </div>
+        <label class="campo" for="m_end">Endereço</label>
+        <input id="m_end" name="endereco" maxlength="200">
+        <div class="duas">
+          <div><label class="campo" for="m_bai">Bairro</label><input id="m_bai" name="bairro" maxlength="80"></div>
+          <div><label class="campo" for="m_cid">Cidade</label><input id="m_cid" name="cidade" maxlength="80"></div>
+        </div>
+        <div class="duas">
+          <div><label class="campo" for="m_tur">Turma / setor</label><select id="m_tur" name="turma"></select></div>
+          <div><label class="campo" for="m_loc">Local de trabalho</label><input id="m_loc" name="local" maxlength="80"></div>
+        </div>
+        <label class="campo" for="m_pon">Ponto de embarque</label>
+        <input id="m_pon" name="ponto" maxlength="200">
+
+        <div class="bloco-admin">
+          <div class="duas">
+            <div><label class="campo" for="m_sta">Status</label><select id="m_sta" name="status"></select></div>
+            <div><label class="campo" for="m_oni">Ônibus / rota definida</label><input id="m_oni" name="onibus" maxlength="120" placeholder="Ex.: ADM05 U&M"></div>
+          </div>
+          <label class="campo" for="m_obs">Observações internas</label>
+          <textarea id="m_obs" name="obs" maxlength="500" placeholder="Só a administração vê"></textarea>
+        </div>
+      </div>
+      <div class="modal-rod">
+        <button type="button" class="btn" data-fechar>Cancelar</button>
+        <button class="btn prim" id="btnSalvarModal">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Confirmação -->
+<div class="modal" id="confirma" hidden>
+  <div class="modal-caixa peq" role="alertdialog" aria-modal="true" aria-labelledby="confirmaMsg">
+    <div class="modal-corpo" style="padding-top:20px"><p id="confirmaMsg" style="margin:0;font-size:17px"></p></div>
+    <div class="modal-rod">
+      <button type="button" class="btn" id="confNao">Cancelar</button>
+      <button type="button" class="btn perigo cheio" id="confSim">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="inFotoCard" class="arquivo" accept="image/*">
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const PAGE = '<?= page ?>';
+
+const TURMAS = ['Administrativo','Turno A','Turno B','Turno C','Turno D',
+  'Retaludamento — Turma A','Retaludamento — Turma B','Retaludamento — Turma C','Retaludamento — Turma D','Retaludamento — ADM'];
+const STATUS = ['Novo','Em análise','Rota definida','Inativo'];
+const CLASSE_STATUS = {'Novo':'s-novo','Em análise':'s-analise','Rota definida':'s-rota','Inativo':'s-inativo'};
+
+const ICONE_FOTO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+
+let TOKEN = null;
+try { TOKEN = sessionStorage.getItem('um_token'); } catch (e) {}
+let DADOS = [];
+let PLANILHA_URL = '';
+const FOTOS = {};
+const filtro = { busca:'', turma:'', status:'', bairro:'', ordem:'recentes' };
+
+/* ---------- utilidades ---------- */
+function api(fn, ...args) {
+  return new Promise((ok, erro) => {
+    google.script.run.withSuccessHandler(ok).withFailureHandler(erro)[fn](...args);
+  });
+}
+function msgErro(err) {
+  const m = (err && err.message) ? err.message : String(err);
+  return m.replace(/^(Exception|Error):\s*/i, '');
+}
+function toast(msg, tipo) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (tipo || '');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { t.className = 'toast'; }, 3400);
+}
+function iniciais(n) {
+  return String(n || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase() || '?';
+}
+function setAvatar(el, src, texto) {
+  el.innerHTML = src ? '<img src="' + src + '" alt="">' : (texto ? '<span>' + esc(texto) + '</span>' : ICONE_FOTO);
+}
+function opcoes(sel, lista, vazio) {
+  sel.innerHTML = (vazio != null ? '<option value="">' + esc(vazio) + '</option>' : '') +
+    lista.map(v => '<option>' + esc(v) + '</option>').join('');
+}
+function mostrar(id) {
+  ['viewForm','viewOk','viewLogin','viewAdmin'].forEach(v => { $('#' + v).hidden = (v !== id); });
+  $('#btnSair').hidden = (id !== 'viewAdmin');
+  window.scrollTo(0, 0);
+}
+
+// Reduz a foto no próprio celular antes de enviar (máx. 800 px, JPEG)
+function lerFoto(arquivo) {
+  return new Promise((ok, erro) => {
+    if (!arquivo) return ok(null);
+    if (!/^image\//.test(arquivo.type)) return erro(new Error('Escolha um arquivo de imagem.'));
+    const url = URL.createObjectURL(arquivo);
+    const img = new Image();
+    img.onload = () => {
+      const esc2 = Math.min(1, 800 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * esc2);
+      c.height = Math.round(img.height * esc2);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      const dataUrl = c.toDataURL('image/jpeg', 0.82);
+      ok({ tipo:'image/jpeg', base64:dataUrl.split(',')[1], preview:dataUrl });
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); erro(new Error('Não foi possível abrir essa imagem. Tente outra foto.')); };
+    img.src = url;
+  });
+}
+const soFoto = f => f ? { tipo:f.tipo, base64:f.base64 } : null;
+
+function confirmar(msg) {
+  return new Promise(ok => {
+    $('#confirmaMsg').textContent = msg;
+    $('#confirma').hidden = false;
+    const fim = v => { $('#confirma').hidden = true; $('#confSim').onclick = $('#confNao').onclick = null; ok(v); };
+    $('#confSim').onclick = () => fim(true);
+    $('#confNao').onclick = () => fim(false);
+    $('#confSim').focus();
+  });
+}
+
+/* ---------- colaborador ---------- */
+let fotoForm = null;
+opcoes($('#c_tur'), TURMAS, 'Selecione');
+
+$('#fFoto').addEventListener('change', async e => {
+  try {
+    fotoForm = await lerFoto(e.target.files[0]);
+    setAvatar($('#fFotoPrev'), fotoForm && fotoForm.preview);
+    $('#fFotoRem').hidden = !fotoForm;
+  } catch (err) { toast(msgErro(err), 'erro'); }
+  e.target.value = '';
+});
+$('#fFotoRem').addEventListener('click', () => {
+  fotoForm = null; setAvatar($('#fFotoPrev'), null); $('#fFotoRem').hidden = true;
+});
+
+$('#formColab').addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.reportValidity()) return;
+  const d = Object.fromEntries(new FormData(f));
+  d.consentimento = f.consentimento.checked;
+  d.foto = soFoto(fotoForm);
+  const b = $('#btnEnviar');
+  b.disabled = true; b.textContent = 'Enviando…';
+  try {
+    const r = await api('enviarCadastro', d);
+    $('#protocolo').textContent = r.protocolo;
+    f.reset(); f.cidade.value = 'Parauapebas';
+    fotoForm = null; setAvatar($('#fFotoPrev'), null); $('#fFotoRem').hidden = true;
+    mostrar('viewOk');
+  } catch (err) {
+    toast(msgErro(err), 'erro');
+  } finally {
+    b.disabled = false; b.textContent = 'Enviar cadastro';
+  }
+});
+$('#btnOutro').addEventListener('click', () => mostrar('viewForm'));
+
+/* ---------- login ---------- */
+$('#formLogin').addEventListener('submit', async e => {
+  e.preventDefault();
+  const b = $('#btnEntrar');
+  b.disabled = true; b.textContent = 'Entrando…';
+  try {
+    TOKEN = await api('login', $('#senha').value);
+    try { sessionStorage.setItem('um_token', TOKEN); } catch (er) {}
+    $('#senha').value = '';
+    mostrar('viewAdmin');
+    carregar();
+  } catch (err) {
+    toast(msgErro(err), 'erro');
+  } finally {
+    b.disabled = false; b.textContent = 'Entrar';
+  }
+});
+function sairLocal() {
+  TOKEN = null;
+  try { sessionStorage.removeItem('um_token'); } catch (e) {}
+  DADOS = [];
+  mostrar('viewLogin');
+}
+$('#btnSair').addEventListener('click', () => {
+  const t = TOKEN; sairLocal();
+  if (t) api('sair', t).catch(() => {});
+});
+function trataErro(err) {
+  const m = msgErro(err);
+  if (m.indexOf('SESSAO_EXPIRADA') >= 0) { sairLocal(); toast('Sua sessão expirou. Entre de novo.', 'erro'); return; }
+  toast(m, 'erro');
+}
+
+/* ---------- painel ---------- */
+async function carregar() {
+  $('#lista').innerHTML = '<p class="vazio">Carregando cadastros…</p>';
+  try {
+    const r = await api('listarCadastros', TOKEN);
+    DADOS = r.registros || [];
+    PLANILHA_URL = r.planilhaUrl || '';
+    $('#lnkPlanilha').href = PLANILHA_URL || '#';
+    render();
+    carregarFotos();
+  } catch (err) { trataErro(err); }
+}
+
+async function carregarFotos() {
+  const ids = DADOS.filter(r => r.fotoId && !FOTOS[r.id]).map(r => r.id);
+  for (let i = 0; i < ids.length; i += 10) {
+    try {
+      const mapa = await api('getFotos', TOKEN, ids.slice(i, i + 10));
+      Object.keys(mapa).forEach(id => {
+        FOTOS[id] = mapa[id];
+        document.querySelectorAll('[data-foto="' + id + '"]').forEach(el => setAvatar(el, mapa[id]));
+      });
+    } catch (err) { return; }
+  }
+}
+
+function filtrados() {
+  const q = norm(filtro.busca);
+  const lista = DADOS.filter(r =>
+    (!filtro.turma || r.turma === filtro.turma) &&
+    (!filtro.status || r.status === filtro.status) &&
+    (!filtro.bairro || norm(r.bairro) === filtro.bairro) &&
+    (!q || norm([r.nome, r.matricula, r.endereco, r.bairro, r.ponto, r.onibus, r.local, r.telefone, r.id].join(' ')).indexOf(q) >= 0)
+  );
+  const cmp = (a, b) => String(a || '').localeCompare(String(b || ''), 'pt-BR', { sensitivity:'base' });
+  if (filtro.ordem === 'nome') lista.sort((a, b) => cmp(a.nome, b.nome));
+  else if (filtro.ordem === 'bairro') lista.sort((a, b) => cmp(a.bairro, b.bairro) || cmp(a.nome, b.nome));
+  else if (filtro.ordem === 'antigos') lista.reverse();
+  return lista;
+}
+
+function render() {
+  // números do topo
+  const cont = s => DADOS.filter(r => r.status === s).length;
+  $('#stats').innerHTML =
+    '<button class="stat' + (!filtro.status ? ' ativo' : '') + '" data-status=""><b>' + DADOS.length + '</b><span>Total</span></button>' +
+    STATUS.map(s => '<button class="stat' + (filtro.status === s ? ' ativo' : '') + '" data-status="' + esc(s) + '"><b>' + cont(s) + '</b><span>' + esc(s) + '</span></button>').join('');
+
+  // turmas (inclui alguma que exista nos dados e não esteja na lista)
+  const turmas = TURMAS.slice();
+  DADOS.forEach(r => { if (r.turma && turmas.indexOf(r.turma) < 0) turmas.push(r.turma); });
+  $('#chipsTurma').innerHTML =
+    '<button class="chip' + (!filtro.turma ? ' ativo' : '') + '" data-turma="">Todas<small>' + DADOS.length + '</small></button>' +
+    turmas.map(t => {
+      const n = DADOS.filter(r => r.turma === t).length;
+      return '<button class="chip' + (filtro.turma === t ? ' ativo' : '') + '" data-turma="' + esc(t) + '">' + esc(t) + '<small>' + n + '</small></button>';
+    }).join('');
+
+  // selects
+  opcoes($('#fStatus'), STATUS, 'Todos os status');
+  $('#fStatus').value = filtro.status;
+  const bairros = {};
+  DADOS.forEach(r => { const k = norm(r.bairro); if (k && !bairros[k]) bairros[k] = r.bairro; });
+  const chaves = Object.keys(bairros).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  $('#fBairro').innerHTML = '<option value="">Todos os bairros</option>' + chaves.map(k => '<option value="' + esc(k) + '">' + esc(bairros[k]) + '</option>').join('');
+  if (filtro.bairro && !bairros[filtro.bairro]) filtro.bairro = '';
+  $('#fBairro').value = filtro.bairro;
+  $('#fOrdem').value = filtro.ordem;
+
+  renderLista();
+}
+
+function renderLista() {
+  const lista = filtrados();
+  const ativos = filtro.busca || filtro.turma || filtro.status || filtro.bairro;
+  $('#resumo').textContent = lista.length + (lista.length === 1 ? ' cadastro' : ' cadastros') + (ativos ? ' encontrados' : '');
+  $('#btnLimpar').hidden = !ativos;
+
+  if (!DADOS.length) {
+    $('#lista').innerHTML = '<p class="vazio">Nenhum cadastro ainda. Envie o link do colaborador para a equipe ou toque em “+ Novo cadastro”.</p>';
+    return;
+  }
+  if (!lista.length) {
+    $('#lista').innerHTML = '<p class="vazio">Nenhum cadastro com esses filtros. Toque em “Limpar filtros” para ver todos.</p>';
+    return;
+  }
+  const mats = {};
+  DADOS.forEach(r => { const m = norm(r.matricula); if (m) mats[m] = (mats[m] || 0) + 1; });
+
+  $('#lista').innerHTML = lista.map(r => {
+    const cls = CLASSE_STATUS[r.status] || '';
+    const dup = mats[norm(r.matricula)] > 1;
+    const linha = (rot, val) => val ? '<dt>' + rot + '</dt><dd>' + esc(val) + '</dd>' : '';
+    const local = [r.endereco, r.bairro, r.cidade].filter(Boolean).join(', ');
+    const maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(local);
+    return '<article class="cad ' + cls + '">' +
+      '<div class="cad-top">' +
+        '<div class="avatar" data-foto="' + esc(r.id) + '">' + (FOTOS[r.id] ? '<img src="' + FOTOS[r.id] + '" alt="">' : '<span>' + esc(iniciais(r.nome)) + '</span>') + '</div>' +
+        '<div><h3>' + esc(r.nome) + '</h3>' +
+        '<p class="sub">' + esc([r.matricula && ('Matrícula ' + r.matricula), r.turma].filter(Boolean).join(' • ')) + '</p>' +
+        '<div class="badges"><span class="badge ' + cls + '">' + esc(r.status || 'Novo') + '</span>' + (dup ? '<span class="badge dup">Matrícula repetida</span>' : '') + '</div></div>' +
+      '</div>' +
+      '<dl class="info">' +
+        linha('Endereço', r.endereco) + linha('Bairro', r.bairro) + linha('Cidade', r.cidade) +
+        linha('Embarque', r.ponto) + linha('Trabalho', r.local) + linha('Telefone', r.telefone) +
+        linha('Ônibus', r.onibus) + linha('Obs.', r.obs) + linha('Cadastro', r.criadoEm + ' (' + r.id + ')') +
+      '</dl>' +
+      '<div class="acoes">' +
+        '<select data-status-de="' + esc(r.id) + '" aria-label="Mudar status">' + STATUS.map(s => '<option' + (s === r.status ? ' selected' : '') + '>' + esc(s) + '</option>').join('') + '</select>' +
+        '<button class="btn" data-acao="editar" data-id="' + esc(r.id) + '">Editar</button>' +
+        '<button class="btn" data-acao="foto" data-id="' + esc(r.id) + '">Mudar foto</button>' +
+        (local ? '<a class="btn" href="' + esc(maps) + '" target="_blank" rel="noopener">Ver no Maps</a>' : '') +
+        '<button class="btn perigo" data-acao="excluir" data-id="' + esc(r.id) + '">Excluir</button>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+}
+
+// filtros
+$('#stats').addEventListener('click', e => { const b = e.target.closest('[data-status]'); if (!b) return; filtro.status = b.dataset.status; render(); });
+$('#chipsTurma').addEventListener('click', e => { const b = e.target.closest('[data-turma]'); if (!b) return; filtro.turma = b.dataset.turma; render(); });
+$('#fBusca').addEventListener('input', e => { filtro.busca = e.target.value; renderLista(); });
+$('#fStatus').addEventListener('change', e => { filtro.status = e.target.value; render(); });
+$('#fBairro').addEventListener('change', e => { filtro.bairro = e.target.value; renderLista(); });
+$('#fOrdem').addEventListener('change', e => { filtro.ordem = e.target.value; renderLista(); });
+$('#btnLimpar').addEventListener('click', () => {
+  Object.assign(filtro, { busca:'', turma:'', status:'', bairro:'' });
+  $('#fBusca').value = ''; render();
+});
+$('#btnAtualizar').addEventListener('click', carregar);
+$('#lnkPlanilha').addEventListener('click', e => {
+  if (!PLANILHA_URL || PLANILHA_URL === '#') { e.preventDefault(); toast('Na versão do Google, este botão abre a planilha com todos os cadastros.'); }
+});
+
+// ações dos cartões
+let fotoAlvo = null;
+$('#lista').addEventListener('click', async e => {
+  const b = e.target.closest('[data-acao]'); if (!b) return;
+  const r = DADOS.find(x => x.id === b.dataset.id); if (!r) return;
+  const acao = b.dataset.acao;
+  if (acao === 'editar') abrirModal(r);
+  else if (acao === 'foto') { fotoAlvo = r.id; $('#inFotoCard').click(); }
+  else if (acao === 'excluir') {
+    if (!(await confirmar('Excluir o cadastro de ' + r.nome + '? Isso apaga também a foto e não pode ser desfeito.'))) return;
+    try {
+      await api('excluirCadastro', TOKEN, r.id);
+      DADOS = DADOS.filter(x => x.id !== r.id); delete FOTOS[r.id];
+      render(); toast('Cadastro excluído.');
+    } catch (err) { trataErro(err); }
+  }
+});
+$('#lista').addEventListener('change', async e => {
+  const s = e.target.closest('[data-status-de]'); if (!s) return;
+  const id = s.dataset.statusDe;
+  s.disabled = true;
+  try {
+    const r = await api('alterarStatus', TOKEN, id, s.value);
+    const i = DADOS.findIndex(x => x.id === id); if (i >= 0) DADOS[i] = r;
+    render(); toast('Status alterado para “' + r.status + '”.');
+  } catch (err) { s.disabled = false; trataErro(err); }
+});
+$('#inFotoCard').addEventListener('change', async e => {
+  const id = fotoAlvo; const arq = e.target.files[0]; e.target.value = '';
+  if (!id || !arq) return;
+  try {
+    const f = await lerFoto(arq);
+    toast('Enviando foto…');
+    const x = await api('alterarFoto', TOKEN, id, soFoto(f));
+    const r = DADOS.find(y => y.id === id); if (r) r.fotoId = x.fotoId;
+    FOTOS[id] = f.preview;
+    render(); toast('Foto atualizada.');
+  } catch (err) { trataErro(err); }
+});
+
+/* ---------- modal editar / novo ---------- */
+const modalFoto = { nova:null, remover:false, atual:null, nome:'' };
+opcoes($('#m_tur'), TURMAS, 'Selecione');
+opcoes($('#m_sta'), STATUS);
+
+function abrirModal(r) {
+  const f = $('#formModal');
+  f.reset();
+  const novo = !r;
+  r = r || { status:'Novo', cidade:'Parauapebas' };
+  $('#modalTit').textContent = novo ? 'Novo cadastro' : 'Editar cadastro';
+  if (r.turma && TURMAS.indexOf(r.turma) < 0) $('#m_tur').insertAdjacentHTML('beforeend', '<option>' + esc(r.turma) + '</option>');
+  ['id','nome','matricula','telefone','endereco','bairro','cidade','turma','local','ponto','onibus','status','obs']
+    .forEach(k => { if (f.elements[k]) f.elements[k].value = r[k] || ''; });
+  if (!f.elements.status.value) f.elements.status.value = 'Novo';
+  Object.assign(modalFoto, { nova:null, remover:false, atual: novo ? null : (FOTOS[r.id] || null), nome:r.nome || '' });
+  atualizarFotoModal();
+  $('#modal').hidden = false;
+  document.body.classList.add('travado');
+  setTimeout(() => $('#m_nome').focus(), 50);
+}
+function fecharModal() { $('#modal').hidden = true; document.body.classList.remove('travado'); }
+function atualizarFotoModal() {
+  const src = modalFoto.nova ? modalFoto.nova.preview : (modalFoto.remover ? null : modalFoto.atual);
+  const nm = modalFoto.nome || $('#m_nome').value;
+  setAvatar($('#mFotoPrev'), src, nm ? iniciais(nm) : '');
+  $('#mFotoRem').hidden = !src;
+}
+$('#mFoto').addEventListener('change', async e => {
+  try { modalFoto.nova = await lerFoto(e.target.files[0]); modalFoto.remover = false; atualizarFotoModal(); }
+  catch (err) { toast(msgErro(err), 'erro'); }
+  e.target.value = '';
+});
+$('#mFotoRem').addEventListener('click', () => { modalFoto.nova = null; modalFoto.remover = true; atualizarFotoModal(); });
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal' || e.target.closest('[data-fechar]')) fecharModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#modal').hidden) fecharModal(); });
+$('#btnNovo').addEventListener('click', () => abrirModal(null));
+
+$('#formModal').addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.reportValidity()) return;
+  const d = Object.fromEntries(new FormData(f));
+  const novo = !d.id;
+  if (novo) d.foto = soFoto(modalFoto.nova);
+  const b = $('#btnSalvarModal');
+  b.disabled = true; b.textContent = 'Salvando…';
+  try {
+    const r = await api('salvarCadastro', TOKEN, d);
+    if (!novo && (modalFoto.nova || modalFoto.remover)) {
+      const x = await api('alterarFoto', TOKEN, r.id, soFoto(modalFoto.nova));
+      r.fotoId = x.fotoId;
+    }
+    if (modalFoto.nova) FOTOS[r.id] = modalFoto.nova.preview;
+    else if (modalFoto.remover) delete FOTOS[r.id];
+    const i = DADOS.findIndex(x => x.id === r.id);
+    if (i >= 0) DADOS[i] = r; else DADOS.unshift(r);
+    fecharModal(); render();
+    toast(novo ? 'Cadastro adicionado.' : 'Alterações salvas.');
+  } catch (err) { trataErro(err); }
+  finally { b.disabled = false; b.textContent = 'Salvar'; }
+});
+
+/* ---------- início ---------- */
+function iniciar() {
+  document.body.dataset.page = PAGE;
+  $('#subtitulo').textContent = PAGE === 'admin' ? 'Painel administrativo' : 'Área do colaborador';
+  setAvatar($('#fFotoPrev'), fotoForm && fotoForm.preview);
+  if (PAGE === 'admin') {
+    if (TOKEN) { mostrar('viewAdmin'); carregar(); } else mostrar('viewLogin');
+  } else {
+    mostrar('viewForm');
+  }
+}
+iniciar();
+</script>
+</body>
+</html>
