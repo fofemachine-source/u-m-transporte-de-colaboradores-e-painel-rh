@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createServer as createViteServer } from 'vite';
 import { ROTAS_INICIAIS, sugerirRota, PORTARIA_PEBA } from './src/utils/motorRotas.js';
 import { RotaLinha, StatusCadastro, ColaboradorCadastro, SolicitacaoEndereco } from './src/types.js';
 
@@ -1060,7 +1061,6 @@ async function startServer() {
   // Vite integration
   const isProduction = process.env.NODE_ENV === 'production';
   if (!isProduction) {
-    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
