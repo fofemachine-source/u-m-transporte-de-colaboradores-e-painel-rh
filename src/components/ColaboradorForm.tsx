@@ -365,7 +365,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                 setSucessoProtocolo(null);
                 setTab('consultar');
               }}
-              className="px-6 py-2.5 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-semibold text-sm transition-colors shadow-sm cursor-pointer"
+              className="px-6 py-2.5 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-semibold text-sm transition-colors shadow-sm cursor-pointer"
             >
               Consultar Rota / Status
             </button>
@@ -389,7 +389,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
       <div className="bg-white rounded-3xl border border-stone-200 p-5 mb-6 shadow-2xs">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#1b6e47] flex items-center justify-center flex-none border border-emerald-100 shadow-inner">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#19502f] flex items-center justify-center flex-none border border-emerald-100 shadow-inner">
               <Bus className="w-6 h-6" />
             </div>
             <div>
@@ -409,7 +409,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
               onClick={() => setTab('consultar')}
               className={`flex-1 sm:flex-initial px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                 tab === 'consultar'
-                  ? 'bg-white text-[#1b6e47] shadow-2xs'
+                  ? 'bg-white text-[#19502f] shadow-2xs'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -422,7 +422,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
               onClick={() => setTab('rotas_turma')}
               className={`flex-1 sm:flex-initial px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                 tab === 'rotas_turma'
-                  ? 'bg-[#1b6e47] text-white shadow-2xs'
+                  ? 'bg-[#19502f] text-white shadow-2xs'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -435,7 +435,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
               onClick={() => setTab('formulario')}
               className={`flex-1 sm:flex-initial px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                 tab === 'formulario'
-                  ? 'bg-white text-[#1b6e47] shadow-2xs'
+                  ? 'bg-white text-[#19502f] shadow-2xs'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -464,7 +464,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
         <div className="bg-white rounded-3xl border border-stone-200 shadow-sm p-5 sm:p-8 space-y-6">
           
           <div className="text-center max-w-lg mx-auto">
-            <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#1b6e47] flex items-center justify-center mx-auto mb-3 shadow-inner">
+            <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#19502f] flex items-center justify-center mx-auto mb-3 shadow-inner">
               <Search className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-black text-stone-900">
@@ -485,13 +485,13 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   onChange={(e) => setBuscaTermo(e.target.value)}
                   placeholder="Ex.: UM-74291, UM-83104 ou seu nome..."
                   required
-                  className="w-full px-4 py-3 rounded-2xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-900 text-sm font-medium shadow-2xs"
+                  className="w-full px-4 py-3 rounded-2xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-900 text-sm font-medium shadow-2xs"
                 />
               </div>
               <button
                 type="submit"
                 disabled={buscandoStatus}
-                className="px-6 py-3 bg-[#1b6e47] hover:bg-[#155a3a] text-white rounded-2xl text-sm font-bold flex items-center gap-2 transition-all shadow-md disabled:opacity-50 cursor-pointer flex-none"
+                className="px-6 py-3 bg-[#19502f] hover:bg-[#0d2b19] text-white rounded-2xl text-sm font-bold flex items-center gap-2 transition-all shadow-md disabled:opacity-50 cursor-pointer flex-none"
               >
                 {buscandoStatus ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />
@@ -541,7 +541,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                 {/* Header do Card com Status */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-emerald-200/80 pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-14 h-14 rounded-full border-2 border-emerald-300 bg-white text-[#1b6e47] flex items-center justify-center font-bold text-lg flex-none overflow-hidden shadow-2xs">
+                    <div className="w-14 h-14 rounded-full border-2 border-emerald-300 bg-white text-[#19502f] flex items-center justify-center font-bold text-lg flex-none overflow-hidden shadow-2xs">
                       {resultadoConsulta.foto ? (
                         <img src={resultadoConsulta.foto} alt="" className="w-full h-full object-cover" />
                       ) : (
@@ -553,7 +553,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                         {resultadoConsulta.nome}
                       </h4>
                       <p className="text-xs text-stone-600 mt-0.5">
-                        Matrícula: <strong className="font-mono text-stone-800">{resultadoConsulta.matricula}</strong> • Turma: <span className="font-bold text-[#1b6e47]">{resultadoConsulta.turma}</span>
+                        Matrícula: <strong className="font-mono text-stone-800">{resultadoConsulta.matricula}</strong> • Turma: <span className="font-bold text-[#19502f]">{resultadoConsulta.turma}</span>
                       </p>
                     </div>
                   </div>
@@ -578,7 +578,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                       <Bus className="w-4 h-4 text-emerald-700" /> Linha de Ônibus / Rota Designada:
                     </span>
                     <div className="flex items-center gap-2.5 flex-wrap">
-                      <span className="bg-[#1b6e47] text-white text-base sm:text-lg font-black px-3 py-0.5 rounded-xl shadow-2xs">
+                      <span className="bg-[#19502f] text-white text-base sm:text-lg font-black px-3 py-0.5 rounded-xl shadow-2xs">
                         {rotaColab ? rotaColab.codigo : (resultadoConsulta.onibus || 'A definir')}
                       </span>
                       <span className="text-base sm:text-lg font-bold text-emerald-950">
@@ -643,7 +643,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                       <button
                         type="button"
                         onClick={() => setMapaModalOpen(true)}
-                        className="px-3.5 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold text-xs flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold text-xs flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer"
                         title="Ver traçado no mapa e localização do ponto"
                       >
                         <MapPin className="w-4 h-4 text-emerald-200" />
@@ -767,7 +767,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                 <button
                   type="button"
                   onClick={() => setTab('formulario')}
-                  className="px-4 py-2 bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold rounded-xl transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold rounded-xl transition-colors cursor-pointer"
                 >
                   Cadastrar Meu Transporte Agora
                 </button>
@@ -790,7 +790,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
                 <h3 className="text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-                  <Bus className="w-5 h-5 text-[#1b6e47]" />
+                  <Bus className="w-5 h-5 text-[#19502f]" />
                   Rotas de Ônibus por Turma / Setor de Trabalho
                 </h3>
                 <p className="text-stone-500 text-xs sm:text-sm mt-1">
@@ -810,7 +810,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                 onClick={() => setTurmaSelecionadaRotas('Todas')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   turmaSelecionadaRotas === 'Todas'
-                    ? 'bg-[#1b6e47] text-white shadow-2xs'
+                    ? 'bg-[#19502f] text-white shadow-2xs'
                     : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                 }`}
               >
@@ -824,7 +824,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   onClick={() => setTurmaSelecionadaRotas(t)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                     turmaSelecionadaRotas === t
-                      ? 'bg-[#1b6e47] text-white shadow-2xs'
+                      ? 'bg-[#19502f] text-white shadow-2xs'
                       : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                   }`}
                 >
@@ -841,7 +841,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                 value={buscaRotasTurma}
                 onChange={(e) => setBuscaRotasTurma(e.target.value)}
                 placeholder="Filtrar por bairro, rua, nome ou código (ex: Betânia, ADM02, LINHA-06)..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-stone-200 text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#1b6e47]"
+                className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-stone-200 text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#19502f]"
               />
             </div>
           </div>
@@ -860,7 +860,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   setTurmaSelecionadaRotas('Todas');
                   setBuscaRotasTurma('');
                 }}
-                className="mt-3 px-4 py-1.5 bg-[#1b6e47] text-white rounded-xl text-xs font-bold cursor-pointer"
+                className="mt-3 px-4 py-1.5 bg-[#19502f] text-white rounded-xl text-xs font-bold cursor-pointer"
               >
                 Ver Todas as Linhas
               </button>
@@ -882,7 +882,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                         <div className="flex items-center gap-2">
                           <span
                             className="px-2.5 py-1 rounded-xl text-white font-black text-xs font-mono shadow-2xs"
-                            style={{ backgroundColor: r.cor || '#1b6e47' }}
+                            style={{ backgroundColor: r.cor || '#19502f' }}
                           >
                             {r.codigo}
                           </span>
@@ -922,7 +922,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                         <div className="w-full bg-stone-100 rounded-full h-1.5 overflow-hidden">
                           <div
                             className={`h-full rounded-full transition-all ${
-                              percentual >= 90 ? 'bg-red-500' : percentual >= 70 ? 'bg-amber-500' : 'bg-[#1b6e47]'
+                              percentual >= 90 ? 'bg-red-500' : percentual >= 70 ? 'bg-amber-500' : 'bg-[#19502f]'
                             }`}
                             style={{ width: `${Math.min(100, percentual)}%` }}
                           />
@@ -976,7 +976,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                       <button
                         type="button"
                         onClick={() => handleAbrirMapaRota(r)}
-                        className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-[#1b6e47] text-emerald-800 hover:text-white text-xs font-bold transition-all flex items-center gap-1.5 border border-emerald-200 hover:border-[#1b6e47] cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-[#19502f] text-emerald-800 hover:text-white text-xs font-bold transition-all flex items-center gap-1.5 border border-emerald-200 hover:border-[#19502f] cursor-pointer"
                       >
                         <MapPin className="w-3.5 h-3.5" />
                         <span>Ver Traçado no Mapa</span>
@@ -1066,7 +1066,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
                   placeholder="Nome completo do colaborador"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                 />
               </div>
 
@@ -1081,7 +1081,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   value={matricula}
                   onChange={(e) => setMatricula(e.target.value)}
                   placeholder="Ex: UM-74291"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm font-mono"
                 />
               </div>
 
@@ -1095,7 +1095,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   value={telefone}
                   onChange={(e) => setTelefone(e.target.value)}
                   placeholder="(94) 99123-4567"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                 />
               </div>
             </div>
@@ -1118,7 +1118,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                     value={endereco}
                     onChange={(e) => setEndereco(e.target.value)}
                     placeholder="Ex: Rua Santa Catarina, 1420 - Apt 204"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                   />
                 </div>
 
@@ -1133,7 +1133,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                     value={bairro}
                     onChange={(e) => setBairro(e.target.value)}
                     placeholder="Ex: Liberdade, Cidade Nova, VS-10"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                   />
                 </div>
 
@@ -1145,7 +1145,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                     type="text"
                     value={cidade}
                     onChange={(e) => setCidade(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm bg-stone-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm bg-stone-50"
                   />
                 </div>
               </div>
@@ -1169,7 +1169,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                       setTurma(e.target.value);
                       setLinhaSelecionada('');
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm bg-white"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm bg-white"
                   >
                     <option value="">Selecione sua turma...</option>
                     {TURMAS.map((t) => (
@@ -1190,7 +1190,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                     value={local}
                     onChange={(e) => setLocal(e.target.value)}
                     placeholder="Ex: U&M Mina N4, Escritório Central"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                   />
                 </div>
 
@@ -1212,7 +1212,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                     disabled={!turma}
                     value={linhaSelecionada}
                     onChange={(e) => setLinhaSelecionada(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm bg-white disabled:bg-stone-100 disabled:text-stone-400"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm bg-white disabled:bg-stone-100 disabled:text-stone-400"
                   >
                     <option value="">
                       {!turma ? 'Primeiro escolha a Turma acima...' : 'Selecione a linha de ônibus...'}
@@ -1234,7 +1234,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                       {sugestaoForm?.encontrada ? (
                         <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 flex flex-wrap items-center justify-between gap-2 shadow-2xs">
                           <div className="flex items-center gap-2">
-                            <span className="px-2.5 py-1 rounded-lg bg-[#1b6e47] text-white font-black text-xs">
+                            <span className="px-2.5 py-1 rounded-lg bg-[#19502f] text-white font-black text-xs">
                               Linha sugerida: {sugestaoForm.codigo}
                             </span>
                             <span className="text-xs font-bold text-emerald-900">
@@ -1295,7 +1295,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
                   required
                   checked={consentimento}
                   onChange={(e) => setConsentimento(e.target.checked)}
-                  className="w-4 h-4 mt-0.5 rounded text-[#1b6e47] focus:ring-[#1b6e47] border-stone-300 accent-[#1b6e47]"
+                  className="w-4 h-4 mt-0.5 rounded text-[#19502f] focus:ring-[#19502f] border-stone-300 accent-[#19502f]"
                 />
                 <span className="text-xs text-stone-600 leading-relaxed">
                   Autorizo o uso dos meus dados estritamente para a finalidade de
@@ -1308,7 +1308,7 @@ export const ColaboradorForm: React.FC<ColaboradorFormProps> = ({
             <button
               type="submit"
               disabled={enviando}
-              className="w-full py-3.5 rounded-2xl bg-[#1b6e47] hover:bg-[#155a3a] active:scale-[0.99] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-md disabled:opacity-60 cursor-pointer"
+              className="w-full py-3.5 rounded-2xl bg-[#19502f] hover:bg-[#0d2b19] active:scale-[0.99] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-md disabled:opacity-60 cursor-pointer"
             >
               {enviando ? (
                 <>

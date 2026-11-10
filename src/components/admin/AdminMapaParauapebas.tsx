@@ -237,7 +237,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
     rotas.forEach((r) => {
       if (r.coordenadas && r.coordenadas.length > 1) {
         const poly = L.polyline(r.coordenadas, {
-          color: r.cor || '#1b6e47',
+          color: r.cor || '#19502f',
           weight: 4,
           opacity: 0.85,
           lineJoin: 'round',
@@ -250,7 +250,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
         poly.bindPopup(`
           <div style="font-family: sans-serif; padding: 4px; min-width: 200px;">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-              <span style="font-weight: 900; font-size: 13px; color: ${r.cor || '#1b6e47'};">${r.codigo}</span>
+              <span style="font-weight: 900; font-size: 13px; color: ${r.cor || '#19502f'};">${r.codigo}</span>
               <span style="font-size: 10px; background: #ecfdf5; color: #065f46; padding: 2px 6px; border-radius: 4px; font-weight: bold;">${r.turmas?.join('/') || r.turma || ''}</span>
             </div>
             <div style="font-size: 11px; color: #374151; margin-top: 4px;">
@@ -269,7 +269,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
     // 3. Marcador Destino Comum: Portaria Peba
     const portariaHtml = `
       <div style="display: flex; flex-direction: column; align-items: center;">
-        <div style="background: #1b6e47; color: #ffffff; font-weight: 900; font-size: 10px; padding: 2px 6px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); white-space: nowrap; margin-bottom: 2px;">
+        <div style="background: #19502f; color: #ffffff; font-weight: 900; font-size: 10px; padding: 2px 6px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); white-space: nowrap; margin-bottom: 2px;">
           ★ Portaria Peba (Destino)
         </div>
         <div style="width: 26px; height: 26px; border-radius: 50%; background: #047857; border: 3px solid #ffffff; display: flex; items-center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4);">
@@ -426,7 +426,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-emerald-500 animate-ping inline-block" />
               <h2 className="text-lg sm:text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-[#1b6e47]" />
+                <MapPin className="w-5 h-5 text-[#19502f]" />
                 Mapa de Parauapebas • Rotas e Pontos de Embarque
               </h2>
             </div>
@@ -443,7 +443,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
                 onClick={() => setTipoMapa('real')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   tipoMapa === 'real'
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -456,7 +456,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
                 onClick={() => setTipoMapa('esquematico')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   tipoMapa === 'esquematico'
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -489,7 +489,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
               value={buscaTexto}
               onChange={(e) => setBuscaTexto(e.target.value)}
               placeholder="Buscar colaborador, matrícula ou ponto..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
             />
           </div>
 
@@ -591,7 +591,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
               className="absolute top-4 right-4 z-[500] bg-white/95 hover:bg-white text-stone-800 px-3 py-2 rounded-xl text-xs font-bold shadow-lg border border-stone-200 flex items-center gap-1.5 transition-all cursor-pointer"
               title="Centralizar mapa em Parauapebas"
             >
-              <RefreshCw className="w-3.5 h-3.5 text-[#1b6e47]" />
+              <RefreshCw className="w-3.5 h-3.5 text-[#19502f]" />
               <span>Recentrar</span>
             </button>
           )}
@@ -660,7 +660,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
                       </div>
 
                       <div className={`w-9 h-9 rounded-full border-2 flex items-center justify-center font-bold text-xs shadow-md ${
-                        isSelected ? 'border-amber-400 bg-amber-100 ring-4 ring-amber-400/50' : 'border-white bg-[#1b6e47] text-white'
+                        isSelected ? 'border-amber-400 bg-amber-100 ring-4 ring-amber-400/50' : 'border-white bg-[#19502f] text-white'
                       }`}>
                         {c.nome.slice(0, 2).toUpperCase()}
                       </div>
@@ -677,7 +677,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
         <div className="bg-white rounded-3xl border border-stone-200 shadow-sm p-6 flex flex-col justify-between space-y-4">
           <div>
             <div className="flex items-center gap-2 pb-3 border-b border-stone-100">
-              <div className="p-2 rounded-xl bg-emerald-100 text-[#1b6e47]">
+              <div className="p-2 rounded-xl bg-emerald-100 text-[#19502f]">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
@@ -690,7 +690,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
               <div className="mt-4 space-y-4 animate-in fade-in duration-200">
                 {/* Colaborador Card */}
                 <div className="flex items-center gap-3 p-3 rounded-2xl bg-stone-50 border border-stone-200/80">
-                  <div className="w-12 h-12 rounded-full border border-stone-200 bg-[#1b6e47] text-white flex items-center justify-center font-bold text-sm overflow-hidden flex-none">
+                  <div className="w-12 h-12 rounded-full border border-stone-200 bg-[#19502f] text-white flex items-center justify-center font-bold text-sm overflow-hidden flex-none">
                     {colabSelecionado.foto ? (
                       <img src={colabSelecionado.foto} alt="" className="w-full h-full object-cover" />
                     ) : (
@@ -791,7 +791,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
                         value={descricaoPonto}
                         onChange={(e) => setDescricaoPonto(e.target.value)}
                         placeholder="Ex: Em frente ao Mercadinho Silva, esquina com Av. D"
-                        className="w-full px-3 py-1.5 rounded-xl border border-stone-300 text-xs bg-white focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                        className="w-full px-3 py-1.5 rounded-xl border border-stone-300 text-xs bg-white focus:ring-2 focus:ring-[#19502f] focus:outline-none"
                       />
                     </div>
 
@@ -800,7 +800,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
                         type="button"
                         disabled={salvandoPonto || !pontoTemp || !descricaoPonto.trim()}
                         onClick={handleSalvarPontoEmbarque}
-                        className="w-full py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-colors disabled:opacity-50 cursor-pointer"
+                        className="w-full py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-colors disabled:opacity-50 cursor-pointer"
                       >
                         <Save className="w-3.5 h-3.5" />
                         <span>{salvandoPonto ? 'Salvando...' : 'Salvar Ponto de Embarque'}</span>
@@ -818,7 +818,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
                           setPontoTemp({ lat: colabSelecionado.pontoEmbarque.lat, lng: colabSelecionado.pontoEmbarque.lng });
                         }
                       }}
-                      className="w-full py-2.5 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                      className="w-full py-2.5 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                     >
                       <Crosshair className="w-4 h-4" />
                       <span>Definir / Ajustar Ponto no Mapa</span>
@@ -862,7 +862,7 @@ export const AdminMapaParauapebas: React.FC<AdminMapaParauapebasProps> = ({
             <div className="grid grid-cols-2 gap-1 text-[10px]">
               {rotas.slice(0, 6).map((r) => (
                 <div key={r.id} className="flex items-center gap-1.5 truncate">
-                  <span className="w-2.5 h-2.5 rounded-full flex-none" style={{ backgroundColor: r.cor || '#1b6e47' }} />
+                  <span className="w-2.5 h-2.5 rounded-full flex-none" style={{ backgroundColor: r.cor || '#19502f' }} />
                   <span className="font-bold text-stone-700 truncate">{r.codigo}</span>
                 </div>
               ))}

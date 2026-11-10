@@ -102,7 +102,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-stone-100">
           <div>
             <h2 className="text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-              <FileText className="w-6 h-6 text-[#1b6e47]" />
+              <FileText className="w-6 h-6 text-[#19502f]" />
               Relatórios Operacionais e de Ocupação • U&M
             </h2>
             <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
@@ -114,7 +114,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
             <button
               type="button"
               onClick={handleImprimir}
-              className="px-4 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
             >
               <Printer className="w-4 h-4" />
               <span>Imprimir Relatório</span>
@@ -138,7 +138,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
             onClick={() => setRelatorioAtivo('ocupacao')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
               relatorioAtivo === 'ocupacao'
-                ? 'bg-[#1b6e47] text-white shadow-md'
+                ? 'bg-[#19502f] text-white shadow-md'
                 : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
             }`}
           >
@@ -151,7 +151,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
             onClick={() => setRelatorioAtivo('romaneio')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
               relatorioAtivo === 'romaneio'
-                ? 'bg-[#1b6e47] text-white shadow-md'
+                ? 'bg-[#19502f] text-white shadow-md'
                 : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
             }`}
           >
@@ -164,7 +164,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
             onClick={() => setRelatorioAtivo('demissoes')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
               relatorioAtivo === 'demissoes'
-                ? 'bg-[#1b6e47] text-white shadow-md'
+                ? 'bg-[#19502f] text-white shadow-md'
                 : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
             }`}
           >
@@ -186,7 +186,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
               <div>
                 <h3 className="text-base sm:text-lg font-black text-stone-900 tracking-tight flex items-center gap-2">
-                  <BarChart2 className="w-5 h-5 text-[#1b6e47]" />
+                  <BarChart2 className="w-5 h-5 text-[#19502f]" />
                   Relatório de Ocupação e Lotação por Linha de Transporte
                 </h3>
                 <p className="text-xs text-stone-500 mt-0.5">
@@ -197,7 +197,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
               <button
                 type="button"
                 onClick={() => baixarCsvOcupacao(rotas, cadastros)}
-                className="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer print:hidden"
+                className="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer print:hidden"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Exportar CSV Ocupação</span>
@@ -234,7 +234,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
                         </td>
                         <td className="py-3 px-4">{item.turma}</td>
                         <td className="py-3 px-4 text-center font-bold text-stone-800">{item.capacidade}</td>
-                        <td className="py-3 px-4 text-center font-bold text-[#1b6e47]">{item.ocupadas}</td>
+                        <td className="py-3 px-4 text-center font-bold text-[#19502f]">{item.ocupadas}</td>
                         <td className={`py-3 px-4 text-center font-bold ${item.vagasRestantes === 0 ? 'text-red-600' : 'text-emerald-700'}`}>
                           {item.vagasRestantes}
                         </td>
@@ -299,7 +299,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
                 onClick={() => setLinhaSelecionada('todas')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                   linhaSelecionada === 'todas'
-                    ? 'bg-[#1b6e47] text-white'
+                    ? 'bg-[#19502f] text-white'
                     : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                 }`}
               >
@@ -313,7 +313,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
                   onClick={() => setLinhaSelecionada(r)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                     linhaSelecionada === r
-                      ? 'bg-[#1b6e47] text-white'
+                      ? 'bg-[#19502f] text-white'
                       : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                   }`}
                 >
@@ -337,7 +337,7 @@ export const AdminRelatorios: React.FC<AdminRelatoriosProps> = ({
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b-2 border-stone-200">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="w-8 h-8 rounded-lg bg-emerald-100 text-[#1b6e47] flex items-center justify-center font-bold">
+                        <span className="w-8 h-8 rounded-lg bg-emerald-100 text-[#19502f] flex items-center justify-center font-bold">
                           <Bus className="w-4 h-4" />
                         </span>
                         <h3 className="text-base sm:text-lg font-black text-stone-900 tracking-tight">

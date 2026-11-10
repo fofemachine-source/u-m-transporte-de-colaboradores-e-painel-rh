@@ -102,7 +102,7 @@ export const ModalSolicitarMudancaEndereco: React.FC<ModalSolicitarMudancaEndere
         {/* Header */}
         <div className="px-5 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/80">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#1b6e47] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#19502f] flex items-center justify-center font-bold">
               <MapPin className="w-5 h-5" />
             </div>
             <div>
@@ -164,7 +164,7 @@ export const ModalSolicitarMudancaEndereco: React.FC<ModalSolicitarMudancaEndere
                   value={novoEndereco}
                   onChange={(e) => setNovoEndereco(e.target.value)}
                   placeholder="Ex: Rua Santa Catarina, 450"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                 />
               </div>
 
@@ -179,7 +179,7 @@ export const ModalSolicitarMudancaEndereco: React.FC<ModalSolicitarMudancaEndere
                     value={bairro}
                     onChange={(e) => setBairro(e.target.value)}
                     placeholder="Ex: Liberdade, Cidade Jardim, VS-10"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                   />
                 </div>
 
@@ -191,7 +191,7 @@ export const ModalSolicitarMudancaEndereco: React.FC<ModalSolicitarMudancaEndere
                     type="text"
                     value={cidade}
                     onChange={(e) => setCidade(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
                   />
                 </div>
               </div>
@@ -206,7 +206,7 @@ export const ModalSolicitarMudancaEndereco: React.FC<ModalSolicitarMudancaEndere
                           Nova Linha Sugerida pelo Sistema:
                         </span>
                         <div className="flex items-center gap-2 mt-0.5">
-                          <span className="bg-[#1b6e47] text-white text-xs font-black px-2 py-0.5 rounded-md">
+                          <span className="bg-[#19502f] text-white text-xs font-black px-2 py-0.5 rounded-md">
                             {sugestao.codigo}
                           </span>
                           <span className="text-xs font-bold text-emerald-900">
@@ -286,7 +286,7 @@ export const ModalSolicitarMudancaEndereco: React.FC<ModalSolicitarMudancaEndere
                 <button
                   type="submit"
                   disabled={enviando}
-                  className="px-5 py-2.5 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer shadow-sm disabled:opacity-60"
+                  className="px-5 py-2.5 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer shadow-sm disabled:opacity-60"
                 >
                   {enviando ? (
                     <>

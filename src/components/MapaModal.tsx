@@ -86,7 +86,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
       polyline.bindPopup(`
         <div style="font-family: sans-serif; font-size: 12px; line-height: 1.4; min-width: 200px;">
           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-            <span style="background: ${isMinhaLinha ? '#dc2626' : '#1b6e47'}; color: #fff; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px;">
+            <span style="background: ${isMinhaLinha ? '#dc2626' : '#19502f'}; color: #fff; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px;">
               ${r.codigo}
             </span>
             <strong style="font-size: 13px; color: #111;">${r.nome}</strong>
@@ -127,7 +127,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
 
     // Ícone de pessoa (boneco, SVG próprio) no ponto de embarque do colaborador (Item 2.3)
     const bonecoSvg = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" stroke="#1b6e47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" stroke="#19502f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="7" r="4"/>
         <path d="M5.5 21v-2a7 7 0 0 1 13 0v2"/>
       </svg>
@@ -139,7 +139,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
           position: absolute;
           bottom: 42px;
           white-space: nowrap;
-          background: ${temPontoDefinido ? '#1b6e47' : '#d97706'};
+          background: ${temPontoDefinido ? '#19502f' : '#d97706'};
           color: #ffffff;
           font-size: 11px;
           font-weight: 800;
@@ -157,7 +157,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          background: ${temPontoDefinido ? '#1b6e47' : '#d97706'};
+          background: ${temPontoDefinido ? '#19502f' : '#d97706'};
           border: 3px solid #ffffff;
           box-shadow: 0 4px 10px rgba(0,0,0,0.4);
           display: flex;
@@ -171,7 +171,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
           height: 0; 
           border-left: 7px solid transparent;
           border-right: 7px solid transparent;
-          border-top: 9px solid ${temPontoDefinido ? '#1b6e47' : '#d97706'};
+          border-top: 9px solid ${temPontoDefinido ? '#19502f' : '#d97706'};
           margin-top: -2px;
         "></div>
       </div>
@@ -187,8 +187,8 @@ export const MapaModal: React.FC<MapaModalProps> = ({
     const popupTexto = temPontoDefinido
       ? `
         <div style="font-family: sans-serif; font-size: 12px; line-height: 1.5;">
-          <strong style="color: #1b6e47; font-size: 13px;">Seu ponto de embarque</strong><br/>
-          <strong>Linha:</strong> <span style="background: #1b6e47; color: #fff; padding: 1px 6px; border-radius: 4px; font-weight: bold;">${colabRota ? colabRota.codigo : (colaborador.onibus || 'Em definição')}</span><br/>
+          <strong style="color: #19502f; font-size: 13px;">Seu ponto de embarque</strong><br/>
+          <strong>Linha:</strong> <span style="background: #19502f; color: #fff; padding: 1px 6px; border-radius: 4px; font-weight: bold;">${colabRota ? colabRota.codigo : (colaborador.onibus || 'Em definição')}</span><br/>
           <strong>Ponto:</strong> ${colaborador.pontoEmbarque?.descricao || colaborador.ponto}<br/>
           <span style="color: #4b5563;">Passe às ~${colabRota ? colabRota.horarioInicio : '04:30'}</span>
         </div>
@@ -235,7 +235,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
         {/* Header do Modal */}
         <div className="px-4 sm:px-6 py-3.5 border-b border-stone-200 flex items-center justify-between bg-stone-50/90">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-[#1b6e47] flex items-center justify-center font-bold flex-none">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-[#19502f] flex items-center justify-center font-bold flex-none">
               <Bus className="w-5 h-5" />
             </div>
             <div>
@@ -284,7 +284,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
               onClick={() => setFiltroModo('todas')}
               className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 filtroModo === 'todas'
-                  ? 'bg-[#1b6e47] text-white shadow-2xs'
+                  ? 'bg-[#19502f] text-white shadow-2xs'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -306,7 +306,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
               </span>
             )}
             <span className="flex items-center gap-1 font-semibold">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#1b6e47]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#19502f]"></span>
               <span>Seu Ponto</span>
             </span>
             <span className="flex items-center gap-1 font-semibold">
@@ -326,7 +326,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
             <div>
               <p className="text-stone-900 font-bold text-sm flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-[#1b6e47]" />
+                <MapPin className="w-4 h-4 text-[#19502f]" />
                 <span>
                   {colaborador.pontoEmbarque?.descricao || colaborador.ponto || 'Ponto em definição pelo RH'}
                 </span>
@@ -343,7 +343,7 @@ export const MapaModal: React.FC<MapaModalProps> = ({
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial px-4 py-2 bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                className="flex-1 sm:flex-initial px-4 py-2 bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
               >
                 <Navigation className="w-4 h-4" />
                 <span>Abrir GPS Externo</span>

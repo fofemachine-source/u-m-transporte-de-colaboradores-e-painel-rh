@@ -96,7 +96,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   );
 
   return (
-    <div className="flex min-h-[calc(100vh-65px)] bg-[#f3f6f4]">
+    <div className="flex min-h-[calc(100vh-65px)] bg-[#f5f4f4]">
       
       {/* 1. Menu Lateral Esquerdo */}
       <AdminSidebar
@@ -134,7 +134,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={() => setActiveView('dashboard')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   activeView === 'dashboard'
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -147,7 +147,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={() => setActiveView('colaboradores')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   activeView === 'colaboradores'
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -160,7 +160,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={() => setActiveView('rotas')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   activeView === 'rotas'
-                    ? 'bg-[#1b6e47] text-white shadow-xs'
+                    ? 'bg-[#19502f] text-white shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -173,7 +173,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={() => setActiveView('mapa')}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   activeView === 'mapa'
-                    ? 'bg-[#1b6e47] text-white shadow-xs'
+                    ? 'bg-[#19502f] text-white shadow-xs'
                     : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-300'
                 }`}
               >
@@ -187,7 +187,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={() => setActiveView('solicitacoes')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   activeView === 'solicitacoes'
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -218,7 +218,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 onClick={() => setActiveView('relatorios')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   activeView === 'relatorios'
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -233,7 +233,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             <button
               type="button"
               onClick={handleCopiarColab}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] text-xs font-bold border border-emerald-200 transition-colors cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#19502f] text-xs font-bold border border-emerald-200 transition-colors cursor-pointer"
               title="Copiar link para enviar ao colaborador"
             >
               {copiadoColab ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
@@ -259,7 +259,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
               <div>
                 <h3 className="text-sm sm:text-base font-black text-stone-900 tracking-tight flex items-center gap-2">
-                  <Share2 className="w-4 h-4 text-[#1b6e47]" />
+                  <Share2 className="w-4 h-4 text-[#19502f]" />
                   Link de Acesso para os Colaboradores
                 </h3>
                 <p className="text-[11px] sm:text-xs text-stone-500 mt-0.5">
@@ -295,14 +295,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                     className="px-3 py-2 bg-white hover:bg-stone-50 text-stone-800 text-xs font-bold rounded-xl border border-emerald-300 flex items-center gap-1.5 transition-all shadow-2xs flex-none"
                     title="Abrir o link do colaborador em uma nova guia secundária"
                   >
-                    <ExternalLink className="w-3.5 h-3.5 text-[#1b6e47]" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#19502f]" />
                     <span className="hidden sm:inline">Abrir Link Secundário</span>
                   </a>
 
                   <button
                     type="button"
                     onClick={handleCopiarColab}
-                    className="px-3.5 py-2 bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all cursor-pointer shadow-sm flex-none"
+                    className="px-3.5 py-2 bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all cursor-pointer shadow-sm flex-none"
                     title="Copiar link do colaborador"
                   >
                     {copiadoColab ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}

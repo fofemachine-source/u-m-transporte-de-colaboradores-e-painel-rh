@@ -236,7 +236,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
     // 1. Desenha Polyline
     if (coordsEditadas.length > 1) {
       L.polyline(coordsEditadas, {
-        color: editorMapaRota.cor || '#1b6e47',
+        color: editorMapaRota.cor || '#19502f',
         weight: 5,
         opacity: 0.9,
       }).addTo(layer);
@@ -251,7 +251,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
         <div style="
           width: ${isFirst || isLast ? '24px' : '16px'};
           height: ${isFirst || isLast ? '24px' : '16px'};
-          background: ${isFirst ? '#059669' : isLast ? '#dc2626' : editorMapaRota.cor || '#1b6e47'};
+          background: ${isFirst ? '#059669' : isLast ? '#dc2626' : editorMapaRota.cor || '#19502f'};
           border: 2px solid #ffffff;
           border-radius: 50%;
           box-shadow: 0 2px 6px rgba(0,0,0,0.4);
@@ -328,7 +328,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-4 border-b border-stone-100">
           <div>
             <h2 className="text-lg sm:text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-              <Bus className="w-5 h-5 text-[#1b6e47]" />
+              <Bus className="w-5 h-5 text-[#19502f]" />
               Gestão de Linhas & Traçados de Rotas • U&M Parauapebas
             </h2>
             <p className="text-xs sm:text-sm text-stone-500 mt-1">
@@ -340,7 +340,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
             <button
               type="button"
               onClick={() => setSimuladorAberto(!simuladorAberto)}
-              className="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
               <span>{simuladorAberto ? 'Fechar Teste' : 'Testar Sugestão de Linha'}</span>
@@ -365,7 +365,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                 });
                 setModalAberto(true);
               }}
-              className="px-4 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Nova Linha</span>
@@ -432,7 +432,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                 <button
                   type="button"
                   onClick={testarMotor}
-                  className="w-full py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-1.5"
+                  className="w-full py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-1.5"
                 >
                   <Compass className="w-3.5 h-3.5" />
                   <span>Calcular Linha</span>
@@ -473,7 +473,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               type="button"
               onClick={() => setTurmaAtiva('Todas')}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                turmaAtiva === 'Todas' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600 hover:text-stone-900'
+                turmaAtiva === 'Todas' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               Todas as Linhas ({rotas.length})
@@ -482,7 +482,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               type="button"
               onClick={() => setTurmaAtiva('Administrativo')}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                turmaAtiva === 'Administrativo' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600 hover:text-stone-900'
+                turmaAtiva === 'Administrativo' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               Administrativo
@@ -491,7 +491,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               type="button"
               onClick={() => setTurmaAtiva('Turma A')}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                turmaAtiva === 'Turma A' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600 hover:text-stone-900'
+                turmaAtiva === 'Turma A' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               Turma A
@@ -500,7 +500,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               type="button"
               onClick={() => setTurmaAtiva('Turma B')}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                turmaAtiva === 'Turma B' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600 hover:text-stone-900'
+                turmaAtiva === 'Turma B' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               Turma B
@@ -509,7 +509,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               type="button"
               onClick={() => setTurmaAtiva('Turma C')}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                turmaAtiva === 'Turma C' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600 hover:text-stone-900'
+                turmaAtiva === 'Turma C' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               Turma C
@@ -518,7 +518,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               type="button"
               onClick={() => setTurmaAtiva('Turma D')}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                turmaAtiva === 'Turma D' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600 hover:text-stone-900'
+                turmaAtiva === 'Turma D' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               Turma D
@@ -532,7 +532,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
               value={termoBusca}
               onChange={(e) => setTermoBusca(e.target.value)}
               placeholder="Buscar por código, bairro ou rua..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
             />
           </div>
         </div>
@@ -552,7 +552,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
             <div
               key={r.id}
               className="bg-white rounded-2xl border border-stone-200 shadow-2xs hover:shadow-md transition-shadow p-5 flex flex-col justify-between space-y-4 border-l-4"
-              style={{ borderLeftColor: r.cor || '#1b6e47' }}
+              style={{ borderLeftColor: r.cor || '#19502f' }}
             >
               <div>
                 {/* Header do Card */}
@@ -560,7 +560,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                   <div className="flex items-center gap-3">
                     <div
                       className="w-11 h-11 rounded-2xl flex items-center justify-center font-black text-sm flex-none text-white shadow-xs"
-                      style={{ backgroundColor: r.cor || '#1b6e47' }}
+                      style={{ backgroundColor: r.cor || '#19502f' }}
                     >
                       <Bus className="w-5 h-5" />
                     </div>
@@ -625,7 +625,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                     <button
                       type="button"
                       onClick={() => setLinhaExpandida(isExpandida ? null : r.id)}
-                      className="text-[#1b6e47] hover:underline font-bold text-[11px] flex items-center gap-0.5 cursor-pointer"
+                      className="text-[#19502f] hover:underline font-bold text-[11px] flex items-center gap-0.5 cursor-pointer"
                     >
                       <span>{isExpandida ? 'Recolher' : 'Ver tudo'}</span>
                       {isExpandida ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -650,7 +650,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                 <button
                   type="button"
                   onClick={() => setModalPassageirosRota(r)}
-                  className="px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-200 font-bold flex items-center gap-1 cursor-pointer"
+                  className="px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-200 font-bold flex items-center gap-1 cursor-pointer"
                   title="Ver lista de colaboradores alocados"
                 >
                   <Users className="w-3.5 h-3.5 text-emerald-600" />
@@ -702,7 +702,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
           <div className="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-stone-200 max-h-[90vh] overflow-y-auto space-y-4">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
-                <Bus className="w-5 h-5 text-[#1b6e47]" />
+                <Bus className="w-5 h-5 text-[#19502f]" />
                 {rotaEditando?.id ? `Editar ${rotaEditando.codigo}` : 'Cadastrar Nova Linha'}
               </h3>
               <button
@@ -757,7 +757,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                   <button
                     type="button"
                     onClick={() => setMostraCriarNovaTurma((prev) => !prev)}
-                    className="text-[11px] font-bold text-[#1b6e47] hover:text-[#124d31] flex items-center gap-1 cursor-pointer transition-colors"
+                    className="text-[11px] font-bold text-[#19502f] hover:text-[#124d31] flex items-center gap-1 cursor-pointer transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Criar Nova Linha / Turma</span>
@@ -785,7 +785,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                                 turma: novasTurmas[0] || t,
                               }));
                             }}
-                            className="w-3.5 h-3.5 rounded text-[#1b6e47] accent-[#1b6e47]"
+                            className="w-3.5 h-3.5 rounded text-[#19502f] accent-[#19502f]"
                           />
                           <span>{t}</span>
                         </label>
@@ -799,7 +799,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                       <button
                         type="button"
                         onClick={() => setMostraCriarNovaTurma(true)}
-                        className="w-full py-2 px-3 rounded-lg border border-dashed border-emerald-400 bg-emerald-50/70 hover:bg-emerald-100/80 text-[#1b6e47] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                        className="w-full py-2 px-3 rounded-lg border border-dashed border-emerald-400 bg-emerald-50/70 hover:bg-emerald-100/80 text-[#19502f] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                       >
                         <Plus className="w-4 h-4" />
                         <span>+ Criar / Adicionar Nova Linha ou Turma nesta lista</span>
@@ -822,12 +822,12 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                               }
                             }}
                             placeholder="Ex: Turno Noturno, LINHA-08, Turma E..."
-                            className="flex-1 px-3 py-1.5 rounded-lg border border-emerald-400 text-xs text-stone-800 focus:outline-none focus:ring-2 focus:ring-[#1b6e47]"
+                            className="flex-1 px-3 py-1.5 rounded-lg border border-emerald-400 text-xs text-stone-800 focus:outline-none focus:ring-2 focus:ring-[#19502f]"
                           />
                           <button
                             type="button"
                             onClick={handleCriarNovaTurmaOuLinha}
-                            className="px-3.5 py-1.5 bg-[#1b6e47] hover:bg-[#155a3a] text-white rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 shadow-2xs"
+                            className="px-3.5 py-1.5 bg-[#19502f] hover:bg-[#0d2b19] text-white rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 shadow-2xs"
                           >
                             <Plus className="w-3.5 h-3.5" />
                             <span>Adicionar</span>
@@ -903,13 +903,13 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                   <div className="flex items-center gap-2">
                     <input
                       type="color"
-                      value={rotaEditando?.cor || '#1b6e47'}
+                      value={rotaEditando?.cor || '#19502f'}
                       onChange={(e) => setRotaEditando((prev) => ({ ...prev, cor: e.target.value }))}
                       className="w-10 h-9 p-0 rounded-lg cursor-pointer border border-stone-300"
                     />
                     <input
                       type="text"
-                      value={rotaEditando?.cor || '#1b6e47'}
+                      value={rotaEditando?.cor || '#19502f'}
                       onChange={(e) => setRotaEditando((prev) => ({ ...prev, cor: e.target.value }))}
                       className="flex-1 px-3 py-1.5 rounded-xl border border-stone-300 font-mono text-xs"
                     />
@@ -968,7 +968,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                   id="rotaAtivaCheck"
                   checked={rotaEditando?.ativa !== false}
                   onChange={(e) => setRotaEditando((prev) => ({ ...prev, ativa: e.target.checked }))}
-                  className="w-4 h-4 rounded text-[#1b6e47] accent-[#1b6e47]"
+                  className="w-4 h-4 rounded text-[#19502f] accent-[#19502f]"
                 />
                 <label htmlFor="rotaAtivaCheck" className="text-xs font-bold text-stone-700 cursor-pointer">
                   Linha operacional ativa (participa da sugestão automática e do mapa)
@@ -986,7 +986,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                 <button
                   type="submit"
                   disabled={salvando}
-                  className="px-5 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold text-xs flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold text-xs flex items-center gap-1.5 shadow-2xs cursor-pointer"
                 >
                   {salvando ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : null}
                   <span>{salvando ? 'Salvando...' : 'Salvar Linha'}</span>
@@ -1004,7 +1004,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <div>
                 <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-[#1b6e47]" />
+                  <Users className="w-5 h-5 text-[#19502f]" />
                   Passageiros Alocados: {modalPassageirosRota.codigo}
                 </h3>
                 <p className="text-xs text-stone-500">
@@ -1074,7 +1074,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
             <div className="flex items-center justify-between border-b border-stone-100 pb-2">
               <div>
                 <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
-                  <Compass className="w-5 h-5 text-[#1b6e47]" />
+                  <Compass className="w-5 h-5 text-[#19502f]" />
                   Editor de Traçado no Mapa • Linha {editorMapaRota.codigo}
                 </h3>
                 <p className="text-xs text-stone-500">
@@ -1145,7 +1145,7 @@ export const AdminRotas: React.FC<AdminRotasProps> = ({
                 <button
                   type="button"
                   onClick={handleSalvarTraçado}
-                  className="px-5 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs cursor-pointer"
                 >
                   <Save className="w-4 h-4" />
                   <span>Salvar Traçado ({coordsEditadas.length} pontos)</span>

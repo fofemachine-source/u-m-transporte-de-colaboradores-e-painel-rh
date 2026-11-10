@@ -38,7 +38,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
       <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-8">
         
         <div className="text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-[#1b6e47] flex items-center justify-center mx-auto mb-3 shadow-inner">
+          <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-[#19502f] flex items-center justify-center mx-auto mb-3 shadow-inner">
             <ShieldCheck className="w-8 h-8" />
           </div>
           <h2 className="text-xl font-black text-stone-900 tracking-tight">
@@ -72,7 +72,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
                 value={usuario}
                 onChange={(e) => setUsuario(e.target.value)}
                 placeholder="Digite seu usuário"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm"
               />
             </div>
           </div>
@@ -92,7 +92,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 placeholder="Digite sua senha"
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#1b6e47] text-stone-800 text-sm font-mono"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-[#19502f] text-stone-800 text-sm font-mono"
               />
               <button
                 type="button"
@@ -108,7 +108,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
           <button
             type="submit"
             disabled={carregando}
-            className="w-full py-3 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-md disabled:opacity-60 cursor-pointer mt-2"
+            className="w-full py-3 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-md disabled:opacity-60 cursor-pointer mt-2"
           >
             {carregando ? (
               <>

@@ -29,14 +29,14 @@ export const Header: React.FC<HeaderProps> = ({
   const isTelaLogin = activePanel === 'admin' && !isAdminLoggedIn;
 
   return (
-    <header className="bg-[#1b6e47] text-white shadow-md sticky top-0 z-30">
+    <header className="bg-[#19502f] text-white shadow-md sticky top-0 z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           
           {/* Brand Logo & Name */}
           <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-white text-[#1b6e47] font-black text-xl flex items-center justify-center shadow-inner tracking-tighter flex-none select-none">
+              <div className="w-11 h-11 rounded-xl bg-white text-[#19502f] font-black text-xl flex items-center justify-center shadow-inner tracking-tighter flex-none select-none">
                 U&M
               </div>
               <div>
@@ -96,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   type="button"
                   onClick={handleCopiarColab}
-                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#1b6e47] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#19502f] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
                   title="Copiar link para enviar aos colaboradores"
                 >
                   {copiadoColab ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
@@ -127,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   type="button"
                   onClick={() => onSelectPanel('admin')}
-                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#1b6e47] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#19502f] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
                   title="Acessar o Painel Administrativo do RH e Dashboard"
                 >
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />

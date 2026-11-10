@@ -329,7 +329,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-4 border-b border-stone-100">
           <div>
             <h2 className="text-lg sm:text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-              <Users className="w-5 h-5 text-[#1b6e47]" />
+              <Users className="w-5 h-5 text-[#19502f]" />
               Gestão de Colaboradores & Demissões
             </h2>
             <p className="text-xs text-stone-500 mt-0.5">
@@ -344,7 +344,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                 setCadastroSelecionado(null);
                 setModalEditOpen(true);
               }}
-              className="px-4 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Novo Colaborador</span>
@@ -369,7 +369,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
             onClick={() => setAbaFiltro('todos')}
             className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
               abaFiltro === 'todos'
-                ? 'bg-[#1b6e47] text-white shadow-2xs'
+                ? 'bg-[#19502f] text-white shadow-2xs'
                 : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
             }`}
           >
@@ -382,7 +382,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
             onClick={() => setAbaFiltro('ativos')}
             className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
               abaFiltro === 'ativos'
-                ? 'bg-[#1b6e47] text-white shadow-2xs'
+                ? 'bg-[#19502f] text-white shadow-2xs'
                 : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
             }`}
           >
@@ -433,7 +433,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
               value={filtros.busca}
               onChange={(e) => setFiltros((prev) => ({ ...prev, busca: e.target.value }))}
               placeholder="Buscar por colaborador, matrícula, bairro, ponto de embarque ou ônibus..."
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
             />
           </div>
 
@@ -515,7 +515,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
             <button
               type="button"
               onClick={() => setFiltros({ busca: '', turma: '', linha: '', status: '', bairro: '', ordem: 'recentes' })}
-              className="text-[#1b6e47] font-semibold hover:underline cursor-pointer"
+              className="text-[#19502f] font-semibold hover:underline cursor-pointer"
             >
               Limpar filtros
             </button>
@@ -552,7 +552,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                 <div>
                   {/* Top */}
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 rounded-full border border-stone-200 bg-emerald-50 text-[#1b6e47] flex items-center justify-center font-bold text-base flex-none overflow-hidden shadow-2xs">
+                    <div className="w-12 h-12 rounded-full border border-stone-200 bg-emerald-50 text-[#19502f] flex items-center justify-center font-bold text-base flex-none overflow-hidden shadow-2xs">
                       {item.foto ? (
                         <img src={item.foto} alt="" className="w-full h-full object-cover" />
                       ) : (
@@ -628,7 +628,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                           setColabTrocarLinha(item);
                           setLinhaSelecionadaParaTroca(item.linhaId || item.onibus || '');
                         }}
-                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-100 text-[#1b6e47] border border-emerald-300 text-xs font-bold transition-colors cursor-pointer flex-none shadow-2xs"
+                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-emerald-100 text-[#19502f] border border-emerald-300 text-xs font-bold transition-colors cursor-pointer flex-none shadow-2xs"
                         title="Trocar linha de transporte do colaborador"
                       >
                         Trocar Linha
@@ -670,7 +670,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                   <button
                     type="button"
                     onClick={() => onVerNoMapa?.(item)}
-                    className="w-full py-1.5 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-300 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="w-full py-1.5 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-300 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     title="Localizar e abrir colaborador no mapa de Parauapebas"
                   >
                     <MapPin className="w-3.5 h-3.5 text-emerald-600" />
@@ -792,7 +792,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                               setColabTrocarLinha(item);
                               setLinhaSelecionadaParaTroca(item.linhaId || item.onibus || '');
                             }}
-                            className="p-1 rounded text-stone-400 hover:text-[#1b6e47] hover:bg-emerald-50 cursor-pointer"
+                            className="p-1 rounded text-stone-400 hover:text-[#19502f] hover:bg-emerald-50 cursor-pointer"
                             title="Trocar linha de transporte"
                           >
                             <Bus className="w-3.5 h-3.5" />
@@ -912,7 +912,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                 value={motivoDemitir}
                 onChange={(e) => setMotivoDemitir(e.target.value)}
                 placeholder="Ex.: Término de contrato, pedido de demissão..."
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -967,7 +967,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 space-y-4">
             <div className="flex items-start gap-3">
-              <div className="p-2.5 rounded-2xl bg-emerald-100 text-[#1b6e47] flex-none">
+              <div className="p-2.5 rounded-2xl bg-emerald-100 text-[#19502f] flex-none">
                 <Bus className="w-6 h-6" />
               </div>
               <div>
@@ -1017,7 +1017,7 @@ export const AdminColaboradores: React.FC<AdminColaboradoresProps> = ({
                 type="button"
                 disabled={salvandoTroca || !linhaSelecionadaParaTroca}
                 onClick={handleConfirmarTrocaLinha}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#1b6e47] hover:bg-[#155a3a] transition-colors shadow-2xs disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#19502f] hover:bg-[#0d2b19] transition-colors shadow-2xs disabled:opacity-50 cursor-pointer"
               >
                 {salvandoTroca ? 'Salvando...' : 'Salvar Nova Linha'}
               </button>

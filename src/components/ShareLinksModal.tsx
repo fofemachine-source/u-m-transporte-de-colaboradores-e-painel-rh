@@ -43,7 +43,7 @@ export const ShareLinksModal: React.FC<ShareLinksModalProps> = ({ isOpen, onClos
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-stone-200">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#1b6e47] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#19502f] flex items-center justify-center">
               <Share2 className="w-5 h-5" />
             </div>
             <div>
@@ -86,7 +86,7 @@ export const ShareLinksModal: React.FC<ShareLinksModalProps> = ({ isOpen, onClos
             <button
               type="button"
               onClick={handleCopiarColab}
-              className="px-3 py-2 bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer flex-none shadow-2xs"
+              className="px-3 py-2 bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer flex-none shadow-2xs"
             >
               {copiadoColab ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
               <span>{copiadoColab ? 'Copiado!' : 'Copiar'}</span>

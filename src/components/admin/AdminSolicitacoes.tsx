@@ -148,7 +148,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-stone-100">
           <div>
             <h2 className="text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-              <FileEdit className="w-5 h-5 text-[#1b6e47]" />
+              <FileEdit className="w-5 h-5 text-[#19502f]" />
               Solicitações de Mudança de Endereço
             </h2>
             <p className="text-xs sm:text-sm text-stone-500 mt-1">
@@ -174,7 +174,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                 onClick={() => setFiltroStatus(st)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   filtroStatus === st
-                    ? 'bg-white text-[#1b6e47] shadow-xs'
+                    ? 'bg-white text-[#19502f] shadow-xs'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
@@ -195,7 +195,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
               value={busca}
               onChange={(e) => setBusca(e.target.value)}
               placeholder="Buscar por colaborador ou bairro..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+              className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#19502f] focus:outline-none"
             />
           </div>
         </div>
@@ -239,7 +239,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                 {/* Header do Card */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#1b6e47] border border-emerald-200 flex items-center justify-center font-black text-sm flex-none">
+                    <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#19502f] border border-emerald-200 flex items-center justify-center font-black text-sm flex-none">
                       {s.nomeColaborador.slice(0, 2).toUpperCase()}
                     </div>
                     <div>
@@ -285,7 +285,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
 
                   {/* Novo Endereço */}
                   <div className="space-y-1 border-t sm:border-t-0 sm:border-l border-stone-200 pt-2 sm:pt-0 sm:pl-3">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#1b6e47] block flex items-center gap-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#19502f] block flex items-center gap-1">
                       <MapPin className="w-3 h-3 text-emerald-600" /> Novo Endereço Solicitado:
                     </span>
                     <p className="font-bold text-stone-900 leading-snug">
@@ -304,7 +304,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                 <div className="mt-3 p-3 rounded-xl bg-white border border-stone-200 text-xs space-y-1.5">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-stone-800 flex items-center gap-1.5">
-                      <Bus className="w-3.5 h-3.5 text-[#1b6e47]" />
+                      <Bus className="w-3.5 h-3.5 text-[#19502f]" />
                       Capacidade da Linha {s.linhaSugeridaId}:
                     </span>
                     {lotada ? (
@@ -354,7 +354,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                   <button
                     type="button"
                     onClick={() => handleAbrirAcao(s, 'aprovar')}
-                    className="flex-1 py-2 px-3 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                    className="flex-1 py-2 px-3 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                   >
                     <Check className="w-3.5 h-3.5" />
                     <span>Aprovar Mudança</span>
@@ -374,7 +374,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                   <button
                     type="button"
                     onClick={() => onDefinirPontoNoMapa?.(colab)}
-                    className="w-full py-2 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-300 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="w-full py-2 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-300 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <MapPin className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Posicionar Ponto no Mapa</span>
@@ -392,7 +392,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
           <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 space-y-4">
             <div className="flex items-start gap-3">
               <div className={`p-2.5 rounded-2xl flex-none ${
-                modalAcao === 'aprovar' ? 'bg-emerald-100 text-[#1b6e47]' : 'bg-red-100 text-red-700'
+                modalAcao === 'aprovar' ? 'bg-emerald-100 text-[#19502f]' : 'bg-red-100 text-red-700'
               }`}>
                 {modalAcao === 'aprovar' ? <CheckCircle2 className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
               </div>
@@ -425,7 +425,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                 value={respostaRH}
                 onChange={(e) => setRespostaRH(e.target.value)}
                 placeholder="Insira a justificativa ou orientações..."
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -442,7 +442,7 @@ export const AdminSolicitacoes: React.FC<AdminSolicitacoesProps> = ({
                 disabled={processando}
                 onClick={handleConfirmarAcao}
                 className={`px-4 py-2 rounded-xl text-xs font-bold text-white transition-colors shadow-2xs cursor-pointer ${
-                  modalAcao === 'aprovar' ? 'bg-[#1b6e47] hover:bg-[#155a3a]' : 'bg-red-600 hover:bg-red-700'
+                  modalAcao === 'aprovar' ? 'bg-[#19502f] hover:bg-[#0d2b19]' : 'bg-red-600 hover:bg-red-700'
                 }`}
               >
                 {processando ? 'Processando...' : modalAcao === 'aprovar' ? 'Confirmar Aprovação' : 'Confirmar Recusa'}

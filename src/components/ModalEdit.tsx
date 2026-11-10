@@ -204,7 +204,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 required
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -217,7 +217,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 required
                 value={matricula}
                 onChange={(e) => setMatricula(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm font-mono focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm font-mono focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -229,7 +229,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 type="tel"
                 value={telefone}
                 onChange={(e) => setTelefone(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -242,7 +242,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 required
                 value={endereco}
                 onChange={(e) => setEndereco(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -255,7 +255,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 required
                 value={bairro}
                 onChange={(e) => setBairro(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -268,7 +268,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 required
                 value={cidade}
                 onChange={(e) => setCidade(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -279,7 +279,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
               <select
                 value={turma}
                 onChange={(e) => setTurma(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm bg-white focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm bg-white focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               >
                 {TURMAS.map((t) => (
                   <option key={t} value={t}>
@@ -298,7 +298,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 value={local}
                 onChange={(e) => setLocal(e.target.value)}
                 placeholder="Ex.: U&M Mina N4"
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
 
@@ -311,7 +311,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 required
                 value={ponto}
                 onChange={(e) => setPonto(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
               />
             </div>
           </div>
@@ -331,7 +331,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as StatusCadastro)}
-                  className="w-full px-3 py-2 rounded-xl border border-emerald-300 bg-white text-sm font-semibold text-stone-800 focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-emerald-300 bg-white text-sm font-semibold text-stone-800 focus:ring-2 focus:ring-[#19502f] focus:outline-none"
                 >
                   {STATUS_LIST.map((s) => (
                     <option key={s} value={s}>
@@ -351,7 +351,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                     value={onibus}
                     onChange={(e) => setOnibus(e.target.value)}
                     placeholder="Ex: TA-L01 (Amazonas / Cidade Jardim)"
-                    className="w-full px-3 py-2 rounded-xl border border-emerald-300 bg-white text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-emerald-300 bg-white text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
                   />
 
                   {/* Sugestão do Motor Inteligente U&M */}
@@ -406,7 +406,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
                   value={obs}
                   onChange={(e) => setObs(e.target.value)}
                   placeholder="Ex: Colaborador com restrição de horário; ponto de embarque validado pelo fiscal de tráfego."
-                  className="w-full px-3 py-2 rounded-xl border border-emerald-300 bg-white text-sm focus:ring-2 focus:ring-[#1b6e47] focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-emerald-300 bg-white text-sm focus:ring-2 focus:ring-[#19502f] focus:outline-none"
                 />
               </div>
             </div>
@@ -424,7 +424,7 @@ export const ModalEdit: React.FC<ModalEditProps> = ({
             <button
               type="submit"
               disabled={salvando}
-              className="px-5 py-2.5 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold text-sm flex items-center gap-2 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold text-sm flex items-center gap-2 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>{salvando ? 'Salvando...' : 'Salvar Alterações'}</span>

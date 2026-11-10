@@ -116,7 +116,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       {/* Brand Header */}
       <div className="p-4 sm:p-5 border-b border-[#263b2f] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white text-[#1b6e47] font-black text-xl flex items-center justify-center shadow-md flex-none">
+          <div className="w-10 h-10 rounded-xl bg-white text-[#19502f] font-black text-xl flex items-center justify-center shadow-md flex-none">
             U&M
           </div>
           <div>
@@ -159,7 +159,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
               }}
               className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[#1b6e47] text-white shadow-md'
+                  ? 'bg-[#19502f] text-white shadow-md'
                   : 'text-stone-300 hover:bg-white/5 hover:text-white'
               }`}
             >
@@ -194,7 +194,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         <button
           type="button"
           onClick={handleCopiarLink}
-          className="w-full py-2.5 px-3 rounded-xl bg-[#1b6e47]/40 hover:bg-[#1b6e47] text-white text-xs font-bold flex items-center justify-between border border-emerald-600/40 transition-colors cursor-pointer"
+          className="w-full py-2.5 px-3 rounded-xl bg-[#19502f]/40 hover:bg-[#19502f] text-white text-xs font-bold flex items-center justify-between border border-emerald-600/40 transition-colors cursor-pointer"
           title="Copiar link para enviar aos colaboradores"
         >
           <div className="flex items-center gap-2 truncate">

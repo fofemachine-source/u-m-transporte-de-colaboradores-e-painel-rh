@@ -159,7 +159,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-xl font-black text-stone-900 tracking-tight flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-[#1b6e47]" />
+              <TrendingUp className="w-6 h-6 text-[#19502f]" />
               Painel Geral de Transporte & Recursos Humanos
             </h2>
             <p className="text-xs sm:text-sm text-stone-500 mt-1">
@@ -171,7 +171,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <button
               type="button"
               onClick={() => onChangeView('mapa')}
-              className="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] text-xs font-bold border border-emerald-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#19502f] text-xs font-bold border border-emerald-200 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <MapPin className="w-4 h-4 text-emerald-600" />
               <span>Ver no Mapa</span>
@@ -232,7 +232,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block truncate">
             Ativos Transporte
           </span>
-          <div className="text-2xl font-black text-[#1b6e47] mt-1">{stats.ativos}</div>
+          <div className="text-2xl font-black text-[#19502f] mt-1">{stats.ativos}</div>
           <span className="text-[10px] text-emerald-700 font-semibold mt-0.5 block truncate">em operação</span>
         </div>
 
@@ -300,7 +300,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
           <div>
             <h3 className="font-black text-stone-900 text-base flex items-center gap-2">
-              <Bus className="w-5 h-5 text-[#1b6e47]" />
+              <Bus className="w-5 h-5 text-[#19502f]" />
               Ocupação dos Ônibus • Capacidade & Assentos Livres
             </h3>
             <p className="text-xs text-stone-500 mt-0.5">
@@ -314,7 +314,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               type="button"
               onClick={() => setFiltroTurmaOcupacao('Todas')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filtroTurmaOcupacao === 'Todas' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600'
+                filtroTurmaOcupacao === 'Todas' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600'
               }`}
             >
               Todas
@@ -323,7 +323,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               type="button"
               onClick={() => setFiltroTurmaOcupacao('Administrativo')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filtroTurmaOcupacao === 'Administrativo' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600'
+                filtroTurmaOcupacao === 'Administrativo' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600'
               }`}
             >
               Administrativo
@@ -332,7 +332,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               type="button"
               onClick={() => setFiltroTurmaOcupacao('Turma A')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filtroTurmaOcupacao === 'Turma A' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600'
+                filtroTurmaOcupacao === 'Turma A' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600'
               }`}
             >
               Turma A
@@ -341,7 +341,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               type="button"
               onClick={() => setFiltroTurmaOcupacao('Turma B')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filtroTurmaOcupacao === 'Turma B' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600'
+                filtroTurmaOcupacao === 'Turma B' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600'
               }`}
             >
               Turma B
@@ -350,7 +350,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               type="button"
               onClick={() => setFiltroTurmaOcupacao('Turma C')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filtroTurmaOcupacao === 'Turma C' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600'
+                filtroTurmaOcupacao === 'Turma C' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600'
               }`}
             >
               Turma C
@@ -359,7 +359,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               type="button"
               onClick={() => setFiltroTurmaOcupacao('Turma D')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filtroTurmaOcupacao === 'Turma D' ? 'bg-white text-[#1b6e47] shadow-xs' : 'text-stone-600'
+                filtroTurmaOcupacao === 'Turma D' ? 'bg-white text-[#19502f] shadow-xs' : 'text-stone-600'
               }`}
             >
               Turma D
@@ -436,7 +436,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-2xs space-y-4">
           <div className="flex items-center justify-between border-b border-stone-100 pb-3">
             <h3 className="font-bold text-stone-900 text-sm flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-[#1b6e47]" />
+              <BarChart3 className="w-4 h-4 text-[#19502f]" />
               Colaboradores por Linha de Transporte
             </h3>
             <span className="text-[11px] text-stone-400">Total: {stats.vagasOcupadas} alocados</span>
@@ -457,7 +457,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   </div>
                   <div className="w-full bg-stone-100 rounded-full h-2 overflow-hidden">
                     <div
-                      className="bg-[#1b6e47] h-full rounded-full transition-all duration-500"
+                      className="bg-[#19502f] h-full rounded-full transition-all duration-500"
                       style={{ width: `${Math.min(100, Math.max(2, item.percentual))}%` }}
                     />
                   </div>
@@ -471,7 +471,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-2xs space-y-4">
           <div className="flex items-center justify-between border-b border-stone-100 pb-3">
             <h3 className="font-bold text-stone-900 text-sm flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#1b6e47]" />
+              <Layers className="w-4 h-4 text-[#19502f]" />
               Colaboradores por Turma / Turno
             </h3>
             <span className="text-[11px] text-stone-400">Total: {stats.ativos} ativos</span>
@@ -515,7 +515,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <button
               type="button"
               onClick={() => onChangeView('mapa')}
-              className="text-[11px] text-[#1b6e47] font-bold hover:underline"
+              className="text-[11px] text-[#19502f] font-bold hover:underline"
             >
               Abrir Mapa Completo ↗
             </button>
@@ -554,7 +554,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <button
               type="button"
               onClick={() => onChangeView('colaboradores')}
-              className="text-xs font-bold text-[#1b6e47] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#19502f] hover:underline flex items-center gap-1"
             >
               <span>Ver Todos</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -565,7 +565,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             {recentes.map((c) => (
               <div key={c.id} className="py-2.5 flex items-center justify-between gap-3 text-xs">
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-full bg-emerald-50 text-[#1b6e47] border border-stone-200 flex items-center justify-center font-bold text-xs flex-none">
+                  <div className="w-8 h-8 rounded-full bg-emerald-50 text-[#19502f] border border-stone-200 flex items-center justify-center font-bold text-xs flex-none">
                     {c.nome.slice(0, 2).toUpperCase()}
                   </div>
                   <div className="min-w-0">
@@ -591,7 +591,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <button
                     type="button"
                     onClick={() => onVerNoMapa ? onVerNoMapa(c) : onChangeView('mapa')}
-                    className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-200 font-bold text-xs flex items-center gap-1 cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-200 font-bold text-xs flex items-center gap-1 cursor-pointer"
                     title="Ver no mapa"
                   >
                     <MapPin className="w-3 h-3 text-emerald-600" />

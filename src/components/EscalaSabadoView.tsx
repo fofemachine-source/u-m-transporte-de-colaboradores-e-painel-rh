@@ -390,7 +390,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
   if (carregando) {
     return (
       <div className="p-8 text-center bg-white rounded-3xl border border-stone-200">
-        <RefreshCw className="w-8 h-8 text-[#1b6e47] animate-spin mx-auto mb-2" />
+        <RefreshCw className="w-8 h-8 text-[#19502f] animate-spin mx-auto mb-2" />
         <p className="text-stone-600 text-sm font-semibold">Carregando Painel Escala Parvi...</p>
       </div>
     );
@@ -498,7 +498,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
               type="button"
               onClick={handleSalvarEscala}
               disabled={salvando || !escalaAtiva}
-              className="px-4 py-2 bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer disabled:opacity-50"
+              className="px-4 py-2 bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer disabled:opacity-50"
             >
               {salvando ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
               <span>{salvando ? 'Salvando...' : 'Salvar Escala'}</span>
@@ -568,7 +568,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
 
       {/* BARRA DA ESCALA PARVI (COM CAMPO DE OBSERVAÇÕES - OBS. INCLUÍDO NA BARRA) */}
       {escalaAtiva && (
-        <div className="bg-gradient-to-r from-emerald-800 to-[#1b6e47] text-white rounded-3xl p-5 sm:p-6 shadow-md space-y-4">
+        <div className="bg-gradient-to-r from-emerald-800 to-[#19502f] text-white rounded-3xl p-5 sm:p-6 shadow-md space-y-4">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
               <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-200 font-bold bg-emerald-900/60 px-2.5 py-1 rounded-full border border-emerald-600/60">
@@ -587,7 +587,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
               <button
                 type="button"
                 onClick={handleExportarWhatsAppParvi}
-                className="px-4 py-2.5 rounded-xl bg-white text-[#1b6e47] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm transition-all cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-white text-[#19502f] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm transition-all cursor-pointer"
                 title="Copiar e enviar escala formatada para a Parvi via WhatsApp"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-600" />
@@ -638,7 +638,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-stone-100 pb-4">
             <div>
               <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
-                <User className="w-4 h-4 text-[#1b6e47]" />
+                <User className="w-4 h-4 text-[#19502f]" />
                 Colaboradores na Escala Parvi ({escalaAtiva.itens?.length || 0})
               </h3>
               <p className="text-xs text-stone-500 mt-0.5">
@@ -649,7 +649,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
             <button
               type="button"
               onClick={() => handleAbrirModalAdicionar()}
-              className="px-4 py-2.5 bg-[#1b6e47] hover:bg-[#155a3a] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+              className="px-4 py-2.5 bg-[#19502f] hover:bg-[#0d2b19] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>Adicionar Colaborador</span>
@@ -667,7 +667,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
               <button
                 type="button"
                 onClick={() => handleAbrirModalAdicionar()}
-                className="mt-3 px-4 py-2 bg-[#1b6e47] text-white rounded-xl text-xs font-bold cursor-pointer"
+                className="mt-3 px-4 py-2 bg-[#19502f] text-white rounded-xl text-xs font-bold cursor-pointer"
               >
                 + Adicionar Primeiro Colaborador
               </button>
@@ -683,7 +683,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                     {/* Barra da Linha da Escala (com campo OBS. incluso na barra) */}
                     <div className="bg-stone-100 px-4 py-3 flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-stone-200">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="px-2.5 py-1 rounded-lg bg-[#1b6e47] text-white font-black text-xs font-mono">
+                        <span className="px-2.5 py-1 rounded-lg bg-[#19502f] text-white font-black text-xs font-mono">
                           {linhaCod}
                         </span>
                         <span className="font-bold text-stone-800 text-xs sm:text-sm">
@@ -704,7 +704,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                           placeholder={`OBS. da linha ${linhaCod} (ex: parada extra, horário especial)...`}
                           value={escalaAtiva.observacoesLinhas?.[linhaCod] || ''}
                           onChange={(e) => handleAtualizarObsLinha(linhaCod, e.target.value)}
-                          className="w-full text-xs px-3 py-1.5 rounded-lg border border-stone-300 bg-white text-stone-800 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#1b6e47]"
+                          className="w-full text-xs px-3 py-1.5 rounded-lg border border-stone-300 bg-white text-stone-800 font-medium placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#19502f]"
                         />
                       </div>
 
@@ -718,7 +718,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                         <button
                           type="button"
                           onClick={() => handleAbrirModalAdicionar(linhaCod)}
-                          className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#1b6e47] border border-emerald-300 text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#19502f] border border-emerald-300 text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
                           title={`Adicionar colaborador na linha ${linhaCod}`}
                         >
                           <Plus className="w-3 h-3" />
@@ -768,7 +768,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                                   <button
                                     type="button"
                                     onClick={() => handleAbrirEdicao(it)}
-                                    className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-[#1b6e47] font-bold text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
+                                    className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-[#19502f] font-bold text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
                                     title="Alterar dados do colaborador"
                                   >
                                     <Edit2 className="w-3 h-3" />
@@ -804,7 +804,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
           <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-stone-200 max-h-[92vh] overflow-y-auto space-y-4">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
-                <Edit2 className="w-4 h-4 text-[#1b6e47]" />
+                <Edit2 className="w-4 h-4 text-[#19502f]" />
                 Alterar Dados no Painel Escala Parvi
               </h3>
               <button
@@ -892,7 +892,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold text-xs shadow-2xs cursor-pointer flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold text-xs shadow-2xs cursor-pointer flex items-center gap-1.5"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>Salvar Alterações</span>
@@ -909,7 +909,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
           <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-stone-200 max-h-[92vh] overflow-y-auto space-y-4">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
-                <User className="w-5 h-5 text-[#1b6e47]" />
+                <User className="w-5 h-5 text-[#19502f]" />
                 Adicionar ao Painel Escala Parvi
               </h3>
               <button
@@ -933,7 +933,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                   value={buscaColab}
                   onChange={(e) => setBuscaColab(e.target.value)}
                   placeholder="Digite o nome ou bairro para preencher automático..."
-                  className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-emerald-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-[#1b6e47]"
+                  className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-emerald-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-[#19502f]"
                 />
               </div>
 
@@ -1028,7 +1028,7 @@ export const EscalaSabadoView: React.FC<EscalaSabadoViewProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#1b6e47] hover:bg-[#155a3a] text-white font-bold text-xs shadow-2xs cursor-pointer flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl bg-[#19502f] hover:bg-[#0d2b19] text-white font-bold text-xs shadow-2xs cursor-pointer flex items-center gap-1.5"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Adicionar à Escala</span>
