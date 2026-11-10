@@ -2,7 +2,6 @@ import express, { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { createServer as createViteServer } from 'vite';
 import { ROTAS_INICIAIS, sugerirRota, PORTARIA_PEBA } from './src/utils/motorRotas.js';
 import { RotaLinha, StatusCadastro, ColaboradorCadastro, SolicitacaoEndereco } from './src/types.js';
 
@@ -33,7 +32,8 @@ function getHost(): string {
 
 const PORT = getPort();
 const HOST = getHost();
-const DATA_DIR = path.join(__dirname, 'data');
+const DEFAULT_DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.VERCEL ? path.join('/tmp', 'um-data') : DEFAULT_DATA_DIR;
 const DATA_FILE = path.join(DATA_DIR, 'cadastros.json');
 const ROTAS_FILE = path.join(DATA_DIR, 'rotas.json');
 const SOLICITACOES_FILE = path.join(DATA_DIR, 'solicitacoes.json');
@@ -413,8 +413,12 @@ function writeEscalasSabado(data: EscalaSabado[]): void {
   }
 }
 
-async function startServer() {
-  initStorage();
+export function createApiApp() {
+  try {
+    initStorage();
+  } catch (err) {
+    console.error('Aviso ao inicializar storage:', err);
+  }
 
   const app = express();
   app.use(express.json({ limit: '20mb' }));
@@ -1027,9 +1031,17 @@ async function startServer() {
     return res.send(csvContent);
   });
 
+  return app;
+}
+
+export const app = createApiApp();
+export default app;
+
+async function startServer() {
   // Vite integration
   const isProduction = process.env.NODE_ENV === 'production';
   if (!isProduction) {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
@@ -1064,7 +1076,9 @@ async function startServer() {
   process.on('SIGINT', shutdown);
 }
 
-startServer().catch(err => {
-  console.error('Erro ao iniciar servidor:', err);
-  process.exit(1);
-});
+if (!process.env.VERCEL) {
+  startServer().catch(err => {
+    console.error('Erro ao iniciar servidor:', err);
+    process.exit(1);
+  });
+}

@@ -85,9 +85,10 @@ export default function App() {
   }, []);
 
   // Altera a URL amigavelmente ao trocar de painel mantendo suporte a links limpos
+  const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
   const handleSelectPanel = (panel: 'funcionario' | 'admin') => {
     setActivePanel(panel);
-    const targetPath = panel === 'admin' ? '/admin' : '/colaborador';
+    const targetPath = `${basePath}/${panel === 'admin' ? 'admin' : 'colaborador'}`;
     const targetUrl = new URL(window.location.href);
     targetUrl.pathname = targetPath;
     targetUrl.searchParams.delete('painel'); // limpa o param para manter a URL limpa (/admin ou /colaborador)
@@ -172,7 +173,7 @@ export default function App() {
           <div className="flex items-center gap-4 text-[11px] text-stone-500">
             {isAdminLoggedIn ? (
               <a
-                href="/colaborador"
+                href={`${basePath}/colaborador`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#1b6e47] hover:underline font-semibold flex items-center gap-1 cursor-pointer"

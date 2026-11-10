@@ -12,7 +12,8 @@ export const ShareLinksModal: React.FC<ShareLinksModalProps> = ({ isOpen, onClos
 
   if (!isOpen) return null;
 
-  const origin = window.location.origin;
+  const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  const origin = window.location.origin + basePath;
   const linkColaborador = `${origin}/colaborador`;
   const linkAdmin = `${origin}/admin`;
 
