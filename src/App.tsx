@@ -84,15 +84,10 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Altera a URL amigavelmente ao trocar de painel mantendo suporte a links limpos
-  const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+  // Mantém sempre o mesmo link fixo sem alterar a URL ao trocar de painel
+  const FIXED_SYSTEM_URL = 'https://ais-dev-pzejj4vazewhfves4dby4h-345977153072.us-west2.run.app/';
   const handleSelectPanel = (panel: 'funcionario' | 'admin') => {
     setActivePanel(panel);
-    const targetPath = `${basePath}/${panel === 'admin' ? 'admin' : 'colaborador'}`;
-    const targetUrl = new URL(window.location.href);
-    targetUrl.pathname = targetPath;
-    targetUrl.searchParams.delete('painel'); // limpa o param para manter a URL limpa (/admin ou /colaborador)
-    window.history.pushState({}, '', targetUrl.toString());
   };
 
   const handleCadastroCriado = (novo: ColaboradorCadastro) => {
@@ -173,7 +168,7 @@ export default function App() {
           <div className="flex items-center gap-4 text-[11px] text-stone-500">
             {isAdminLoggedIn ? (
               <a
-                href={`${basePath}/colaborador`}
+                href={FIXED_SYSTEM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#1b6e47] hover:underline font-semibold flex items-center gap-1 cursor-pointer"

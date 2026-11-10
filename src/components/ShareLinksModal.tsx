@@ -12,10 +12,9 @@ export const ShareLinksModal: React.FC<ShareLinksModalProps> = ({ isOpen, onClos
 
   if (!isOpen) return null;
 
-  const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
-  const origin = window.location.origin + basePath;
-  const linkColaborador = `${origin}/colaborador`;
-  const linkAdmin = `${origin}/admin`;
+  const FIXED_LINK = 'https://ais-dev-pzejj4vazewhfves4dby4h-345977153072.us-west2.run.app/';
+  const linkColaborador = FIXED_LINK;
+  const linkAdmin = `${FIXED_LINK}?painel=admin`;
 
   const handleCopiarColab = () => {
     navigator.clipboard.writeText(linkColaborador);
