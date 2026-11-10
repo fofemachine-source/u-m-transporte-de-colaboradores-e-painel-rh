@@ -49,6 +49,11 @@ const SEED_ESCALAS_SABADO: EscalaSabado[] = [
     supervisorTelefone: '(94) 99201-4455',
     status: 'Enviada à Parvi',
     observacoesGerais: 'Escala de reforço operacional para sábado. Frota Parvi autorizada para embarque dos colaboradores listados.',
+    observacoesLinhas: {
+      ADM01: 'Desembarque no Portão 02 PeBa às 05:40',
+      ADM02: 'Aguardar liberação de crachá na portaria',
+      'LINHA-06': 'Apoio direto à frente de lavra Mina N4',
+    },
     criadoEm: '06/11/2026 15:30',
     itens: [
       {
@@ -58,6 +63,7 @@ const SEED_ESCALAS_SABADO: EscalaSabado[] = [
         matricula: 'UM-74291',
         turma: 'Administrativo',
         bairro: 'Cidade Nova',
+        rua: 'Rua A, 210',
         endereco: 'Rua A, 210',
         pontoEmbarque: 'Supermercado Líder - Cidade Nova',
         linhaId: 'ADM01',
@@ -73,6 +79,7 @@ const SEED_ESCALAS_SABADO: EscalaSabado[] = [
         matricula: 'UM-83104',
         turma: 'Administrativo',
         bairro: 'Liberdade',
+        rua: 'Rua Santa Catarina, 1420',
         endereco: 'Rua Santa Catarina, 1420',
         pontoEmbarque: 'Farmácia Pague Menos - Rua Santa Catarina',
         linhaId: 'ADM03',
@@ -88,6 +95,7 @@ const SEED_ESCALAS_SABADO: EscalaSabado[] = [
         matricula: 'UM-61902',
         turma: 'Administrativo',
         bairro: 'Nova Carajás',
+        rua: 'Rua C42, Casinhas',
         endereco: 'Rua C42, Casinhas',
         pontoEmbarque: 'Entrada das Casinhas Nova Carajás',
         linhaId: 'ADM02',
@@ -103,6 +111,7 @@ const SEED_ESCALAS_SABADO: EscalaSabado[] = [
         matricula: 'UM-91203',
         turma: 'Retaludamento — Turma A',
         bairro: 'Tropical',
+        rua: 'Av. Jatobá, 450',
         endereco: 'Av. Jatobá, 450',
         pontoEmbarque: 'Panificadora Pão Dourado - Av. Jatobá',
         linhaId: 'LINHA-06',
@@ -118,6 +127,7 @@ const SEED_ESCALAS_SABADO: EscalaSabado[] = [
         matricula: 'UM-44021',
         turma: 'Retaludamento — Turma D',
         bairro: 'Palmares II',
+        rua: 'Av. Tancredo Neves, 12',
         endereco: 'Av. Tancredo Neves, 12',
         pontoEmbarque: 'Praça Principal Palmares II',
         linhaId: 'LINHA-07',
@@ -565,6 +575,7 @@ export function createApiApp() {
       supervisorTelefone: String(body.supervisorTelefone || '').trim(),
       status: body.status || 'Enviada à Parvi',
       observacoesGerais: String(body.observacoesGerais || '').trim(),
+      observacoesLinhas: body.observacoesLinhas || {},
       criadoEm: dataStr,
       itens: Array.isArray(body.itens) ? body.itens : [],
     };
@@ -582,12 +593,26 @@ export function createApiApp() {
     const lista = readEscalasSabado();
     const index = lista.findIndex(e => e.id === id);
 
-    if (index === -1) {
-      return res.status(404).json({ error: 'Escala de sábado não encontrada.' });
-    }
-
     const agora = new Date();
     const dataStr = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    if (index === -1) {
+      const novaEscala: EscalaSabado = {
+        id,
+        dataSabado: String(body.dataSabado || '08/11/2026').trim(),
+        supervisorNome: String(body.supervisorNome || 'Supervisor U&M').trim(),
+        supervisorTelefone: String(body.supervisorTelefone || '').trim(),
+        status: body.status || 'Enviada à Parvi',
+        observacoesGerais: String(body.observacoesGerais || '').trim(),
+        observacoesLinhas: body.observacoesLinhas || {},
+        criadoEm: body.criadoEm || dataStr,
+        atualizadoEm: dataStr,
+        itens: Array.isArray(body.itens) ? body.itens : [],
+      };
+      lista.unshift(novaEscala);
+      writeEscalasSabado(lista);
+      return res.json({ success: true, escala: novaEscala });
+    }
 
     const atualizada: EscalaSabado = {
       ...lista[index],
@@ -627,31 +652,25 @@ export function createApiApp() {
 
     const headers = [
       'Data do Sábado',
-      'Supervisor U&M',
-      'Contato Supervisor',
       'Linha do Ônibus',
-      'OBS da Linha',
-      'Nome do Colaborador',
-      'Matrícula',
+      'OBS. da Escala',
+      'OBS. da Linha',
+      'Nome',
       'Bairro',
       'Rua',
-      'Ponto de Embarque',
-      'OBS. (Observações)'
+      'Ponto de Embarque'
     ];
 
     const escapeCsv = (val: unknown) => `"${String(val == null ? '' : val).replace(/"/g, '""')}"`;
     const rows = (escala.itens || []).map(item => [
       escala.dataSabado,
-      escala.supervisorNome,
-      escala.supervisorTelefone || '',
       item.linhaId,
+      escala.observacoesGerais || '',
       escala.observacoesLinhas?.[item.linhaId] || '',
       item.nome,
-      item.matricula,
       item.bairro,
       item.rua || item.endereco || '',
-      item.pontoEmbarque,
-      item.observacao || ''
+      item.pontoEmbarque
     ].map(escapeCsv).join(';'));
 
     const csvContent = '\uFEFF' + [headers.map(escapeCsv).join(';'), ...rows].join('\r\n');

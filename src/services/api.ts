@@ -591,32 +591,26 @@ const triggerDownload = (conteudoCsv: string, nomeArquivo: string) => {
 export function baixarCsvEscalaSabado(escala: EscalaSabado) {
   const headers = [
     'Data do Sábado',
-    'Supervisor U&M',
-    'Contato Supervisor',
     'Linha do Ônibus',
-    'OBS da Linha',
-    'Nome do Colaborador',
-    'Matrícula',
+    'OBS. da Escala',
+    'OBS. da Linha',
+    'Nome',
     'Bairro',
     'Rua',
     'Ponto de Embarque',
-    'OBS. (Observações)',
   ];
 
   const escapeCsv = (val: unknown) => `"${String(val == null ? '' : val).replace(/"/g, '""')}"`;
   const rows = (escala.itens || []).map((item) =>
     [
       escala.dataSabado,
-      escala.supervisorNome,
-      escala.supervisorTelefone || '',
       item.linhaId,
+      escala.observacoesGerais || '',
       escala.observacoesLinhas?.[item.linhaId] || '',
       item.nome,
-      item.matricula,
       item.bairro,
       item.rua || item.endereco || '',
       item.pontoEmbarque,
-      item.observacao || '',
     ]
       .map(escapeCsv)
       .join(';')
