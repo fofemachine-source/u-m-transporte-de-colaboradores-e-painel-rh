@@ -1,123 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* Paleta Oficial U&M — Verde Principal (#19502F) e Secundário (#466C53) */
-  --color-emerald-50: #f2f5f3;
-  --color-emerald-100: #b2bfb4;
-  --color-emerald-200: #b2bfb4;
-  --color-emerald-300: #82a68f;
-  --color-emerald-400: #82a68f;
-  --color-emerald-500: #466c53;
-  --color-emerald-600: #466c53;
-  --color-emerald-700: #19502f;
-  --color-emerald-800: #19502f;
-  --color-emerald-900: #0d2b19;
-  --color-emerald-950: #0d2b19;
-
-  /* Paleta Oficial U&M — Verde Secundário / Qualidade (#466C53, #82A68F, #324D3B) */
-  --color-blue-50: #f2f5f3;
-  --color-blue-100: #b2bfb4;
-  --color-blue-200: #82a68f;
-  --color-blue-300: #82a68f;
-  --color-blue-500: #466c53;
-  --color-blue-600: #466c53;
-  --color-blue-700: #324d3b;
-  --color-blue-800: #324d3b;
-  --color-blue-900: #19502f;
-
-  --color-indigo-50: #f2f5f3;
-  --color-indigo-100: #b2bfb4;
-  --color-indigo-200: #82a68f;
-  --color-indigo-300: #82a68f;
-  --color-indigo-500: #466c53;
-  --color-indigo-600: #466c53;
-  --color-indigo-700: #324d3b;
-  --color-indigo-800: #324d3b;
-  --color-indigo-900: #19502f;
-
-  /* Paleta Oficial U&M — Alerta / Amarelo Ouro (#E2A937) */
-  --color-amber-50: #fdf8ec;
-  --color-amber-100: #f1d394;
-  --color-amber-200: #f1d394;
-  --color-amber-300: #e2a937;
-  --color-amber-400: #e2a937;
-  --color-amber-500: #e2a937;
-  --color-amber-600: #b5872c;
-  --color-amber-700: #b5872c;
-  --color-amber-800: #b5872c;
-  --color-amber-900: #2c2d2d;
-  --color-amber-950: #2c2d2d;
-
-  /* Paleta Oficial U&M — Crítico / Laranja (#FF7725) */
-  --color-orange-50: #fff3eb;
-  --color-orange-100: #ffb080;
-  --color-orange-200: #ffb080;
-  --color-orange-300: #ff7725;
-  --color-orange-400: #ff7725;
-  --color-orange-500: #ff7725;
-  --color-orange-600: #c44a00;
-  --color-orange-700: #c44a00;
-  --color-orange-800: #c44a00;
-  --color-orange-900: #c44a00;
-
-  /* Paleta Oficial U&M — Negativo / Vermelho (#DC3545) */
-  --color-red-50: #fdf2f3;
-  --color-red-100: #f1959b;
-  --color-red-200: #f1959b;
-  --color-red-300: #dc3545;
-  --color-red-400: #dc3545;
-  --color-red-500: #dc3545;
-  --color-red-600: #dc3545;
-  --color-red-700: #a71d2a;
-  --color-red-800: #a71d2a;
-  --color-red-900: #a71d2a;
-
-  /* Paleta Oficial U&M — Neutros (#F5F4F4, #DADADA, #A9A9A9, #575756, #2C2D2D) */
-  --color-stone-50: #f5f4f4;
-  --color-stone-100: #f5f5f5;
-  --color-stone-200: #dadada;
-  --color-stone-300: #b2bfb4;
-  --color-stone-400: #a9a9a9;
-  --color-stone-500: #575756;
-  --color-stone-600: #575756;
-  --color-stone-700: #575756;
-  --color-stone-800: #2c2d2d;
-  --color-stone-900: #2c2d2d;
-  --color-stone-950: #2c2d2d;
+  --font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 @layer base {
   html,
   body {
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 400;
-    color: #575756;
-    background-color: #f5f4f4;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #f3f6f4;
     -webkit-font-smoothing: antialiased;
-  }
-
-  /* Títulos e Subtítulos no padrão U&M: Montserrat Light (300) + Caixa Alta */
-  h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  h2,
-  h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  strong,
-  b {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
   }
 }

@@ -6,7 +6,7 @@ import { AdminLogin } from './components/AdminLogin';
 import { ShareLinksModal } from './components/ShareLinksModal';
 import { ColaboradorCadastro } from './types';
 import { fetchCadastros } from './services/api';
-import { Bus, CheckCircle2, Shield, Users, Share2, Link as LinkIcon } from 'lucide-react';
+import { CheckCircle2, Link as LinkIcon } from 'lucide-react';
 
 export default function App() {
   // Determina o painel pela rota (/admin vs /colaborador) ou pelo query param (?painel=admin)
@@ -108,7 +108,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f4f4] text-[#575756] flex flex-col font-sans selection:bg-[#19502f] selection:text-white">
+    <div className="min-h-screen bg-[#f3f6f4] text-stone-800 flex flex-col font-sans selection:bg-[#1b6e47] selection:text-white">
       {/* Toast Notification */}
       {toastMsg && (
         <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-5 duration-300">
@@ -158,29 +158,25 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="bg-white border-t border-stone-200 py-5 text-center text-xs text-stone-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-[#19502f]">U&M</span>
-            <span>•</span>
-            <span>Sistema Integrado de Transporte & Recursos Humanos</span>
+      <footer className="bg-white border-t border-gray-200 py-4 text-xs text-gray-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div>
+            <span>U&M • Sistema Integrado de Transporte e Recursos Humanos</span>
           </div>
-          <div className="flex items-center gap-4 text-[11px] text-stone-500">
-            {isAdminLoggedIn ? (
+          <div className="flex items-center gap-4">
+            {activePanel === 'admin' && isAdminLoggedIn ? (
               <a
                 href={FIXED_SYSTEM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#19502f] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+                className="text-[#1b6e47] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
                 title="Abrir o Portal do Colaborador em uma guia secundária"
               >
                 <LinkIcon className="w-3 h-3" />
-                <span>Abrir Portal do Colaborador (Guia Secundária) ↗</span>
+                <span>Abrir Portal do Colaborador (Guia Secundária)</span>
               </a>
-            ) : activePanel === 'funcionario' ? (
-              <span className="text-stone-400">Portal Oficial do Colaborador • Transporte U&M</span>
             ) : (
-              <span className="text-stone-400">Ambiente Seguro RH</span>
+              <span>Portal Oficial do Colaborador • Transporte U&M</span>
             )}
           </div>
         </div>

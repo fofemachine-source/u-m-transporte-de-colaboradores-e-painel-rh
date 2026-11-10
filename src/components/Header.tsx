@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bus, Users, ShieldCheck, LogOut, Copy, Check, MessageCircle, Lock, ExternalLink } from 'lucide-react';
+import { Bus, Shield, LogOut, Copy, Check, Lock } from 'lucide-react';
 
 interface HeaderProps {
   activePanel: 'funcionario' | 'admin';
@@ -29,26 +29,26 @@ export const Header: React.FC<HeaderProps> = ({
   const isTelaLogin = activePanel === 'admin' && !isAdminLoggedIn;
 
   return (
-    <header className="bg-[#19502f] text-white shadow-md sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+    <header className="bg-[#14673f] text-white shadow-sm sticky top-0 z-30 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           
           {/* Brand Logo & Name */}
           <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-white text-[#19502f] font-black text-xl flex items-center justify-center shadow-inner tracking-tighter flex-none select-none">
+              <div className="w-11 h-11 rounded-xl bg-white text-[#1b6e47] font-black text-lg flex items-center justify-center shadow-xs tracking-tight flex-none select-none">
                 U&M
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-lg sm:text-xl font-bold tracking-tight leading-tight">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="text-base sm:text-lg font-bold text-white tracking-tight leading-tight">
                     Transporte de Colaboradores
                   </h1>
-                  <span className="hidden md:inline-flex items-center text-[11px] font-semibold bg-emerald-800/80 text-emerald-200 px-2 py-0.5 rounded-full border border-emerald-600/50">
-                    <Bus className="w-3 h-3 mr-1" /> U&M Parauapebas
+                  <span className="inline-flex items-center text-[11px] font-medium bg-white/15 text-white px-2.5 py-0.5 rounded-full border border-white/20">
+                    U&M Parauapebas
                   </span>
                 </div>
-                <p className="text-xs text-emerald-100/85">
+                <p className="text-xs text-emerald-100/90 mt-0.5">
                   {isTelaLogin
                     ? 'Painel Administrativo do RH'
                     : activePanel === 'admin'
@@ -72,8 +72,6 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Top Actions */}
           <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-end">
-            
-            {/* NA TELA DE LOGIN: Badge de acesso restrito + botão para voltar ao Portal do Colaborador */}
             {isTelaLogin ? (
               <div className="flex items-center gap-2">
                 <span className="text-xs bg-emerald-900/70 border border-emerald-700/60 text-emerald-200 px-3 py-1.5 rounded-xl font-semibold flex items-center gap-1.5">
@@ -91,12 +89,11 @@ export const Header: React.FC<HeaderProps> = ({
                 </button>
               </div>
             ) : activePanel === 'admin' && isAdminLoggedIn ? (
-              /* DENTRO DO PAINEL ADMIN (LOGADO): Mantém o link para abrir em guia secundária e botão de copiar */
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleCopiarColab}
-                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#19502f] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#1b6e47] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
                   title="Copiar link para enviar aos colaboradores"
                 >
                   {copiadoColab ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
@@ -122,20 +119,19 @@ export const Header: React.FC<HeaderProps> = ({
                 </button>
               </div>
             ) : (
-              /* NO PORTAL DO COLABORADOR: Acesso direto ao Painel Admin / Dashboard para RH e supervisores */
-              <div className="flex items-center gap-2">
+              /* NO PORTAL DO COLABORADOR: Botão branco com ícone de escudo */
+              <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={() => onSelectPanel('admin')}
-                  className="px-3.5 py-1.5 rounded-xl bg-white text-[#19502f] hover:bg-emerald-50 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
-                  title="Acessar o Painel Administrativo do RH e Dashboard"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white text-[#1b6e47] hover:bg-gray-50 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer"
+                  title="Abrir o Painel de Administração do RH"
                 >
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>Painel Admin (RH) / Dashboard</span>
+                  <Shield className="w-4 h-4 text-[#1b6e47] flex-none" />
+                  <span>Painel de Administração (RH) / Painel de Controle</span>
                 </button>
               </div>
             )}
-
           </div>
         </div>
       </div>
